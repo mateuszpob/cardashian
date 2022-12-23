@@ -1,0 +1,161 @@
+TODO trzeba zrobic przycisk zeby dzialal na przerwanie. PRzytrzymanie go powoduje reset flasha (zostaje tylko adres urzadzenia)
+
+
+===============================================================================================================================
+
+1)  podpinamy pierwsze urzadzenie (n1), ono musi słyszeć {HC}. ODznacza sobie licznik {hc_steps} = 0.
+2)  podpinamy następne użądzenie (n2) jeśli nie słyszy {HC}, wysyła BROADCAST o zapytanie kto słyszy {HC}. 
+
+3)  (n1) odpowiada, że słyszy, wysyła swój {hc_steps} i swój adres w RESP.
+3)  (n2) odbiera RESP od (n1), zapisuje sobie jego adres, jego {hc_steps} i swoje {hc_steps} = {hc_steps} + 1 w eeprom.
+
+    Potem może wysłać raport do {HC}, o swojej trasie. Ramka z flagą HC_TRACK (każdy pośrednik dodaje swoj adres 
+    do ramki {HC} potem z nich kożysta trasując ramkę do (n2)
+4)  (n2) chce wysłać ramkę do {HC} => jeśli jego {hc_steps} = 0 - wysyła bezpośrednio do {HC}, jeśli {hc_steps} > 0
+    pobiera adres swojego pośrednika (z najmniejszym {hc_steps}) z eeprom i wysyła ramkę z flagą {HC} i liczbą {hc_steps}
+
+5)  Podłączamy (n3), który słyszy tylko (n2). (n3) wysyła BROADCAST.... (n2) odpowiada wysyłając swój adres
+    i wszystkich swoich pośredników, oraz swoje {hc_steps}.
+6)  (n3) zapisuje trasę i swoje {hc_steps} ({hc_steps} + 1). jak chce wysłąć REQ do {HC} to tworzy ramkę z flagą
+    {HC} i liczbą {hc_steps}. Ramka leci po wszystkich adresach zmniejszajac w niej licznik {hc_steps} i tak trafia do {HC}
+    
+
+Inna opcja to w responsie urzadzenie n3 wysyla ramke z flaga {HC} na adres swojego {first_node} (tutaj (n2)),
+(n2) widząc ramkę z flagą {HC} kieruje ją na adres swojego {first_node} (tutaj (n1)),
+(n1) widząc ramkę z flagą {HC} kieruje ją na adres swojego {first_node} (tutaj już nie ma pośrednika tylko jest {HC}),
+
+
+
+{hc_steps} - liczba pośredników na drodze do {HC}
+{first_node} - najbliższy słyszany węzeł z najniższym {hc_steps}
+
+MEMORY fajf
+#define DEV_ADDR_OFFSET 0
+#define HC_STEPS 1
+#define FIRST_PROXY_ADDR 2
+#define FIRST_PROXY_HC_STEPS 3
+
+
+01  :2000000001FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFE
+02  :2000000002FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFD
+03  :2000000003FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFC
+
+01  :2000000001010F00FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEB
+02  :2000000002020101FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF6
+03  :2000000003030202FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF2
+
+RAMKI:
+
+    (n2) -> (n1) (BROADCAST REQUEST)
+    {BRD_REQ, rx_addr_2, counter};
+
+    (n1) -> (n2) (BROADCAST RESPONSE)
+    {BRD_RES, {hc_steps}, rx_addr_2};
+
+
+
+     > Received frame: [ 72 ]
+    Back to RX
+    > Received frame: [ 01 03 00 ]
+    Broadcast resp sent to: [ 03 01 01 01 01 ]
+    Back to RX
+
+
+ADRESY:
+    hc_address: {0xf0, 0x01, 0x01, 0x01, 0x01};
+    broadcast:  {0x00, 0x01, 0x01, 0x01, 0x01};
+    RX_ADDR_P1: {0x00, 0x01, 0x01, 0x01, 0x01}; // adres do odbierania broadcastu
+    RX_ADDR_P2: {EEPR, 0x01, 0x01, 0x01, 0x01}; // unikalny adres urzadzenia (EEPR = rx_addr_2 w kodzie - z eepromu pobierane)
+    tx_address: {0xXX, 0x01, 0x01, 0x01, 0x01}; // 0xXX - ustawiamy przed każda wysylka gdzie ma lecieć - node zazwyczaj bierze z eepromu swoje {first_node}
+
+
+
+PIERWSZE DEVY:
+    (n1)
+    DEV_ADDR_OFFSET         01  // adres pierwszego urządzenia podłączanego do {HC}
+    HC_STEPS                01  // czyli mam bezposredni dotep do {HC}
+    FIRST_PROXY_ADDR        f0  // słyszę {HC} więc mam tu jego adres
+    FIRST_PROXY_HC_STEPS    00  // {hc_steps} {HC} czyli 0
+
+    (n2)
+    DEV_ADDR_OFFSET         02  // adres pierwszego urządzenia podłączanego do {HC}
+    HC_STEPS                02  // mam jeden node (n1) po drodze
+    FIRST_PROXY_ADDR        01  // adres (n2)
+    FIRST_PROXY_HC_STEPS    01  // {hc_steps} (n1)
+
+
+
+
+
+
+TRANSPORT TO HC:
+    1       2                3            4             5              6        ?..
+    [TO_HC, first_node_addr, payload_len, node_counter, moj_rx_addr_2, payload, nx_address.....]
+    0       1                2            3             4              5        ?..
+
+    [ 03 02 02 02 03 00 76 02 01  ]
+    
+    TO_HC,                 03
+    first_node_addr,       02
+    payload_len,           02
+    node_counter,          02
+    moj_rx_addr_2,         03
+    payload,               00 76
+    nx_address ..... ]     02 01    // sensor_track
+
+    Mamy taki układ:     HC  (n1)    (n2)    (n3)
+    (n3) wysyła ramkę do swojego {first_node} czyli do (n2)     [TO_HC, 02, 3, 0, 03, p0, p1, p2, n3_rx_addr_2]
+    (n2) odbiera i wysyła do swojego {first_node} czyli do (n1) [TO_HC, 02, 3, 0, 03, p0, p1, p2, n3_rx_addr_2, n2_rx_addr_2]
+    (n1) odbiera i wysyła do swojego {first_node} czyli do {HC} [TO_HC, 02, 3, 0, 03, p0, p1, p2, n3_rx_addr_2, n2_rx_addr_2, n1_rx_addr_2]
+
+    Jeśli first_node_addr jest rowne adresowi HC, node ktory odbierze ta ramke odrzuci ja
+
+
+
+
+
+
+
+
+
+
+(n3) wysyla taka ramke do ??:
+Send to HC:[ 03 02 02 00 03 00 50 ]
+
+
+w tym czasie (n2) nie reaguje..
+
+(n1) odbiera takie dane:
+> Received frame: [ 03 02 02 00 03 00 56 ]
+Transport to HC:[ 03 02 02 01 03 00 56 01 ]
+{first_node} nie odebrał ramki TO_HC
+RX mode. Wait for data.
+
+
+===========================
+----------- n01 -----------
+
+RX_ADDR_1: [ 00 01 01 01 01 ]
+RX_ADDR_2: [ 01 ]
+
+
+Device ready [1]
+SET_TX_ADDR: [ 02 01 01 01 01 ]
+First node address: [ 02 01 01 01 01 ]
+TX addr:[ 03 02 03 00 01 12 13 14 ]
+Send to HC:[ 03 02 03 00 01 12 13 14 ]
+{first_node} nie odebrał ramki TO_HC
+
+
+
+
+
+
+
+==============================================================================
+=================================== SERVER ===================================
+==============================================================================
+
+Sensory rozruzniane sa po rx_2_addr.
+    - JHC odbiera ramke, sprawdza nadawce (rx_2_addr). Sprawdza w swojej bazie czy ma takiego sensora. Jak nie ma to zapisuje go (trzeba dodac pole sensor_type),
+      w kazdej ramce kierowanej do JHC znajduje sie cala sciezka adresow przez ktore przeszła ramka. W ten sposob wiemy jaka droga odeslac ramke

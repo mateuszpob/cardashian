@@ -1,0 +1,12 @@
+{
+    "files.associations": {
+        "serial.h": "c",
+        "emuformat.h": "c",
+        "emustruct.h": "c",
+        "pthread.h": "c",
+        "emuserial.h": "c",
+        "semaphore.h": "c",
+        "stdlib.h": "c",
+        "ioctl.h": "c"
+    }
+}

@@ -1,0 +1,8 @@
+{
+    "files.associations": {
+        "socket_server.h": "c",
+        "semaphore.h": "c",
+        "emustruct.h": "c",
+        "emuformat.h": "c"
+    }
+}
