@@ -22,32 +22,38 @@ export default {
   mounted() {
     this.connection = new WebSocket("ws://localhost:30101")
     this.connection.onmessage = event => {
-      console.log(event);
-      switch(event.data) {
-        case "1":
-          this.emitter.emit("turnLeft");
-          break;
-        case "2":
-          this.emitter.emit("turnRight");
-          break;
-        case "4":
-          this.emitter.emit("enter");
-          break;
+      let data = JSON.parse(event.data);
 
+      switch(data.channel) {
+        case "dashframe":
+          this.emitter.emit("dashframe", data.data);
+          break;
       }
+      // switch(event.data) {
+      //   case "1":
+      //     this.emitter.emit("turnLeft");
+      //     break;
+      //   case "2":
+      //     this.emitter.emit("turnRight");
+      //     break;
+      //   case "4":
+      //     this.emitter.emit("enter");
+      //     break;
+
+      // }
     };
     document.addEventListener('keyup', (event) => {
-      console.log(event.key)
-      console.log(event.code)
+      // console.log(event.key)
+      // console.log(event.code)
 
       if (event.code === "ArrowLeft"){
-        this.emitter.emit("turnLeft");
+        this.emitter.emit("action", "turnLeft");
       } else if (event.code === "ArrowRight"){
-        this.emitter.emit("turnRight");
+        this.emitter.emit("action", "turnRight");
       } else if (event.code === "Enter"){
-        this.emitter.emit("enter");
+        this.emitter.emit("action", "enter");
       }else if (event.code === "Escape"){
-        this.emitter.emit("escape");
+        this.emitter.emit("action", "escape");
       }
     });
   }

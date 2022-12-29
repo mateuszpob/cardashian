@@ -33,20 +33,22 @@ export default {
     }
   },
   created() {
-    this.emitter.on("turnLeft", isOpen => {
-      this.turnLeft();
-    });
-    this.emitter.on("turnRight", isOpen => {
-      this.turnRight();
-    });
-    this.emitter.on("enter", isOpen => {
-      this.structure[this.activeId].callback();
+    this.emitter.on("action", action => {
+      switch(action) {
+        case "turnLeft":
+          this.turnLeft();
+          break;
+        case "turnRight":
+          this.turnRight();
+          break;
+        case "enter":
+          this.structure[this.activeId].callback();
+          break;
+      }
     });
   },
   beforeUnmount() {  
-    this.emitter.off("turnLeft");
-    this.emitter.off("turnRight");
-    this.emitter.off("enter");
+    this.emitter.off("action");
   },
   mounted() {
     this.updateLayout();
@@ -76,6 +78,7 @@ export default {
     },
     settings() {
       console.log("settings")
+      this.$router.push({ name: 'settings' })
     },
 
     open() {
