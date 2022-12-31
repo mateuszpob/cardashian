@@ -64,8 +64,8 @@ uint8_t prepareEmuFrame(uint8_t * buffer) {
 }
 
 void display_data_object() {
-		system("clear");
-		gotoxy(0,0);
+		// system("clear");
+		// gotoxy(0,0);
 		printf("dwellTime: %f \n", emu_data.dwellTime);
 		printf("Batt:      %f \n", emu_data.Batt);
 		printf("MAP:       %d \n", emu_data.MAP);
@@ -83,7 +83,7 @@ void display_data_object() {
 // 		printf("MAP:       %d \n", emu_data.MAP);
 // 		printf("MAP:       %d \n", emu_data.MAP);
 
-	gotoxy(20,20);
+	// gotoxy(20,20);
 }
 
 void * start_reading(void * args) {

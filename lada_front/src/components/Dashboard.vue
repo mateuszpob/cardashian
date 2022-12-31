@@ -1,6 +1,6 @@
 <template>
     <div class="wrapper d-flex  flex-wrap ">
-        <IndicatorDigitDefault class="d-flex gx-4 gy-1" v-for="(value, label) in dashboard" :label="label" :value="value" v-bind:key="index"/>
+        <IndicatorDigitDefault class="d-flex gx-4 gy-1" v-for="(value, label) in dashboard"  :label="label" :value="value" v-bind:key="index"/>
     </div>
 </template>
 
@@ -24,7 +24,12 @@ export default {
     });
     this.emitter.on("dashframe", frame => {
       console.log("FRAME", frame)
-      this.dashboard = frame;
+
+      Object.keys(this.$store.getters.getMenu).forEach((o) => { console.log(o)
+        if(this.$store.getters.getMenu[o])
+          this.dashboard[o] = frame[o]
+      });
+      // this.dashboard = frame;
     });
   },
   mounted() {
