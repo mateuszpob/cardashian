@@ -1,8 +1,0 @@
-Traceback (most recent call last):
-  File "./core/main.py", line 24, in <module>
-    main()
-  File "./core/main.py", line 12, in main
-    emu = EmuSeialClient()
-  File "/home/mp/workspace/home/moto/cardashian/core/EmuSeialClient.py", line 15, in __init__
-    self.sock.connect(server_address)
-ConnectionRefusedError: [Errno 111] Connection refused

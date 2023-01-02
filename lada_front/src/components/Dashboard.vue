@@ -1,6 +1,6 @@
 <template>
-    <div class="wrapper d-flex  flex-wrap ">
-        <IndicatorDigitDefault class="d-flex gx-4 gy-1" v-for="(value, label) in dashboard"  :label="label" :value="value" v-bind:key="index"/>
+    <div class="wrapper d-flex  flex-wrap mt-3">
+        <IndicatorDigitDefault class="d-flex gx-4 gy-1" v-for="(value, label) in dashboard" :total_items="Object.keys(dashboard).length" :label="label" :value="value" v-bind:key="label"/>
     </div>
 </template>
 
@@ -23,9 +23,8 @@ export default {
         this.escape();
     });
     this.emitter.on("dashframe", frame => {
-      console.log("FRAME", frame)
 
-      Object.keys(this.$store.getters.getMenu).forEach((o) => { console.log(o)
+      Object.keys(this.$store.getters.getMenu).forEach((o) => {
         if(this.$store.getters.getMenu[o])
           this.dashboard[o] = frame[o]
       });

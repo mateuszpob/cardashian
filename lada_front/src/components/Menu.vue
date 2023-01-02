@@ -65,6 +65,7 @@ export default {
   methods: {
     yt() {
       console.log("yt")
+      this.$router.push({ name: 'youtube' })
     },
     maps() {
       console.log("maps")

@@ -20,6 +20,10 @@ export default {
 
   },
   mounted() {
+    this.axios.get('/labels.json').then((data) => { console.log(data.data)
+            this.$store.dispatch('setLabels', data.data);
+        });
+
     this.connection = new WebSocket("ws://localhost:30101")
     this.connection.onmessage = event => {
       let data = JSON.parse(event.data);

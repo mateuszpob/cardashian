@@ -70,7 +70,7 @@ export default {
     this.emitter.on("escape", isOpen => {
       this.escape();
     });
-    this.emitter.on("dashframe", data => { console.log("this.$store.getters.getMenu", this.$store.getters.getMenu)
+    this.emitter.on("dashframe", data => {
       if(!this.$store.getters.getMenu) {
         let sideMenu = {};
         Object.keys(data).forEach((k) => { 
@@ -95,16 +95,10 @@ export default {
         case "turnLeft":
           if(this.settings_option > 0)
           this.settings_option--;
-          if(this.settings_option > 12) {
-            this.moveMenuDown()
-          }
           break;
         case "turnRight":
           if(this.settings_option < this.currentMenuLength - 1)
           this.settings_option++;
-          if(this.settings_option > 12) {
-            this.moveMenuUp()
-          }
           break;
         case "enter":
           this.selected_items.push(this.settings_option);
