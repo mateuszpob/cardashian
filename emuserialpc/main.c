@@ -29,8 +29,13 @@ float:      4
 
 
 int main(int argc, char** argv) {
-    serial_device_patch = (char*)"/dev/ttyUSB0";
+    if( argc == 2 ) {
+        serial_device_patch = (char*)argv[1];
+    } else {
+        serial_device_patch = (char*)"/dev/ttyUSB0";
+    }
 
+    printf("Connectiong to %s\n", serial_device_patch);
     pthread_t serial_reader_thread;
 
     pthread_create(&(serial_reader_thread), NULL, &start_reading, NULL);
