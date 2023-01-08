@@ -10,12 +10,12 @@
 
 
 
-// void print_frame(uint8_t *frame, int frame_length) {
-//     printf("[");
-//     for (int i = 0; i < frame_length; i++)
-//         printf("%02x ", (uint8_t) frame[i]);
-//     printf("]\n");
-// }
+void print_frame(uint8_t *frame, int frame_length) {
+    printf("[");
+    for (int i = 0; i < frame_length; i++)
+        printf("%02x ", (uint8_t) frame[i]);
+    printf("]\n");
+}
 
 
 
