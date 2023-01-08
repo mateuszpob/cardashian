@@ -102,8 +102,8 @@ void * start_reading(void * args) {
         // uint8_t read_bytes = read(serial_descriptor, &read_buffer[read_bytes_total], bytes_avaiable);
         uint8_t read_bytes = read(serial_descriptor, read_buffer, bytes_avaiable);
 
-        // printf("[%d] raw bytes: ", read_bytes);
-        // print_frame(read_buffer, read_bytes);
+        printf("[%d] raw bytes: ", read_bytes);
+        print_frame(read_buffer, read_bytes);
 
         while(--read_bytes) {
             if(read_buffer[1] == EMUSERIAL_MAGIC && checksum_is_ok(read_buffer) && prepareEmuFrame(read_buffer)) {
