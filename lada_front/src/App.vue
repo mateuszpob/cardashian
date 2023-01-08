@@ -32,19 +32,21 @@ export default {
         case "dashframe":
           this.emitter.emit("dashframe", data.data);
           break;
+        case "action": console.log(data.data[0])
+          switch(data.data[0]) {
+            case 1:
+              this.emitter.emit("action", "turnLeft");
+              break;
+            case 2:
+              this.emitter.emit("action", "turnRight");
+              break;
+            case 4:
+              this.emitter.emit("action", "enter");
+              break;
+          }
+          break;
       }
-      // switch(event.data) {
-      //   case "1":
-      //     this.emitter.emit("turnLeft");
-      //     break;
-      //   case "2":
-      //     this.emitter.emit("turnRight");
-      //     break;
-      //   case "4":
-      //     this.emitter.emit("enter");
-      //     break;
-
-      // }
+      
     };
     document.addEventListener('keyup', (event) => {
       // console.log(event.key)
