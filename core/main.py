@@ -2,8 +2,10 @@ from MierzejClient import MierzejClient
 from EmuSeialClient import EmuSeialClient
 from Connector import Connector
 from websocket_server import WebsocketServer
+from Idrive import Idrive
 import time
 from pprint import pprint
+import sys
 
 # def generate_fake_frame():
 #     # pprint(data)
@@ -37,11 +39,26 @@ def main():
 #    mierzej = MierzejClient()
 #    mierzej.start()
 
-    emu = EmuSeialClient()
-    emu.start()
+    idrive_path = '/dev/ttyUSB0'
+    if len(sys.argv) > 1:
+        idrive_path = sys.argv[1]
+
+    print('Idrive path: ' + idrive_path)
 
     conn = Connector()
     conn.start()
+
+    try:
+        idrive = Idrive(conn, idrive_path)
+        idrive.start()
+    except:
+        print('Idrive not found')
+    
+    try:
+        emu = EmuSeialClient()
+        emu.start()
+    except:
+        print('Emu not found')
 
     while True:
         # print(mierzej.get_values())
