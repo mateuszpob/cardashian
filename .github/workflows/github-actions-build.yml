@@ -16,9 +16,7 @@ jobs:
         node-version: [10.x, 12.x, 14.x, 15.x]
 
     steps:
-      - run: npm install -g @vue/cli@latest
-      - run: npm install -g @vue/cli-service
-      - run: npm install -g @vue/cli-plugin-babel
+      - run: npm install -g @vue/cli
       - uses: actions/checkout@v3
       - name: Use Node.js ${{ matrix.node-version }}
         working-directory: ./lada_front
