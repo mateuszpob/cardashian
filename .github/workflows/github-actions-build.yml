@@ -20,5 +20,3 @@ jobs:
       - name: Use Node.js ${{ matrix.node-version }}
         working-directory: ./lada_front
         run: npm run build
-        with:
-          node-version: ${{ matrix.node-version }}
