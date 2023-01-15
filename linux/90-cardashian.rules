@@ -1,0 +1,2 @@
+SUBSYSTEM=="tty", ATTRS{product}=="Emuserial", ATTRS{idVendor}=="0403", ATTRS{idProduct}=="6001", SYMLINK+="emu"
+SUBSYSTEM=="tty", ATTRS{product}=="Idrive", ATTRS{idVendor}=="0403", ATTRS{idProduct}=="6001", SYMLINK+="idrive"
