@@ -1,3 +1,3 @@
-#!/bin bash
+#!/bin/bash
 
-ftdi_eeprom --flash-eeprom ft232.conf
+ftdi_eeprom --flash-eeprom ft232_idrive.conf
