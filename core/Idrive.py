@@ -8,19 +8,80 @@ import struct
 from websocket_server import WebsocketServer
 
 class Idrive(threading.Thread):
-    def __init__(self, conn, path):
+    def __init__(self, conn):
         self.conn = conn
-        self.ser = serial.Serial(port=path, baudrate=9600, parity=serial.PARITY_NONE, stopbits=serial.STOPBITS_ONE, bytesize=serial.EIGHTBITS, timeout=0)
-        print("connected to: " + self.ser.portstr)
+        self.device_name = 'Idrive'
+        self.devices = [
+            '/dev/ttyUSB0',
+            '/dev/ttyUSB1',
+            '/dev/ttyUSB2',
+            '/dev/ttyUSB3',
+            '/dev/ttyUSB4',
+            '/dev/ttyUSB5',
+        ]
+
+        self.connect_serial_device()
         threading.Thread.__init__(self)
+
+    def connect_serial_device(self):
+        while self.searchDevice() == False:
+            time.sleep(1)
+
+        # self.ser = serial.Serial(port=path, baudrate=9600, parity=serial.PARITY_NONE, stopbits=serial.STOPBITS_ONE, bytesize=serial.EIGHTBITS, timeout=0)
+        # print("connected to: " + self.ser.portstr)
+        
+    def searchDevice(self):
+        for device in self.devices:
+            print("Check device " + device)
+            if self.checkDevice(device):
+                return True
+        return False
+
+    def checkDevice(self, path):
+        try:
+            self.ser = serial.Serial(port=path, baudrate=9600, parity=serial.PARITY_NONE, stopbits=serial.STOPBITS_ONE, bytesize=serial.EIGHTBITS, timeout=0)
+            print("connected to: " + self.ser.portstr)
+        except:
+            return False
+
+        time.sleep(0.5)
+        self.ser.write(bytes('a', 'ascii'))
+        time.sleep(0.3)
+        line =  self.ser.read(6)
+        print(line)
+        if line == bytes(self.device_name, 'ascii'):
+            return True
+
+        return False
+
+    def read(self):
+        line =  self.ser.read(1)
+        if line:
+            print(">>>" + str(line))
+            self.conn.send({"channel": "action", "data": struct.unpack('B', line)})
 
     def run(self):
         while True:
-            # for line in self.ser.read():
-            line =  self.ser.read(1)
-            if line:
-                print(">>>" + str(line))
-                self.conn.send({"channel": "action", "data": struct.unpack('B', line)})
+            try:
+                self.read()
+            except:
+                print(self.device_name + " disconnected")
+                self.connect_serial_device()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                 # for client in clients:
                 #     # client.sendMessage((str)(line))
                 #     server.send_message(client, (str)(line))

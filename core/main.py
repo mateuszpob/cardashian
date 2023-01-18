@@ -39,20 +39,12 @@ def main():
 #    mierzej = MierzejClient()
 #    mierzej.start()
 
-    idrive_path = '/dev/ttyUSB0'
-    if len(sys.argv) > 1:
-        idrive_path = sys.argv[1]
-
-    print('Idrive path: ' + idrive_path)
 
     conn = Connector()
     conn.start()
 
-    try:
-        idrive = Idrive(conn, idrive_path)
-        idrive.start()
-    except:
-        print('Idrive not found')
+    idrive = Idrive(conn)
+    idrive.start()
     
     try:
         emu = EmuSeialClient()
