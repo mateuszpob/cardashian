@@ -4,3 +4,4 @@ emuserialpc/build/
 emuserialpc/emuserial
 core/__pycache__
 cardashian.tar.gz
+*.bin
