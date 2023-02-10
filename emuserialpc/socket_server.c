@@ -43,9 +43,8 @@ void send_data(int connfd, struct emu_data_t *emu_data_struct) {
     printf("Struct len %d\n", datalen); 
     
     do {
-        printf("write %d to socket client...\n", datalen);
         write(connfd, emu_data_struct, datalen);
-        usleep(50000);
+        usleep(10000);
     } while(read(connfd, read_buffer, 2) > 0);
     
     printf("Client spierdolil.\n");

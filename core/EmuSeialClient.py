@@ -7,30 +7,36 @@ import struct
 import math
 
 class EmuSeialClient(threading.Thread):
-    def __init__(self):
+    def __init__(self, mock=False):
         # Create a TCP/IP socket
-        self.sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-
-        # Connect the socket to the port where the server is listening
-        server_address = ('localhost', 9990)
-        self.sock.connect(server_address)
-        print("Connected to EmuSerial \n")
+        
+        self.mock = mock
+        if self.mock:
+            print("EmuSerial MOCK !!!!!!!!!!!!!!!!!!!!!\n")
+        else:
+            # Connect the socket to the port where the server is listening
+            server_address = ('localhost', 9990)
+            self.sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+            self.sock.connect(server_address)
+            print("Connected to EmuSerial \n")
 
         self.frame = None
         threading.Thread.__init__(self)
         
     def run(self):
         while True:
-
-            print("=============================")
-            data = self.sock.recv(116)
-            self.sock.send(bytes("ok", 'utf-8'))
-            
-            self.decode(data)
-            # print(struct.unpack("f", data))
+            if self.mock:
+                self.frame = self.generate_fake_frame()
+                
+            else:
+                data = self.sock.recv(116)
+                self.sock.send(bytes("ok", 'utf-8'))
+                
+                self.decode(data)
+                # print(struct.unpack("f", data))
+            time.sleep(0.2)
             
     def decode(self, data):
-        pprint("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\n")
         precision = [0, 0, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2]
         fields = ["RPM","MAP","TPS","IAT","Batt","IgnAngle","pulseWidth","scondarypulseWidth","Egt1","Egt2","knockLevel","dwellTime","wboAFR","gear","Baro","analogIn1","analogIn2","analogIn3","analogIn4","injDC","emuTemp","oilPressure","oilTemperature","fuelPressure","CLT","flexFuelEthanolContent","ffTemp","wboLambda","vssSpeed","deltaFPR","fuelLevel","tablesSet","lambdaTarget","afrTarget","cel"]
         types = ["uint16_t","uint16_t","uint8_t","int8_t","float","float","float","float","uint16_t","uint16_t","float","float","float","int8_t","uint8_t","float","float","float","float","float","int8_t","float","uint8_t","float","int16_t","float","int8_t","float","float","uint16_t","uint8_t","uint8_t","float","float","uint16_t"]
@@ -70,7 +76,33 @@ class EmuSeialClient(threading.Thread):
             offset=offset+sizes[types[i]]
             i=i+1
         self.frame = dataObject
-        # pprint(dataObject)
+        pprint(dataObject)
 
 
 
+    def generate_fake_frame(self):
+        # pprint(data)
+        fields = ["RPM","MAP","TPS","IAT","Batt","IgnAngle","pulseWidth","scondarypulseWidth","Egt1","Egt2","knockLevel","dwellTime","wboAFR","gear","Baro","analogIn1","analogIn2","analogIn3","analogIn4","injDC","emuTemp","oilPressure","oilTemperature","fuelPressure","CLT","flexFuelEthanolContent","ffTemp","wboLambda","vssSpeed","deltaFPR","fuelLevel","tablesSet","lambdaTarget","afrTarget","cel"]
+        types = ["uint16_t","uint16_t","uint8_t","int8_t","float","float","float","float","uint16_t","uint16_t","float","float","float","int8_t","uint8_t","float","float","float","float","float","int8_t","float","uint8_t","float","int16_t","float","int8_t","float","float","uint16_t","uint8_t","uint8_t","float","float","uint16_t"]
+        
+        sizes = {
+            "uint16_t": 2,
+            "int16_t": 2,
+            "uint8_t": 1,
+            "int8_t": 1,
+            "float": 4
+        }
+        dataObject = {}
+        i = 0
+        offset = 0
+        
+        for field in fields:
+                # print(field)
+                # print(struct.unpack('f', data[offset+2:offset+2+sizes[types[i]]]))
+
+            dataObject[field] = 0
+
+            offset=offset+sizes[types[i]]
+            i=i+1
+
+        return dataObject

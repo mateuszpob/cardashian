@@ -195,7 +195,7 @@ export default {
 }
 
 .container-xxl, .row, .menu-col {
-  height: 400px;
+  height: 480px;
 }
 .menu-col {
     display: flex;

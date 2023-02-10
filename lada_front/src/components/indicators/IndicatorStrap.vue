@@ -1,20 +1,17 @@
 <template>
-    <div class="box d-flex flex-column" :style="{'width': boxWidth}">
-        <h2 :style="{'font-size': fontSize, 'line-height': 'calc(0.8 * ' + fontSize + ')'}" class="value d-flex justify-content-end align-items-end">
-          {{ value }}
-          <span style="font-size: 30px; line-height: 30px" >
-          {{ $store.getters.labels[label] ? $store.getters.labels[label].unit : '' }}
-          </span>
-          </h2>
-        <h1 class="label d-flex justify-content-end hidden">
-          {{ $store.getters.labels[label] ? $store.getters.labels[label].label : label }}
-          </h1>
+    <div class="box">
+
     </div>
+
+
+
+
+
 </template>
 
 <script>
 export default {
-  name: 'IndicatorDigitDefault',
+  name: 'IndicatorStrap',
   props: {
     label: String,
     value: String,
@@ -44,10 +41,9 @@ export default {
 
 <style scoped>
 .box{
-  width: 80px;
-  overflow: hidden;
-  /* border: solid red 1px; */
-  height: 140px;
+  width: 100px;
+  height: 50px;
+  border: 1px solid #fff;
 }
 .box .label {
   font-size:16px;

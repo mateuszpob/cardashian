@@ -43,12 +43,16 @@ export default {
             case 4:
               this.emitter.emit("action", "enter");
               break;
+            case 7:
+              this.emitter.emit("action", "escape");
+              break;
           }
           break;
       }
       
     };
     document.addEventListener('keyup', (event) => {
+      
       // console.log(event.key)
       // console.log(event.code)
 
@@ -74,13 +78,14 @@ body {
   background: rgb(41, 41, 41);
 }
 #app {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    width: 800px;
-    height: 400px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 800px;
+  height: 480px;
   background: #000;
+  overflow: hidden;
 }
 
 </style>

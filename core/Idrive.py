@@ -20,7 +20,7 @@ class Idrive(threading.Thread):
             '/dev/ttyUSB5',
         ]
 
-        self.connect_serial_device()
+        
         threading.Thread.__init__(self)
 
     def connect_serial_device(self):
@@ -32,14 +32,14 @@ class Idrive(threading.Thread):
         
     def searchDevice(self):
         for device in self.devices:
-            print("Check device " + device)
+            # print("Check device " + device)
             if self.checkDevice(device):
                 return True
         return False
 
     def checkDevice(self, path):
         try:
-            self.ser = serial.Serial(port=path, baudrate=9600, parity=serial.PARITY_NONE, stopbits=serial.STOPBITS_ONE, bytesize=serial.EIGHTBITS, timeout=0)
+            self.ser = serial.Serial(port=path, baudrate=19200, parity=serial.PARITY_NONE, stopbits=serial.STOPBITS_ONE, bytesize=serial.EIGHTBITS, timeout=0)
             print("connected to: " + self.ser.portstr)
         except:
             return False
@@ -61,14 +61,16 @@ class Idrive(threading.Thread):
             self.conn.send({"channel": "action", "data": struct.unpack('B', line)})
 
     def run(self):
+        self.connect_serial_device()
+        
         while True:
             try:
                 self.read()
             except:
                 print(self.device_name + " disconnected")
                 self.connect_serial_device()
-
-
+            
+            time.sleep(0.1)
 
 
 

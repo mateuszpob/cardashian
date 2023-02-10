@@ -26,7 +26,7 @@ struct emu_frame {
 	};
 };
 
-
+struct emu_frame decoded_frame;
 
 uint8_t decodeEmuFrame(struct emu_frame *frame);
 uint8_t checksum_is_ok(uint8_t * buffer);

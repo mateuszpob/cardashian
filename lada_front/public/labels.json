@@ -1,6 +1,6 @@
 {
     "RPM": {"label": "RPM", "unit": ""},
-    "Batt": {"label": "Battery", "unit": ""},
+    "Batt": {"label": "Battery", "unit": "V"},
     "afrTarget": {"label": "Target AFR", "unit": ""},
     "knockLevel": {"label": "Stukanie", "unit": ""},
     "IgnAngle": {"label": "Ign. Angle", "unit": "*"},

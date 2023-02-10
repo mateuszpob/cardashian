@@ -7,44 +7,28 @@ import time
 from pprint import pprint
 import sys
 
-# def generate_fake_frame():
-#     # pprint(data)
-#     fields = ["RPM","MAP","TPS","IAT","Batt","IgnAngle","pulseWidth","scondarypulseWidth","Egt1","Egt2","knockLevel","dwellTime","wboAFR","gear","Baro","analogIn1","analogIn2","analogIn3","analogIn4","injDC","emuTemp","oilPressure","oilTemperature","fuelPressure","CLT","flexFuelEthanolContent","ffTemp","wboLambda","vssSpeed","deltaFPR","fuelLevel","tablesSet","lambdaTarget","afrTarget","cel"]
-#     types = ["uint16_t","uint16_t","uint8_t","int8_t","float","float","float","float","uint16_t","uint16_t","float","float","float","int8_t","uint8_t","float","float","float","float","float","int8_t","float","uint8_t","float","int16_t","float","int8_t","float","float","uint16_t","uint8_t","uint8_t","float","float","uint16_t"]
-    
-#     sizes = {
-#         "uint16_t": 2,
-#         "int16_t": 2,
-#         "uint8_t": 1,
-#         "int8_t": 1,
-#         "float": 4
-#     }
-#     dataObject = {}
-#     i = 0
-#     offset = 0
-    
-#     for field in fields:
-#             # print(field)
-#             # print(struct.unpack('f', data[offset+2:offset+2+sizes[types[i]]]))
-
-#         dataObject[field] = 0
-
-#         offset=offset+sizes[types[i]]
-#         i=i+1
-
-#     return dataObject
 
 
 def main():
+    mock = False
 #    mierzej = MierzejClient()
 #    mierzej.start()
 
+    # check caommand line parameters
+    if len(sys.argv) > 1:
+        if sys.argv[1] == '-h':
+            print(sys.argv[0] + ' -m    # run emuserial mock')
+            exit(0)
+        if sys.argv[1] == '-m':
+            mock = True
 
     conn = Connector()
     conn.start()
 
     idrive = Idrive(conn)
     idrive.start()
+
+    emu = None
     
     try:
         emu = EmuSeialClient()
@@ -56,9 +40,8 @@ def main():
         # print(mierzej.get_values())
         # conn.send({"channels": mierzej.get_values()})
 
-        # frame = generate_fake_frame()
-        # pprint(frame)
-        conn.send({"channel": "dashframe", "data": emu.frame})
+        if emu is not None:
+            conn.send({"channel": "dashframe", "data": emu.frame})
         time.sleep(0.1)
 
 if __name__ == '__main__':

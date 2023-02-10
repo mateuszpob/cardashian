@@ -55,5 +55,6 @@ export default {
 <style scoped>
 .wrapper {
   padding: 5px;
+  height: 100%;
 }
 </style>

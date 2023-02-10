@@ -58,32 +58,30 @@ uint8_t checksum_is_ok(uint8_t * buffer) {
 
 
 uint8_t prepareEmuFrame(uint8_t * buffer) {
-    struct emu_frame frame;
-    memcpy(&frame, buffer, FRAME_SIZE);
-	return decodeEmuFrame(&frame);
+    // struct emu_frame frame;
+    memcpy(&decoded_frame, buffer, FRAME_SIZE);
+	return decodeEmuFrame(&decoded_frame);
 }
 
 void display_data_object() {
-		// system("clear");
-		// gotoxy(0,0);
-		printf("dwellTime: %f \n", emu_data.dwellTime);
-		printf("Batt:      %f \n", emu_data.Batt);
-		printf("MAP:       %d \n", emu_data.MAP);
-		printf("injDC:     %f \n", emu_data.injDC);
-		printf("IgnAngle:  %lf \n", emu_data.IgnAngle);
-		printf("gear:      %d \n", emu_data.gear);
-		printf("TPS:       %d \n", emu_data.TPS);
-		printf("vssSpeed:  %f \n", emu_data.vssSpeed);
-		printf("afrTarget: %f \n", emu_data.afrTarget);
-		printf("wboAFR:    %f \n", emu_data.wboAFR);
-		printf("wboLambda: %f \n", emu_data.wboLambda);
-// 		printf("MAP:       %d \n", emu_data.MAP);
-// 		printf("MAP:       %d \n", emu_data.MAP);
-// 		printf("MAP:       %d \n", emu_data.MAP);
-// 		printf("MAP:       %d \n", emu_data.MAP);
-// 		printf("MAP:       %d \n", emu_data.MAP);
+	// system("clear");
+	// gotoxy(0,0);
+	// printf("dwellTime: %f \n", emu_data.dwellTime);
+	printf("Batt:      %f \n", emu_data.Batt);
+	// printf("MAP:       %d \n", emu_data.MAP);
+	// printf("injDC:     %f \n", emu_data.injDC);
+	// printf("IgnAngle:  %lf \n", emu_data.IgnAngle);
+	// printf("gear:      %d \n", emu_data.gear);
+	// printf("TPS:       %d \n", emu_data.TPS);
+	// printf("vssSpeed:  %f \n", emu_data.vssSpeed);
+	// printf("afrTarget: %f \n", emu_data.afrTarget);
+	// printf("wboAFR:    %f \n", emu_data.wboAFR);
+	// printf("wboLambda: %f \n", emu_data.wboLambda);
 
-	// gotoxy(20,20);
+// gotoxy(20,20);
+
+	// fflush(stdout);
+	// fflush(stderr);
 }
 
 void * start_reading(void * args) {
@@ -102,8 +100,8 @@ void * start_reading(void * args) {
         // uint8_t read_bytes = read(serial_descriptor, &read_buffer[read_bytes_total], bytes_avaiable);
         uint8_t read_bytes = read(serial_descriptor, read_buffer, bytes_avaiable);
 
-        printf("[%d] raw bytes: ", read_bytes);
-        print_frame(read_buffer, read_bytes);
+        // printf("[%d] raw bytes: ", read_bytes);
+        // print_frame(read_buffer, read_bytes);
 
         while(--read_bytes) {
             if(read_buffer[1] == EMUSERIAL_MAGIC && checksum_is_ok(read_buffer) && prepareEmuFrame(read_buffer)) {
@@ -112,6 +110,6 @@ void * start_reading(void * args) {
             memmove(read_buffer, ((uint8_t*)&read_buffer) + 1, read_bytes - 1);
         }
 
-        usleep(100000);
+        usleep(10000);
     }
 }
