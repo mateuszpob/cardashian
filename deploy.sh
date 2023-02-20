@@ -6,7 +6,9 @@
 rm -r -f ./build/*
 
 # Copy installation script
-cp cardashian_install.sh ./build
+cp ./linux/cardashian_install.sh ./build
+cp ./linux/cardashian_start.sh ./build
+cp ./linux/cardashian_stop.sh ./build
 
 # Copy Core
 cp -r ./core ./build

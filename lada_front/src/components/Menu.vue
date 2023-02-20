@@ -71,7 +71,6 @@ export default {
       console.log("maps")
     },
     dashboard() {
-      console.log("dashboard")
       this.$router.push({ name: 'dashboard' })
     },
     chrom() {
