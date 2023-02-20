@@ -70,7 +70,7 @@ class Idrive(threading.Thread):
                 print(self.device_name + " disconnected")
                 self.connect_serial_device()
             
-            time.sleep(0.1)
+            time.sleep(0.01)
 
 
 

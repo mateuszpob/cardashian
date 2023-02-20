@@ -2,11 +2,11 @@
     <div class="box d-flex flex-column" :style="{'width': boxWidth}">
         <h2 :style="{'font-size': fontSize, 'line-height': 'calc(0.8 * ' + fontSize + ')'}" class="value d-flex justify-content-end align-items-end">
           {{ value }}
-          <span style="font-size: 30px; line-height: 30px" >
+          <!--<span style="font-size: 30px; line-height: 30px" >
           {{ $store.getters.labels[label] ? $store.getters.labels[label].unit : '' }}
-          </span>
+          </span>-->
           </h2>
-        <h1 class="label d-flex justify-content-end hidden">
+          <h1 class="label d-flex justify-content-end hidden">
           {{ $store.getters.labels[label] ? $store.getters.labels[label].label : label }}
           </h1>
     </div>
@@ -22,7 +22,7 @@ export default {
   },
   computed: {
     fontSize() {
-      return 480 / Math.ceil(this.total_items / 3) + 'px'
+      return 480 / Math.ceil(this.total_items / 2.9) + 'px'
     },
     boxWidth() {
       return (800 / Math.ceil(this.total_items / 3)) - 4 + 'px'

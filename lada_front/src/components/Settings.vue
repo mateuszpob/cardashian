@@ -20,7 +20,7 @@ export default {
     return {
       dashboardFrame: null,
       settings_option: 0,
-      currentMenuLength: 0,
+      currentMenuLength: 2,
       selected_items: [],
       settings: [
         {
@@ -40,22 +40,38 @@ export default {
           ]
         },
         {
+          'label': 'Settings',
+          'active': '1',
+          'options': [
+            {
+              'label': 'Restart app',
+              'callback': this.restartApp,
+              'arg': null
+            },
+            {
+              'label': 'Update app',
+              'callback': this.updateApp,
+              'arg': null
+            }
+          ]
+        },
+        {
           'label': 'YouTube',
           'options': [
             {
-              'label': 'Ulubione nuty',
+              'label': 'submenu',
               'options': [
-                {'label': 'opcja 1'},
-                {'label': 'opcja 2'},
-                {'label': 'opcja 3'},
+                {'label': 'dupa1'},
+                {'label': 'dupa2'},
+                {'label': 'dupa3'},
               ]
             },
             {
               'label': 'Pierdoły',
               'options': [
-                {'label': 'standard'},
-                {'label': 'cyberpunk'},
-                {'label': 'Universum Szkolna 17'}
+                {'label': 'Konon'},
+                {'label': 'Major'},
+                {'label': 'Piston'}
               ]
             }
           ]
@@ -94,7 +110,7 @@ export default {
       switch(action) {
         case "turnLeft":
           if(this.settings_option > 0)
-          this.settings_option--;
+            this.settings_option--;
           break;
         case "turnRight":
           if(this.settings_option < this.currentMenuLength - 1)
@@ -150,6 +166,12 @@ export default {
     this.emitter.off("action");
   },
   methods: {
+    restartApp() {
+      alert('Smoli?');
+    },
+    updateApp() {
+      alert('Ale smoli');
+    },
     setVisibility(id) {
       this.$store.dispatch('toggle', id)
     },

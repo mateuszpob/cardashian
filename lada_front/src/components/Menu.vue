@@ -19,10 +19,10 @@ export default {
   data() {
     return {
       structure: [
-        {html: "JuTube", callback: this.yt},
-        {html: "Mapy", callback: this.maps},
+        {html: "Menu1", callback: this.yt},
+        {html: "Menu2", callback: this.maps},
         {html: "Dashboard", callback: this.dashboard},
-        {html: "Chrome", callback: this.chrom},
+        {html: "Smolnia4x4", callback: this.chrom},
         {html: "Settings", callback: this.settings}
       ],
 
