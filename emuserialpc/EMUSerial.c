@@ -67,13 +67,14 @@ void display_data_object() {
 	// system("clear");
 	// gotoxy(0,0);
 	// printf("dwellTime: %f \n", emu_data.dwellTime);
+	printf("CLT: %d \n", emu_data.CLT);
 	printf("Batt:      %f \n", emu_data.Batt);
-	// printf("MAP:       %d \n", emu_data.MAP);
-	// printf("injDC:     %f \n", emu_data.injDC);
-	// printf("IgnAngle:  %lf \n", emu_data.IgnAngle);
-	// printf("gear:      %d \n", emu_data.gear);
-	// printf("TPS:       %d \n", emu_data.TPS);
-	// printf("vssSpeed:  %f \n", emu_data.vssSpeed);
+	printf("MAP:       %d \n", emu_data.MAP);
+	printf("injDC:     %f \n", emu_data.injDC);
+	printf("IgnAngle:  %lf \n", emu_data.IgnAngle);
+	printf("gear:      %d \n", emu_data.gear);
+	printf("TPS:       %d \n", emu_data.TPS);
+	printf("vssSpeed:  %f \n", emu_data.vssSpeed);
 	// printf("afrTarget: %f \n", emu_data.afrTarget);
 	// printf("wboAFR:    %f \n", emu_data.wboAFR);
 	// printf("wboLambda: %f \n", emu_data.wboLambda);
@@ -82,6 +83,52 @@ void display_data_object() {
 
 	// fflush(stdout);
 	// fflush(stderr);
+}
+
+// char * get_filename(void) {
+// time_t rawtime;
+// 	struct tm * timeinfo;
+// 	char *filename = malloc(128);
+// 	time ( &rawtime );
+// 	timeinfo = localtime ( &rawtime );
+// 	sprintf(filename, "emudata_%d_%d_%d_%d:%d:%d", timeinfo->tm_mday,
+//             timeinfo->tm_mon + 1, timeinfo->tm_year + 1900,
+//             timeinfo->tm_hour, timeinfo->tm_min, timeinfo->tm_sec);
+
+// 			return filename;
+// }
+
+void store_frame(uint8_t *frame, int frame_length) {
+	
+	
+
+
+	if(fptr == NULL) {
+		// char *data_logger_filename = get_filename();
+		printf("Filename: %s\n", data_logger_filename);
+		fptr = fopen(data_logger_filename,"wb");
+	}
+
+	if(fptr == NULL) {
+		printf("Error open data logger file\n");
+		usleep(300000);
+	}
+
+	fwrite(frame, frame_length, 1, fptr);
+}
+
+void run_serial_reader(void) {
+    printf("Connectiong to %s\n", serial_device_patch);
+    
+
+    pthread_create(&(serial_reader_thread), NULL, &start_reading, NULL);
+    pthread_detach(serial_reader_thread);
+}
+
+void run_data_reader(void) {
+
+    pthread_create(&(data_reader_thread), NULL, &start_reading_log, NULL);
+    pthread_detach(data_reader_thread);
 }
 
 void * start_reading(void * args) {
@@ -100,8 +147,12 @@ void * start_reading(void * args) {
         // uint8_t read_bytes = read(serial_descriptor, &read_buffer[read_bytes_total], bytes_avaiable);
         uint8_t read_bytes = read(serial_descriptor, read_buffer, bytes_avaiable);
 
-        // printf("[%d] raw bytes: ", read_bytes);
-        // print_frame(read_buffer, read_bytes);
+        printf("[%d] raw bytes: ", read_bytes);
+        print_frame(read_buffer, read_bytes);
+
+		if(store_frame_option) {
+			store_frame(read_buffer, read_bytes);
+		}
 
         while(--read_bytes) {
             if(read_buffer[1] == EMUSERIAL_MAGIC && checksum_is_ok(read_buffer) && prepareEmuFrame(read_buffer)) {
@@ -109,7 +160,41 @@ void * start_reading(void * args) {
             }
             memmove(read_buffer, ((uint8_t*)&read_buffer) + 1, read_bytes - 1);
         }
-
-        usleep(10000);
+        usleep(30000);
     }
+}
+
+void * start_reading_log(void * args) {
+	
+	fptr = fopen(data_patch, "rb");
+    
+    int bytes_avaiable = 0;
+	long filelen;
+	uint8_t read_bytes;
+
+	fseek(fptr, 0, SEEK_END);          // Jump to the end of the file
+	filelen = ftell(fptr); 
+	rewind(fptr); 
+
+    uint8_t * read_buffer = (char *)malloc(filelen * sizeof(char));
+	uint8_t read_bytrs_tmp = 0;
+
+	while(read_bytes = fread(read_buffer, 1, 30, fptr)) {
+		read_bytrs_tmp = read_bytes;
+		printf("[%d] raw bytes: ", read_bytes);
+        print_frame(read_buffer, read_bytes);
+
+		while(--read_bytrs_tmp) {
+            if(read_buffer[1] == EMUSERIAL_MAGIC && checksum_is_ok(read_buffer) && prepareEmuFrame(read_buffer)) {
+				printf("OK\n");
+				display_data_object();
+            }
+            memmove(read_buffer, (read_buffer) + 1, read_bytrs_tmp - 1);
+        }
+
+	}
+	fclose(fptr); 
+	printf("KONIEC %d\n\n", read_bytes);
+
+	exit(0);
 }

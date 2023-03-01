@@ -23,6 +23,7 @@
 
 int serial_descriptor;
 char * serial_device_patch;
+char * data_patch;
 
 int run_serial_client(char * device_path, int speed);
 int set_interface_attribs(int fd, int speed, int parity);

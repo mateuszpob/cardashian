@@ -4,6 +4,9 @@
 #include <stdint.h>
 #include <string.h>
 #include <sys/ioctl.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
 #include "serial.h"
 #include "format/emuStruct.h"
 #include "format/emuFormat.h"
@@ -27,10 +30,19 @@ struct emu_frame {
 };
 
 struct emu_frame decoded_frame;
+FILE *fptr;
+pthread_t serial_reader_thread;
+pthread_t data_reader_thread;
+uint8_t store_frame_option;
+char *data_logger_filename;
 
 uint8_t decodeEmuFrame(struct emu_frame *frame);
 uint8_t checksum_is_ok(uint8_t * buffer);
+void store_frame(uint8_t *frame, int frame_length);
+void run_serial_reader(void);
+void run_data_reader(void);
 void * start_reading(void * args);
+void * start_reading_log(void * args);
 void display_data_object();
 
 #define FRAME_SIZE 5
