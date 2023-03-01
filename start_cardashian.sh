@@ -1,11 +1,10 @@
 #!/bin/bash
 
 # kill backend
-pkill -9 -f "emuserial"
-pkill -9 -f "python3 ./core/main.py"
+./stop_cardashian.sh
 
 
-# ./emuserialpc/emuserial > ./logs/emuserial.log 2>&1 &
+ ./emuserialpc/emuserial -r ./emuserialpc/emulogs/emulog1 > ./logs/emuserial.log 2>&1 &
 python3 ./core/main.py -m > ./logs/core.log 2>&1 &
 
 cd ./lada_front

@@ -64,25 +64,33 @@ uint8_t prepareEmuFrame(uint8_t * buffer) {
 }
 
 void display_data_object() {
-	// system("clear");
-	// gotoxy(0,0);
+	
+	gotoxy(0,0);
+	system("clear");
 	// printf("dwellTime: %f \n", emu_data.dwellTime);
-	printf("CLT: %d \n", emu_data.CLT);
-	printf("Batt:      %f \n", emu_data.Batt);
-	printf("MAP:       %d \n", emu_data.MAP);
-	printf("injDC:     %f \n", emu_data.injDC);
-	printf("IgnAngle:  %lf \n", emu_data.IgnAngle);
-	printf("gear:      %d \n", emu_data.gear);
-	printf("TPS:       %d \n", emu_data.TPS);
-	printf("vssSpeed:  %f \n", emu_data.vssSpeed);
-	// printf("afrTarget: %f \n", emu_data.afrTarget);
-	// printf("wboAFR:    %f \n", emu_data.wboAFR);
-	// printf("wboLambda: %f \n", emu_data.wboLambda);
+	printf("RPM:		%d \n", emu_data.RPM);
+	printf("gear:      	%d \n", emu_data.gear);
+	printf("vssSpeed:  	%f \n", emu_data.vssSpeed);
+	printf("CLT: 		%d \n", emu_data.CLT);
+	printf("MAP:       	%d \n", emu_data.MAP);
+	printf("TPS: 		%d \n", emu_data.TPS);
+	printf("IAT: 		%d \n", emu_data.IAT);
+	printf("IgnAngle:  	%lf \n", emu_data.IgnAngle);
+	
+	printf("Batt:      	%f \n", emu_data.Batt);
+	printf("emuTemp: 	%d \n", emu_data.emuTemp);
 
-// gotoxy(20,20);
+	printf("1 Pulse: 	%f \n", emu_data.pulseWidth);
+	printf("2 Pulse:	%f \n", emu_data.scondarypulseWidth);
+	printf("injDC:     	%f \n", emu_data.injDC);
 
-	// fflush(stdout);
-	// fflush(stderr);
+	printf("afrTarget: 	%f \n", emu_data.afrTarget);
+	printf("wboAFR: 	%f \n", emu_data.wboAFR);
+
+// gotoxy(20,20); pulseWidth","scondarypulseWidth emuTemp
+
+	fflush(stdout);
+	fflush(stderr);
 }
 
 // char * get_filename(void) {
@@ -181,8 +189,11 @@ void * start_reading_log(void * args) {
 
 	while(read_bytes = fread(read_buffer, 1, 30, fptr)) {
 		read_bytrs_tmp = read_bytes;
-		printf("[%d] raw bytes: ", read_bytes);
-        print_frame(read_buffer, read_bytes);
+
+		if(show_raw_frames_option == 1) {
+			printf("[%d] raw bytes: ", read_bytes);
+			print_frame(read_buffer, read_bytes);
+		}
 
 		while(--read_bytrs_tmp) {
             if(read_buffer[1] == EMUSERIAL_MAGIC && checksum_is_ok(read_buffer) && prepareEmuFrame(read_buffer)) {
@@ -191,7 +202,7 @@ void * start_reading_log(void * args) {
             }
             memmove(read_buffer, (read_buffer) + 1, read_bytrs_tmp - 1);
         }
-
+		usleep(30000);
 	}
 	fclose(fptr); 
 	printf("KONIEC %d\n\n", read_bytes);

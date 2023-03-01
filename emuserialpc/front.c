@@ -21,6 +21,7 @@ void display_help(void) {
     printf("-d                  Set emu device path\n");
     printf("-r                  Run read data file mode\n");
     printf("-s                  Data logger mode\n");
+    printf("-f                  Show raw frames\n");
     printf("--help              Display this help\n");
     exit(0);
 }
@@ -67,9 +68,14 @@ int start_client(int argc, char** argv) {
             case 'r':
                 data_patch = optarg;
                 run_data_reader();
+                break;
             case 's': // must be 'd' option selected
                 store_frame_option = 1;
                 data_logger_filename = optarg;
+                break;
+            case 'f': // must be 'd' option selected
+                show_raw_frames_option = 1;
+                break;
             case '?':
                 return display_hint(optopt);
                 break;
@@ -80,6 +86,8 @@ int start_client(int argc, char** argv) {
         display_help();
         return 0;
     }
+
+
 
     return 0;
 }

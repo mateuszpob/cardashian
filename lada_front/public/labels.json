@@ -4,6 +4,7 @@
     "afrTarget": {"label": "Target AFR", "unit": ""},
     "knockLevel": {"label": "Stukanie", "unit": ""},
     "IgnAngle": {"label": "Ign. Angle", "unit": "*"},
-    "pulseWidth": {"label": "Pulse Width", "unit": "ms"},
-    "vssSpeed": {"label": "Speed", "unit": "Km/h"}
+    "pulseWidth": {"label": "1 Pulse Width", "unit": "ms"},
+    "vssSpeed": {"label": "Speed", "unit": "Km/h"},
+    "scondarypulseWidth": {"label": "2 Pulse Width"}
 }
