@@ -3,6 +3,9 @@
         "socket_server.h": "c",
         "semaphore.h": "c",
         "emustruct.h": "c",
-        "emuformat.h": "c"
+        "emuformat.h": "c",
+        "emuserial.h": "c",
+        "getopt.h": "c",
+        "time.h": "c"
     }
 }
