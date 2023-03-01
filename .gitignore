@@ -1,8 +1,12 @@
 logs
 build
-emuserialpc/build/
-emuserialpc/emuserial
 core/__pycache__
 cardashian.tar.gz
 *.bin
 .vscode
+
+
+
+emuserialpc/emulogs
+emuserialpc/build/
+emuserialpc/emuserial
