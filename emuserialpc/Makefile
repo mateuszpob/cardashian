@@ -3,7 +3,7 @@
 
 CC=cc
 
-all: main.o
+all: build_dir main.o
 	$(CC) build/main.o build/front.o build/socket_server.o build/EMUSerial.o build/serial.o -o emuserial -lpthread
 
 main.o: 	socket_server.o front.o
@@ -20,6 +20,9 @@ EMUSerial.o:	serial.o
 
 serial.o: 
 	$(CC) serial.c -c -o build/serial.o
+
+build_dir:
+	$(shell mkdir -p build)
 
 clean:
 	rm build/*
