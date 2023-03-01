@@ -17,7 +17,7 @@ extern char * command_arguments[3];
 int display_hint(char option);
 void display_help(void);
 void display(const char *format, ...);
-int startClient(int argc, char** argv);
+int start_client(int argc, char** argv);
 void display_error(const char *format, ...);
 
 #endif

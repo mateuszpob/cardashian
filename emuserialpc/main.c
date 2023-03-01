@@ -38,26 +38,7 @@ void sig_handler(int signum){
 int main(int argc, char** argv) {
     signal(SIGINT,sig_handler);
 
-    
-    // open data file 
-    // if( argc >= 2 ) {
-    //     if(strcmp(argv[1], "-l") == 0) {
-    //         data_patch = (char*)argv[2];
-    //         run_data_reader();
-
-    //     } else {
-            
-    //         serial_device_patch = (char*)argv[1];
-    //         run_serial_reader();
-    //     }
-    // } 
-    // open reading from device
-    // else {
-    //     serial_device_patch = (char*)"/dev/ttyUSB0";
-    //     run_serial_reader();
-    // }
-
-    startClient(argc, argv);
+    start_client(argc, argv);
 
     run_socket_server(9990, &emu_data);
 

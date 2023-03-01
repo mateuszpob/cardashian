@@ -39,6 +39,6 @@ int main(int argc, char** argv) {
     hostname = NULL;
     if(configure(config_path) != 0)
         printf("Config [%s] not found or invalid.\n", config_path);
-    return startClient(argc, argv);
+    return start_client(argc, argv);
 }
 

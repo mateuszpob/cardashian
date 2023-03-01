@@ -16,6 +16,6 @@
 int main(int argc, char** argv) {
     char * config_path = "/etc/qps/mierzejs_client.conf";
     
-    return startClient(argc, argv);
+    return start_client(argc, argv);
 }
 

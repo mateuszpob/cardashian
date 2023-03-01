@@ -43,7 +43,7 @@ void display(const char *format, ...) {
     return;
 }
 
-int startClient(int argc, char** argv) {
+int start_client(int argc, char** argv) {
     opterr = 0;
     static int help_flag;
     int option_index = 0;
