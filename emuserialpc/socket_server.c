@@ -50,18 +50,3 @@ void send_data(int connfd, struct emu_data_t *emu_data_struct) {
     printf("Client escaped.\n");
     wait_for_client(emu_data_struct);
 }
-
-/*
-
-stukanie ok
-dwellTime ok
-wboAFR  ok
-
-gear huj
-injDC   huj
-
-
-
-
-
-*/

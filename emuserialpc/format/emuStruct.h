@@ -30,13 +30,13 @@ struct emu_data_t {
 	int16_t CLT;  //C
 	float flexFuelEthanolContent;  //%
 	int8_t ffTemp;  //C			77
-	float wboLambda;  //λ
+	float wboLambda;  //λ		81
 	float vssSpeed;  //km/h
 	uint16_t deltaFPR;  //kPa
 	uint8_t fuelLevel;  //%
-	uint8_t tablesSet;  //
-	float lambdaTarget;  //λ
-	float afrTarget;  //AFR
-	uint16_t cel;  //
+	uint8_t tablesSet;  //		91
+	float lambdaTarget;  //λ   
+	float afrTarget;  //AFR		99
+	uint16_t cel;  //			101
 };
 #endif

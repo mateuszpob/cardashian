@@ -175,7 +175,7 @@ void * start_reading(void * args) {
 }
 
 void * start_reading_log(void * args) {
-	
+	printf("Start emuserial reading log.\n");
 	fptr = fopen(data_patch, "rb");
     
     int bytes_avaiable = 0;
