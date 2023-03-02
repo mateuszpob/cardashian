@@ -40,7 +40,7 @@ class EmuSeialClient(threading.Thread):
         precision = [0,         0,          0,          0,          2,      2,          2,              2,                      2,          2,          2,              2,          2,          2,          2,          2,              2,          2,              2,              2,          2,          2,              2,                  2,              0,          2,                          2,          2,              2,          2,          2,              2,              2,              2,              2]
         fields = [  "RPM",      "MAP",      "TPS",      "IAT",      "Batt", "IgnAngle", "pulseWidth",   "scondarypulseWidth",   "Egt1",     "Egt2",    "knockLevel",    "dwellTime","wboAFR",   "gear",     "Baro",     "analogIn1",    "analogIn2","analogIn3",    "analogIn4",    "injDC",    "emuTemp",  "oilPressure",  "oilTemperature",   "fuelPressure", "CLT",      "flexFuelEthanolContent",   "ffTemp",   "wboLambda",    "vssSpeed", "deltaFPR", "fuelLevel",    "tablesSet",    "lambdaTarget", "afrTarget",    "cel"]
         types = [   "uint16_t", "uint16_t", "uint8_t",  "int8_t",   "float","float",    "float",        "float",                "uint16_t", "uint16_t","float",         "float",    "float",    "int8_t",   "uint8_t",  "float",        "float",    "float",        "float",        "float",    "int8_t",   "float",        "uint8_t",          "float",        "int16_t",  "float",                    "int8_t",   "float",        "float",    "uint16_t", "uint8_t",      "uint8_t",      "float",        "float",        "uint16_t"]
-        
+        padding = [ 0,          0,          0,          0,          2,      0,           0,             0,                      0,          0,          0,              0,          0,          0,           0,           2,              0,          0,              0,              0,          0,          3,              0,                  3,              0,          2,                          0,          3,              0,          0,          0,              0,              0,              0,              0     ]
         sizes = {
             "uint16_t": 2,
             "int16_t": 2,
@@ -53,6 +53,10 @@ class EmuSeialClient(threading.Thread):
         offset = 0
         
         for field in fields:
+            
+            offset = offset + padding[i]
+
+
             if types[i] == 'uint16_t':
                 value = struct.unpack('H', data[offset:offset+sizes[types[i]]])[0]
                 dataObject[field] = str(round(value, precision[i]))
@@ -70,8 +74,9 @@ class EmuSeialClient(threading.Thread):
                 dataObject[field] = str(round(value, precision[i]))
 
             if types[i] == 'float':
-                value = struct.unpack('f', data[offset+2:offset+2+sizes[types[i]]])[0]
+                value = struct.unpack('f', data[offset:offset+sizes[types[i]]])[0]
                 dataObject[field] = str(round(value, precision[i]))
+                
 
             offset=offset+sizes[types[i]]
             i=i+1
