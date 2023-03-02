@@ -20,6 +20,7 @@ uint16_t:   2
 uint8_t:    1
 int8_t:     1
 float:      4
+struct emu_data_t 116
 */
 
 void sig_handler(int signum){
@@ -31,19 +32,12 @@ void sig_handler(int signum){
   exit(0);
 }
 
-
-
-
-
 int main(int argc, char** argv) {
-    signal(SIGINT,sig_handler);
+  printf ("Start emuserial.\n");
+  
+  signal(SIGINT,sig_handler);
 
-    start_client(argc, argv);
-
-    run_socket_server(9990, &emu_data);
-
-    while(1) {
-        usleep(1000000);
-    }
+  start_client(argc, argv);
+  run_socket_server(9990, &emu_data);
 
 }

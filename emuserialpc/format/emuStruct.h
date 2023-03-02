@@ -17,19 +17,19 @@ struct emu_data_t {
 	float dwellTime;  //ms
 	float wboAFR;  //AFR
 	int8_t gear;  //
-	uint8_t Baro;  //kPa
+	uint8_t Baro;  //kPa   40
 	float analogIn1;  //V
 	float analogIn2;  //V
 	float analogIn3;  //V
 	float analogIn4;  //V
-	float injDC;  //%
+	float injDC;  //%			60
 	int8_t emuTemp;  //C
 	float oilPressure;  //Bar
 	uint8_t oilTemperature;  //C
-	float fuelPressure;  //Bar
+	float fuelPressure;  //Bar		70
 	int16_t CLT;  //C
 	float flexFuelEthanolContent;  //%
-	int8_t ffTemp;  //C
+	int8_t ffTemp;  //C			77
 	float wboLambda;  //λ
 	float vssSpeed;  //km/h
 	uint16_t deltaFPR;  //kPa

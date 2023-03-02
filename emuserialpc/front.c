@@ -22,6 +22,7 @@ void display_help(void) {
     printf("-r                  Run read data file mode\n");
     printf("-s                  Data logger mode\n");
     printf("-f                  Show raw frames\n");
+    printf("-l                  Live params view\n");
     printf("--help              Display this help\n");
     exit(0);
 }
@@ -57,7 +58,7 @@ int start_client(int argc, char** argv) {
         {0, 0, 0, 0}
     };
 
-    while ((command_line_arg = getopt_long(argc, argv, "d:r:s:", long_options, &option_index)) != -1) { // "d:h:p:c:s:ilqb:v"
+    while ((command_line_arg = getopt_long(argc, argv, "d:r:s:fl", long_options, &option_index)) != -1) { // "d:h:p:c:s:ilqb:v"
         switch (command_line_arg) {
             case 'd':
                 // serial_mode = 1;
@@ -75,6 +76,9 @@ int start_client(int argc, char** argv) {
                 break;
             case 'f': // must be 'd' option selected
                 show_raw_frames_option = 1;
+                break;
+            case 'l': // must be 'd' option selected
+                show_live_params_option = 1;
                 break;
             case '?':
                 return display_hint(optopt);

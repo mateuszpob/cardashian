@@ -44,9 +44,24 @@ void send_data(int connfd, struct emu_data_t *emu_data_struct) {
     
     do {
         write(connfd, emu_data_struct, datalen);
-        usleep(10000);
+        usleep(30000);
     } while(read(connfd, read_buffer, 2) > 0);
     
-    printf("Client spierdolil.\n");
+    printf("Client escaped.\n");
     wait_for_client(emu_data_struct);
 }
+
+/*
+
+stukanie ok
+dwellTime ok
+wboAFR  ok
+
+gear huj
+injDC   huj
+
+
+
+
+
+*/

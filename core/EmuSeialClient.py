@@ -66,13 +66,12 @@ class EmuSeialClient(threading.Thread):
                 dataObject[field] = str(round(value, precision[i]))
 
             if types[i] == 'int8_t':
-                value = struct.unpack('b', data[offset+1:offset+1+sizes[types[i]]])[0]
+                value = struct.unpack('b', data[offset:offset+sizes[types[i]]])[0]
                 dataObject[field] = str(round(value, precision[i]))
 
             if types[i] == 'float':
                 value = struct.unpack('f', data[offset+2:offset+2+sizes[types[i]]])[0]
                 dataObject[field] = str(round(value, precision[i]))
-                
 
             offset=offset+sizes[types[i]]
             i=i+1

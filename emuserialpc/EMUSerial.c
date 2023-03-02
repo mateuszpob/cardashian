@@ -164,7 +164,9 @@ void * start_reading(void * args) {
 
         while(--read_bytes) {
             if(read_buffer[1] == EMUSERIAL_MAGIC && checksum_is_ok(read_buffer) && prepareEmuFrame(read_buffer)) {
-				display_data_object();
+				if(show_live_params_option == 1) {
+					display_data_object();
+				}
             }
             memmove(read_buffer, ((uint8_t*)&read_buffer) + 1, read_bytes - 1);
         }
@@ -193,19 +195,21 @@ void * start_reading_log(void * args) {
 		if(show_raw_frames_option == 1) {
 			printf("[%d] raw bytes: ", read_bytes);
 			print_frame(read_buffer, read_bytes);
+			fflush(stdout);
 		}
 
 		while(--read_bytrs_tmp) {
             if(read_buffer[1] == EMUSERIAL_MAGIC && checksum_is_ok(read_buffer) && prepareEmuFrame(read_buffer)) {
-				printf("OK\n");
-				display_data_object();
+				if(show_live_params_option == 1) {
+					display_data_object();
+				}
             }
             memmove(read_buffer, (read_buffer) + 1, read_bytrs_tmp - 1);
         }
 		usleep(30000);
 	}
 	fclose(fptr); 
-	printf("KONIEC %d\n\n", read_bytes);
+	printf("Bytes read: %d\n\n", read_bytes);
 
 	exit(0);
 }

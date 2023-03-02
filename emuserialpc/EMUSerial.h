@@ -35,6 +35,7 @@ pthread_t serial_reader_thread;
 pthread_t data_reader_thread;
 uint8_t store_frame_option;
 uint8_t show_raw_frames_option;
+uint8_t show_live_params_option;
 char *data_logger_filename;
 
 uint8_t decodeEmuFrame(struct emu_frame *frame);
