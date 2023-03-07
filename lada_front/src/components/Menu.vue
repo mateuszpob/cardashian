@@ -20,7 +20,7 @@ export default {
     return {
       structure: [
         {html: "Menu1", callback: this.yt},
-        {html: "Menu2", callback: this.maps},
+        {html: "Desktop", callback: this.desktop},
         {html: "Dashboard", callback: this.dashboard},
         {html: "Smolnia4x4", callback: this.chrom},
         {html: "Settings", callback: this.settings}
@@ -64,20 +64,17 @@ export default {
   },
   methods: {
     yt() {
-      console.log("yt")
       this.$router.push({ name: 'youtube' })
     },
-    maps() {
-      console.log("maps")
+    desktop() {
+      this.$router.push({ name: 'desktop' })
     },
     dashboard() {
       this.$router.push({ name: 'dashboard' })
     },
     chrom() {
-      console.log("chrom")
     },
     settings() {
-      console.log("settings")
       this.$router.push({ name: 'settings' })
     },
 
@@ -102,7 +99,6 @@ export default {
       this.updateLayout();
     },
     updateLayout() {
-      console.log("activeId", this.activeId)
       let menuItems = document.querySelectorAll(".menu-item");
       let offsetAngle = 360 / menuItems.length;
       this.rotateStep = offsetAngle;

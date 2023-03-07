@@ -1,6 +1,6 @@
 <template>
     <div class="box d-flex flex-column" :style="{'width': boxWidth}">
-        <h2 :style="{'font-size': fontSize, 'line-height': 'calc(0.8 * ' + fontSize + ')'}" class="value d-flex justify-content-end align-items-end">
+        <h2 :style="{'font-size': fontSize, 'line-height': 'calc(0.8 * ' + fontSize + ')'}" class="digital-font d-flex justify-content-end align-items-end">
           {{ value }}
           <!--<span style="font-size: 30px; line-height: 30px" >
           {{ $store.getters.labels[label] ? $store.getters.labels[label].unit : '' }}
@@ -52,14 +52,6 @@ export default {
 .box .label {
   font-size:16px;
   color:rgb(0, 189, 0);
-}
-.box .value {
-  /* font-size:44px; */
-    text-shadow: 0 0 1px #49FF18, 0 0 10px #49FF18, 0 0 5px #49FF18, 0px 0px 10px rgba(206,89,55,0);
-  color: rgb(140, 255, 136);
-  text-align: right;
-  font-family: digitalDisplay;
-  /* text-shadow: 4px 4px 9px green; */
 }
 .cntnt {
   text-shadow: 0 0 30px #49FF18, 0 0 20px #49FF18, 0 0 25px #49FF18, 0px 0px 10px rgba(206,89,55,0);

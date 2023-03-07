@@ -2,3 +2,10 @@
     font-family: digitalDisplay;
     src: url('/fonts/digital_display_tfb.ttf');
   }
+.digital-font {
+  text-shadow: 0 0 1px #49FF18, 0 0 3px #49FF18, 0 0 5px #49FF18, 0px 0px 10px rgba(206,89,55,0);
+  color: rgb(140, 255, 136);
+  text-align: right;
+  font-family: digitalDisplay;
+  /* text-shadow: 4px 4px 9px green; */
+}

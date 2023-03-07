@@ -4,7 +4,7 @@ import Menu from './components/Menu.vue';
 import Dashboard from './components/Dashboard.vue';
 import Settings from './components/Settings.vue';
 import Youtube from './components/Youtube.vue';
-// import HelloWorld from './components/HelloWorld.vue';
+import Desktop from './components/Desktop.vue';
 
 const router = createRouter({
     history: createWebHistory(),
@@ -14,6 +14,11 @@ const router = createRouter({
         //     name: 'home',
         //     component: HelloWorld,
         // },
+        {
+            path: '/desktop',
+            name: 'desktop',
+            component: Desktop,
+        },
         {
             path: '/dashboard',
             name: 'dashboard',

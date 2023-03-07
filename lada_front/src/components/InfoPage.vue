@@ -24,7 +24,7 @@ export default {
 
   },
   mounted() {
-    this.axios.get('/labels.json').then((data) => { console.log(data.data)
+    this.axios.get('/labels.json').then((data) => {
       this.$store.dispatch('setLabels', data.data);
     });
   },

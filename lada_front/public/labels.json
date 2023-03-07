@@ -6,5 +6,6 @@
     "IgnAngle": {"label": "Ign. Angle", "unit": "*"},
     "pulseWidth": {"label": "1 Pulse Width", "unit": "ms"},
     "vssSpeed": {"label": "Speed", "unit": "Km/h"},
-    "scondarypulseWidth": {"label": "2 Pulse Width"}
+    "scondarypulseWidth": {"label": "2 Pulse Width"},
+    "CLT": {"label": "Temp."}
 }

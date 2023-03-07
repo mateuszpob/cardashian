@@ -20,7 +20,7 @@ export default {
 
   },
   mounted() {
-    this.axios.get('/labels.json').then((data) => { console.log(data.data)
+    this.axios.get('/labels.json').then((data) => {
             this.$store.dispatch('setLabels', data.data);
         });
 
@@ -32,7 +32,7 @@ export default {
         case "dashframe":
           this.emitter.emit("dashframe", data.data);
           break;
-        case "action": console.log(data.data[0])
+        case "action":
           switch(data.data[0]) {
             case 1:
               this.emitter.emit("action", "turnLeft");
@@ -52,10 +52,6 @@ export default {
       
     };
     document.addEventListener('keyup', (event) => {
-      
-      // console.log(event.key)
-      // console.log(event.code)
-
       if (event.code === "ArrowLeft"){
         this.emitter.emit("action", "turnLeft");
       } else if (event.code === "ArrowRight"){
