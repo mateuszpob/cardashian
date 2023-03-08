@@ -12,10 +12,11 @@
 
       <div class="strap-box">
           <div class="strap-empty">
-          <div :style="{'width': width}" class="strap-value">
-            <div class="value">{{ value + "&nbsp;" + unit }}</div>
+            <div :style="{'width': width}" class="strap-value">
+              <div class="value">{{ value + "&nbsp;" + unit }}</div>
+            </div>
+            <div class="target"></div>
           </div>
-        </div>
       </div>
 
       <div class="label-box d-flex justify-content-between">
@@ -37,7 +38,8 @@ export default {
     value: Number,
     total_items: Number,
     scalePoints: Array,
-    unit: String
+    unit: String,
+    target: Number
   },
   computed: {
     width() {

@@ -1,7 +1,14 @@
 #include "serial.h"
 
-int run_serial_client(char * device_path, int speed) {
-    serial_descriptor = open(device_path, O_RDWR | O_NOCTTY | O_SYNC); // O_NOCTTY, O_NONBLOCK
+int run_serial_client(int speed) {
+    printf("Trying kurwa connect\n");
+    serial_descriptor = open(serial_device_patch, O_RDWR | O_NOCTTY | O_SYNC); // O_NOCTTY, O_NONBLOCK
+
+    if(serial_descriptor < 0) {
+        sleep(1);
+        run_serial_client(speed);
+    }
+    printf("Connected to serial device.\n");
     set_interface_attribs(serial_descriptor, speed, 0);
     set_blocking(serial_descriptor, 0);
     return 0;
@@ -59,12 +66,14 @@ void set_blocking(int fd, int should_block) {
 }
 
 int write_frame_to_serial(uint8_t * frame) {
+    // if(serial_descriptor < 0) {
+    //     return 1;
+    // }
     tcflush(serial_descriptor, TCIOFLUSH);
     if (write(serial_descriptor, frame, frame[1]) < 0) {
         printf("Send frame to serial ERROR. Trying reconnect...\n");
 
-        // run_serial_client(serial_device_patch);
-
+        run_serial_client(B19200);
         return 1;
     }
     return 0;

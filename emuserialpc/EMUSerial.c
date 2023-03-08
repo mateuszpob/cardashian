@@ -141,7 +141,7 @@ void run_data_reader(void) {
 
 void * start_reading(void * args) {
 
-    run_serial_client(serial_device_patch, B19200);
+    run_serial_client(B19200);
     
     uint8_t read_buffer[255] = {0};
     int bytes_avaiable = 0;
