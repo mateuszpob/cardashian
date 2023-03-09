@@ -1,12 +1,13 @@
 from MierzejClient import MierzejClient
 from EmuSeialClient import EmuSeialClient
 from Connector import Connector
+from DeviceManager import DeviceManager
 from websocket_server import WebsocketServer
 from Idrive import Idrive
 import time
 from pprint import pprint
 import sys
-
+import os
 
 
 def main():
@@ -22,12 +23,19 @@ def main():
         if sys.argv[1] == '-m':
             mock = True
 
+    dm = DeviceManager()
+
+    idrive_path = dm.find('idrive')
+    emu_path = dm.find('emu')
+
     conn = Connector()
     conn.start()
 
-    idrive = Idrive(conn)
+    idrive = Idrive(conn, idrive_path)
     idrive.start()
 
+    os.system("/usr/bin/run_emuserial.sh " + emu_path)
+    time.sleep(3)
     emu = None
     
     try:

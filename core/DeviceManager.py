@@ -7,11 +7,9 @@ import struct
 # from simple_websocket_server import WebSocketServer, WebSocket
 from websocket_server import WebsocketServer
 
-class Idrive(threading.Thread):
-    def __init__(self, conn, device_path):
-        self.device_path = device_path
-        self.conn = conn
-        self.device_name = 'Idrive'
+class DeviceManager():
+    def __init__(self):
+        self.device_name = ''
         self.devices = [
             '/dev/ttyUSB0',
             '/dev/ttyUSB1',
@@ -21,30 +19,64 @@ class Idrive(threading.Thread):
             '/dev/ttyUSB5',
         ]
 
+        self.rules = {
+            'idrive':   {'type': 'name',    'value': 'Idrive'},
+            'emu':      {'type': 'notname', 'value': 'Idrive'}
+        }
         
-        threading.Thread.__init__(self)
+    def find(self, device_name):
+        self.device_name = device_name
+        path = False
+        while path == False:
+            path = self.searchDevice()
+            time.sleep(1)
+    
+        return path
+    
+    def searchDevice(self):
+        for device_path in self.devices:
+            # print("Check device " + device)
+            if self.checkDevice(device_path):
+                return device_path
+        return False
 
-    def connect_serial_device(self):
-        self.ser = serial.Serial(port=self.device_path, baudrate=19200, parity=serial.PARITY_NONE, stopbits=serial.STOPBITS_ONE, bytesize=serial.EIGHTBITS, timeout=0)
-        print("connected to: " + self.ser.portstr)
+    def checkDevice(self, path):
+        try:
+            self.ser = serial.Serial(port=path, baudrate=19200, parity=serial.PARITY_NONE, stopbits=serial.STOPBITS_ONE, bytesize=serial.EIGHTBITS, timeout=0)
+            print("checking device: " + self.ser.portstr)
+        except:
+            return False
 
-    def read(self):
-        line =  self.ser.read(1)
-        if line:
-            print(">>>" + str(line))
-            self.conn.send({"channel": "action", "data": struct.unpack('B', line)})
+        time.sleep(0.5)
+        self.ser.write(bytes('a', 'ascii'))
+        time.sleep(0.3)
+        line =  self.ser.read(6)
+        # print(line)
 
-    def run(self):
-        self.connect_serial_device()
-        
-        while True:
-            try:
-                self.read()
-            except:
-                print(self.device_name + " disconnected")
-                self.connect_serial_device()
+        if self.rules[self.device_name]['type'] == 'name':
+            if line == bytes(self.rules[self.device_name]['value'], 'ascii'):
+                print("Found device " + self.device_name + " under " + path)
+                return True
             
-            time.sleep(0.01)
+        if self.rules[self.device_name]['type'] == 'notname':
+            if line != bytes(self.rules[self.device_name]['value'], 'ascii'):
+                print("Found device " + self.device_name + " under " + path)
+                return True
+
+        return False
+
+
+    # def run(self):
+    #     self.connect_serial_device()
+        
+    #     while True:
+    #         try:
+    #             self.read()
+    #         except:
+    #             print(self.device_name + " disconnected")
+    #             self.connect_serial_device()
+            
+    #         time.sleep(0.01)
 
 
 

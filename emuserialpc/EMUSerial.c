@@ -155,9 +155,11 @@ void * start_reading(void * args) {
         // uint8_t read_bytes = read(serial_descriptor, &read_buffer[read_bytes_total], bytes_avaiable);
         uint8_t read_bytes = read(serial_descriptor, read_buffer, bytes_avaiable);
 
-        printf("[%d] raw bytes: ", read_bytes);
-        print_frame(read_buffer, read_bytes);
-
+		if(show_raw_frames_option == 1) {
+			printf("[%d] raw bytes: ", read_bytes);
+			print_frame(read_buffer, read_bytes);
+		}
+		
 		if(store_frame_option) {
 			store_frame(read_buffer, read_bytes);
 		}
