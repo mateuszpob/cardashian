@@ -5,8 +5,11 @@
 # Remove old build
 rm -r -f ./build/*
 
-# Copy installation script
-cp ./linux/* ./build
+mkdir ./build
+mkdir ./build/scripts
+
+# Copy installation scripts
+cp ./linux/* ./build/scripts
 
 # Copy Core
 cp -r ./core ./build

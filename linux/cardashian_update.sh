@@ -14,5 +14,5 @@ mv cardashian.tar.gz ./cardashian
 cd ./cardashian
 tar -xzvf cardashian.tar.gz 
 
-chmod +x ./cardashian_install.sh
-./cardashian_install.sh
+chmod +x ./scripts/cardashian_install.sh
+./scripts/cardashian_install.sh
