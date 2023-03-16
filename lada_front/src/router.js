@@ -15,7 +15,7 @@ const router = createRouter({
         //     component: HelloWorld,
         // },
         {
-            path: '/desktop',
+            path: '/',
             name: 'desktop',
             component: Desktop,
         },
