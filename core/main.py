@@ -23,19 +23,20 @@ def main():
         if sys.argv[1] == '-m':
             mock = True
 
-    dm = DeviceManager()
-
-    idrive_path = dm.find('idrive')
-    emu_path = dm.find('emu')
-
+    
     conn = Connector()
     conn.start()
+    if mock == False:
+        dm = DeviceManager()
+        idrive_path = dm.find('idrive')
+        emu_path = dm.find('emu')
+        
+        idrive = Idrive(conn, idrive_path)
+        idrive.start()
 
-    idrive = Idrive(conn, idrive_path)
-    idrive.start()
-
-    os.system("/usr/bin/run_emuserial.sh " + emu_path)
-    time.sleep(3)
+        os.system("/usr/bin/run_emuserial.sh " + emu_path)
+        time.sleep(3)
+        
     emu = None
     
     try:
