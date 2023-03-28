@@ -1,20 +1,23 @@
 <template>
-  <div class="wrapper d-flex flex-column align-items-center justify-content-center">
+  <div class="wrapper d-flex flex-column align-items-center justify-content-between">
       <!-- <IndicatorStrap v-for="(value, label) in dashboard" :scalePoints="[0, 50, 100]" :total_items="Object.keys(dashboard).length" :label="label" :value="value" v-bind:key="label"/> -->
   
-      <div class="d-flex justify-content-around flex-wrap mt-3">
+      <div class="d-flex justify-content-around flex-wrap ">
         <IndicatorStrap v-for="(settings, key) in indicators" v-bind:key="key" :scalePoints="settings.scalePoints" :unit="settings.unit" :total_items="1" :label="settings.label" :value="dashboard[key]"></IndicatorStrap>
       </div>
-      <br>
-      <div>
-        <IndicatorSpeedDigital :unit="'Km/h'" :total_items="1" :label="'SPEED'" :value="Math.round(dashboard['vssSpeed'])"></IndicatorSpeedDigital>
-        <div class="d-flex flex-row justify-content-between">
+      
+      <div style="margin-top: -100px" class="d-flex flex-row ">
+        <!-- <TableDetails></TableDetails> -->
+        <IndicatorDigiCircle :max-val="6000" :max-angle="270" :value="Math.round(dashboard['RPM'])" :value2="Math.round(dashboard['vssSpeed'])"></IndicatorDigiCircle>
+        <!-- <IndicatorSpeedDigital :unit="''" :total_items="1" :label="'SPEED'" :value="Math.round(dashboard['vssSpeed'])"></IndicatorSpeedDigital> -->
+        <!-- <div class="d-flex flex-row justify-content-between">
           <div class="medium-label digital-font">GEAR: {{ dashboard['gear'] }}</div>
           <div class="medium-label digital-font">RPM: {{ dashboard['RPM'] }}</div>
-        </div>
+        </div> -->
+        <div class="large-label digital-font" style="margin-left: 100px; margin-top: 70px;">{{ dashboard['gear'] }}</div>
       </div> 
       
-      <div class="d-flex justify-content-around flex-wrap mt-3">
+      <div style="margin-top: -60px; height: 92px;" class="d-flex justify-content-around flex-wrap">
         <IndicatorStrap v-for="(settings, key) in indicators2" v-bind:key="key" :scalePoints="settings.scalePoints" :unit="settings.unit" :total_items="1" :label="settings.label" :value="dashboard[key]"></IndicatorStrap>
       </div>
 
@@ -25,6 +28,8 @@
 import IndicatorDigitDefault from './indicators/IndicatorDigitDefault.vue' 
 import IndicatorStrap from './indicators/IndicatorStrap.vue' 
 import IndicatorSpeedDigital from './indicators/IndicatorSpeedDigital.vue' 
+import TableDetails from './indicators/TableDetails.vue' 
+import IndicatorDigiCircle from './indicators/IndicatorDigiCircle.vue' 
 export default {
 name: 'Desktop',
 data()  {
@@ -74,24 +79,30 @@ methods: {
     switch(true){
       default:
         this.$router.push({ name: 'menu' })
+      }
     }
+  },
+  components: {
+    IndicatorDigitDefault,
+    IndicatorStrap,
+    IndicatorSpeedDigital,
+    TableDetails,
+    IndicatorDigiCircle
   }
-},
-components: {
-  IndicatorDigitDefault,
-  IndicatorStrap,
-  IndicatorSpeedDigital
-}
 }
 </script>
 
-<style scoped>
-.wrapper {
-padding: 5px;
-height: 100%;
-}
-.medium-label {
-font-size: 50px;
-line-height: 50px;
-}
+  <style scoped>
+  .wrapper {
+    padding: 5px;
+    height: 100%;
+  }
+  .medium-label {
+    font-size: 50px;
+    line-height: 50px;
+  }
+  .large-label {
+    font-size: 120px;
+    line-height: 120px;
+  }
 </style>

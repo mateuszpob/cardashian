@@ -34,7 +34,7 @@ export default {
   name: 'IndicatorStrap',
   props: {
     label: String,
-    value: Number,
+    value: String,
     total_items: Number,
     scalePoints: Array,
     unit: String
