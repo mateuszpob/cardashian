@@ -37,15 +37,15 @@ data()  {
     dashboard: {},
     indicators: {
       "TPS": {label: "TPS", unit: "%", scalePoints: [0, 50, 100]},
-      "IAT": {label: "INTAKE AIR TEMP", unit: "°C", scalePoints: [0, 50, 100]},
+      "IAT": {label: "INTAKE AIR TEMP", unit: "°C", scalePoints: [0, 30, 60]},
       "Batt": {label: "VOLTAGE", unit: "V", scalePoints: [0, 5, 10, 15]},
       "wboAFR": {label: "AFR", unit: "", scalePoints: [0,  10, 20]},
     },
     indicators2: {
       "CLT": {label: "WATER TEMP", unit: "°C", scalePoints: [0, 50, 100, 150]},
-      "oilPressure": {label: "OIL PRESSURE", unit: "bar", scalePoints: [0, 2, 4, 6]},
+      "oilPressure": {label: "OIL PRESSURE", unit: "bar", scalePoints: [0, 1, 2, 3]},
       "oilTemperature": {label: "OIL TEMP", unit: "°C", scalePoints: [0, 50, 100, 150]},
-      "afrTarget": {label: "TARGET AFR", unit: "", scalePoints: [0, 50, 100]},
+      "knockLevel": {label: "KNOCK LEVEL", unit: "", scalePoints: [0, 250, 500]},
       // "fuelLevel": {label: "FUEL", unit: "%", scalePoints: [0, 50, 100]},
     }
   }
