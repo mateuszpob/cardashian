@@ -1,6 +1,7 @@
 from MierzejClient import MierzejClient
 from EmuSeialClient import EmuSeialClient
 from Connector import Connector
+from DistanceCounter import DistanceCounter
 from DeviceManager import DeviceManager
 from websocket_server import WebsocketServer
 from Idrive import Idrive
@@ -45,12 +46,16 @@ def main():
     except:
         print('Emu not found')
 
+    dc = DistanceCounter()
+    dc.start()
+
     while True:
         # print(mierzej.get_values())
         # conn.send({"channels": mierzej.get_values()})
 
         if emu is not None:
-            conn.send({"channel": "dashframe", "data": emu.frame})
+            # frame = dc.decore_frame(emu.frame)
+            conn.send({"channel": "dashframe", "data": {"emu_frame": emu.frame}})
         time.sleep(0.1)
 
 if __name__ == '__main__':

@@ -30,7 +30,7 @@ export default {
 
       switch(data.channel) {
         case "dashframe":
-          this.emitter.emit("dashframe", data.data);
+          this.emitter.emit("dashframe", data.data.emu_frame);
           break;
         case "action":
           switch(data.data[0]) {

@@ -81,7 +81,7 @@ class EmuSeialClient(threading.Thread):
             offset=offset+sizes[types[i]]
             i=i+1
         self.frame = dataObject
-        pprint(dataObject)
+        # pprint(dataObject)
 
 
 
