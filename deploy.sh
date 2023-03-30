@@ -3,7 +3,7 @@
 # Local machine ci/cd script
 
 # Remove old build
-rm -r -f ./build/*
+rm -r -f ./build
 
 mkdir ./build
 mkdir ./build/scripts
