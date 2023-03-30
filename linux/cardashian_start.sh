@@ -23,4 +23,5 @@ DISPLAY=:0 chromium-browser \
         --disable-component-update \
         --overscroll-history-navigation=0 \
 	    --check-for-update-interval=2147483647 \
-	--kiosk http://127.0.0.1:8000 > /dev/null 2>&1 &
+        --aggressive-cache-discard \
+	    --kiosk http://127.0.0.1:8000 > /dev/null 2>&1 &
