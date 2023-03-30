@@ -6,7 +6,7 @@
         <IndicatorStrap v-for="(settings, key) in indicators" v-bind:key="key" :scalePoints="settings.scalePoints" :unit="settings.unit" :total_items="1" :label="settings.label" :value="dashboard[key]"></IndicatorStrap>
       </div>
       
-      <div style="margin-top: -100px" class="d-flex flex-row ">
+      <div style="width:100%;margin-top: -100px" class="d-flex justify-content-around">
         <!-- <TableDetails></TableDetails> -->
         <IndicatorDigiCircle :max-val="6000" :max-angle="270" :value="Math.round(dashboard['RPM'])" :value2="Math.round(dashboard['vssSpeed'])"></IndicatorDigiCircle>
         <!-- <IndicatorSpeedDigital :unit="''" :total_items="1" :label="'SPEED'" :value="Math.round(dashboard['vssSpeed'])"></IndicatorSpeedDigital> -->
@@ -14,7 +14,22 @@
           <div class="medium-label digital-font">GEAR: {{ dashboard['gear'] }}</div>
           <div class="medium-label digital-font">RPM: {{ dashboard['RPM'] }}</div>
         </div> -->
-        <div class="large-label digital-font" style="margin-left: 100px; margin-top: 70px;">{{ dashboard['gear'] }}</div>
+
+        <div style="" class="d-flex flex-column justify-content-center">
+          <div class="d-flex flex-row align-items-end mt-5">
+            <div class="w-label fnt-20" style="width:70px;"></div>
+            <div class="digital-font fnt-100">{{ dashboard['gear'] }}</div>
+          </div>
+          <div class="d-flex flex-row align-items-end mt-5">
+            <div class="w-label fnt-16" style="width:70px;">TOTAL</div>
+            <div class="digital-font fnt-50">{{ dashboard['total_distance'] }}</div>
+          </div>
+          <div class="d-flex flex-row align-items-end mt-2">
+            <div class="w-label fnt-16" style="width:70px;">TRIP</div>
+            <div class="digital-font fnt-50">{{ dashboard['trip_distance'] }}</div>
+          </div>
+        </div>
+s
       </div> 
       
       <div style="margin-top: -60px; height: 92px;" class="d-flex justify-content-around flex-wrap">
@@ -100,9 +115,5 @@ methods: {
   .medium-label {
     font-size: 50px;
     line-height: 50px;
-  }
-  .large-label {
-    font-size: 120px;
-    line-height: 120px;
   }
 </style>

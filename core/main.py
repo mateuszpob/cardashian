@@ -54,8 +54,7 @@ def main():
         # conn.send({"channels": mierzej.get_values()})
 
         if emu is not None:
-            # frame = dc.decore_frame(emu.frame)
-            conn.send({"channel": "dashframe", "data": {"emu_frame": emu.frame}})
+            conn.send({"channel": "dashframe", "data": {"emu_frame": emu.frame, "total_distance": dc.get_total_distance(), "trip_distance": dc.get_trip_distance()}})
         time.sleep(0.1)
 
 if __name__ == '__main__':

@@ -63,8 +63,8 @@ export default {
         <div class="d-flex w-100 flex-row ">
             <div class="value2-label">km/h</div>
             <div class="value-d-box d-flex flex-column align-items-start ">
-                <div class="digital-font rpm-val">{{ value }}</div>
-                <div class=" rpm-lab">{{ 'RPM' }}</div>
+                <div class="digital-font rpm-val fnt-50">{{ value }}</div>
+                <div class=" rpm-lab fnt-20 mt-1">{{ 'RPM' }}</div>
             </div>
         </div>
         
@@ -126,13 +126,7 @@ export default {
 .value2-label {
     color: #fff;
 }
-.rpm-val {
-    font-size: 50px;
-    line-height: 50px;
-}
 .rpm-lab {
-    font-size: 20px;
-    line-height: 20px;
     color: #fff;
 }
 .value2-label {

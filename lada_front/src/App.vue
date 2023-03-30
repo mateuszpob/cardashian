@@ -30,7 +30,10 @@ export default {
 
       switch(data.channel) {
         case "dashframe":
-          this.emitter.emit("dashframe", data.data.emu_frame);
+          let frame = data.data.emu_frame;
+          frame.total_distance = data.data.total_distance;
+          frame.trip_distance = data.data.trip_distance;
+          this.emitter.emit("dashframe", frame);
           break;
         case "action":
           switch(data.data[0]) {

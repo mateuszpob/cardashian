@@ -12,12 +12,11 @@ class DistanceCounter(threading.Thread):
     def calculate_distance(self):
         print(1)
 
-    def decore_frame(self, frame):
-        # pprint(frame)
-        setattr(frame, 'total_distance', self.total_distance)
-        # frame['total_distance'] = self.total_distance
-        # frame.trip_distance = self.trip_distance
-        return frame
+    def get_total_distance(self):
+        return self.total_distance
+    
+    def get_trip_distance(self):
+        return self.trip_distance
     
     def run(self):
         while(True):

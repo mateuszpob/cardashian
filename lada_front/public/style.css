@@ -9,3 +9,26 @@
   font-family: digitalDisplay;
   /* text-shadow: 4px 4px 9px green; */
 }
+.fnt-100 {
+  font-size: 100px;
+  line-height: 66px;
+}
+.fnt-50 {
+  font-size: 50px;
+  line-height: 40px;
+}
+.fnt-20 {
+  font-size: 20px;
+  line-height: 20px;
+}
+.fnt-16 {
+  font-size: 16px;
+  line-height: 16px;
+}
+.fnt-10 {
+  font-size: 10px;
+  line-height: 10px;
+}
+.w-label {
+  color: white;
+}
