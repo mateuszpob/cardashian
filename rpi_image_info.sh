@@ -1,0 +1,61 @@
+Startup finished in 2.113s (kernel) + 6.705s (userspace) = 8.818s 
+graphical.target reached after 6.658s in userspace
+
+autostart services
+          2.272s dev-mmcblk0p2.device
+          1.237s udisks2.service
+          1.092s rpi-eeprom-update.service
+           672ms systemd-logind.service
+           655ms raspi-config.service
+           643ms dphys-swapfile.service
+           591ms wpa_supplicant.service
+           586ms systemd-udev-trigger.service
+           530ms keyboard-setup.service
+           463ms dhcpcd.service
+           459ms lightdm.service
+           454ms avahi-daemon.service
+           452ms systemd-fsck@dev-disk-by\x2dpartuuid-f94af635\x2d01.service
+           418ms networking.service
+           411ms plymouth-quit-wait.service
+           367ms user@1000.service
+           334ms systemd-timesyncd.service
+           328ms polkit.service
+           326ms rng-tools.service
+           318ms rsyslog.service
+           311ms ssh.service
+           311ms systemd-journald.service
+           292ms gldriver-test.service
+           268ms triggerhappy.service
+           255ms systemd-fsck-root.service
+           206ms alsa-restore.service
+           178ms systemd-remount-fs.service
+           159ms systemd-tmpfiles-setup.service
+           157ms systemd-udevd.service
+           130ms rc-local.service
+           123ms plymouth-read-write.service
+           118ms systemd-user-sessions.service
+           108ms systemd-sysctl.service
+           105ms fake-hwclock.service
+           101ms boot.mount
+            95ms systemd-modules-load.service
+            95ms run-rpc_pipefs.mount
+            94ms systemd-journal-flush.service
+            89ms sys-kernel-debug.mount
+            88ms systemd-sysusers.service
+            86ms systemd-update-utmp.service
+            79ms kmod-static-nodes.service
+            77ms plymouth-start.service
+            75ms systemd-tmpfiles-setup-dev.service
+            74ms dev-mqueue.mount
+            70ms systemd-random-seed.service
+            70ms systemd-timedated.service
+            57ms systemd-rfkill.service
+            56ms sys-kernel-config.mount
+            56ms user-runtime-dir@1000.service
+            47ms console-setup.service
+            39ms systemd-update-utmp-runlevel.service
+            36ms ifupdown-pre.service
+            33ms nfs-config.service
+            31ms rtkit-daemon.service
+            30ms sys-fs-fuse-connections.mount
+
