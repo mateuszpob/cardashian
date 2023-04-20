@@ -46,7 +46,7 @@ def main():
     except:
         print('Emu not found')
 
-    dc = DistanceCounter()
+    dc = DistanceCounter(emu)
     dc.start()
 
     while True:
