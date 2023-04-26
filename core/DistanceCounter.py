@@ -15,12 +15,33 @@ class DistanceCounter(threading.Thread):
         # print("self.total_distance " + str(self.total_distance))
         # self.distance_log = open('distance.log', 'w')
 
+        self.total_distance = self.readDistanceFromFile()
+        self.temp_total_distance = self.total_distance;
         threading.Thread.__init__(self)
 
+    def readDistanceFromFile(self):
+        f = open("/var/log/emu/distance.txt", "r")
+        distance = int(f.read())
+        f.close()
+        return distance
+    
+    def writeDistanceToFile(self, distance):
+        f = open("/var/log/emu/distance.txt", "w")
+        f.write(str(distance))
+        f.close()
+        return distance
+    
     def calculate_distance(self):
         if self.emu and self.emu.frame.get('vssSpeed'):
-            sec_val = (float(self.emu.frame.get('vssSpeed')) * self.km_to_sec / 1000)
-            self.trip_distance = self.trip_distance + sec_val
+            frame_distran = (float(self.emu.frame.get('vssSpeed')) * self.km_to_sec / 1000)
+            self.trip_distance = self.trip_distance + frame_distran
+
+            self.temp_total_distance = self.temp_total_distance + frame_distran
+            if self.total_distance < int(self.temp_total_distance):
+                self.total_distance = int(self.temp_total_distance)
+                self.writeDistanceToFile(self.total_distance)
+
+
             # print(self.trip_distance)
 
             # self.total_distance = self.total_distance + self.trip_distance
