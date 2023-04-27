@@ -5,7 +5,7 @@ echo -e '\e[12m[SMOS] - Start creating the os image at: '; date; echo -e '\e[0m'
 
 
 
-echo -e '\e[12m[QPS] - Extract, resize partition and mount image\e[0m'
+echo -e '\e[12m[SMOS] - Extract, resize partition and mount image\e[0m'
 #IMAGE_NAME=$(unzip -Z1 raspbian_lite_latest)
 
 # ================================ RESIZE FS ========================================================
@@ -65,8 +65,13 @@ cat /mnt/etc/fstab
 
 
 
-echo -e '\e[32m[QPS] - Copy install script\e[0m'
+echo -e '\e[32m[SMOS] - Copy install script\e[0m'
 cp ./configure.sh /mnt/root/;
+
+# # Splash screen
+# cp ./splash/splashscreen.service /mnt/etc/systemd/system/splashscreen.service
+# cp ./splash/cmdline.txt /mnt/boot/cmdline.txt
+# cp ./splash/splash.png /mnt/opt/splash.png
 
 
 mount -o bind /dev /mnt/dev/;
@@ -77,20 +82,29 @@ mount -o bind /dev/pts /mnt/dev/pts/;
 chmod 777 /mnt/tmp;
 cp /etc/resolv.conf /mnt/etc/;
 
+# Lightdm configuration
+mkdir /mnt/etc/lightdm
+mkdir /mnt/etc/lightdm/lightdm.conf.d/
+cp ./configs/lightdm/50-mp.conf /mnt/etc/lightdm/lightdm.conf.d/
+
+# i3 config
+mkdir /mnt/home/mp/
+cp ./configs/i3_config /mnt/home/mp/
+
+
+
 sed -i 's/^/#/g' /mnt/etc/ld.so.preload
 cp /usr/bin/qemu-arm-static /mnt/usr/bin/
 
-echo -e '\e[32m[QPS] - Chroot rootfs\e[0m'
-#chroot /mnt /root/configure.sh
-#
-#sed -i 's/^#//g' /mnt/etc/ld.so.preload
-#
-#umount /mnt/{dev/pts,dev,sys,proc,boot,}
-#
-#losetup -d /dev/loop0;
-#
-#echo -e '\e[32m[QPS] - Finish creating the os image at: '; date; echo -e '\e[0m';
+echo -e '\e[32m[SMOS] - Chroot rootfs\e[0m'
+chroot /mnt /root/configure.sh
 
+
+sed -i 's/^#//g' /mnt/etc/ld.so.preload
+umount /mnt/{dev/pts,dev,sys,proc,boot,}
+losetup -d /dev/loop0;
+
+echo -e '\e[32m[SMOS] - Finish creating the os image at: '; date; echo -e '\e[0m';
 
 
 
