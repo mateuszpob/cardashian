@@ -16,6 +16,9 @@ apt -y install xorg xinit i3 i3status lightdm less vim gcc git nano build-essent
 
 systemctl enable lightdm
 
+systemctl stop userconfig
+systemctl disable userconfig
+systemctl mask userconfig
 
 # cardashian files
 touch /var/log/emu/distance.txt
