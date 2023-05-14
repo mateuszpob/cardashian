@@ -12,3 +12,5 @@ emuserialpc/build/
 emuserialpc/emuserial
 
 smos/images
+smos/configs/ssh
+smos/configs/wpa_supplicant.conf
