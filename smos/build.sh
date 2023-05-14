@@ -29,38 +29,12 @@ echo 'PARTUUID after part '$PARTUUID'\e[0m'
 
 mount -o rw /dev/loop0p2 /mnt
 mount -o rw /dev/loop0p1 /mnt/boot
-echo 'dwc_otg.lpm_enable=0 console=serial0,115200 console=tty1 root=PARTUUID='$PARTUUID'-02 rootfstype=ext4 elevator=deadline fsck.repair=yes rootwait' > /mnt/boot/cmdline.txt
+echo 'dwc_otg.lpm_enable=0 console=serial0,115200 console=tty1 root=PARTUUID='$PARTUUID'-02 rootfstype=ext4 elevator=deadline fsck.repair=yes rootwait quiet plymouth.ignore-serial-consoles' > /mnt/boot/cmdline.txt
+
 cp /mnt/etc/fstab fstab_tmp
-
 sed 's/PARTUUID=[0-9a-fA-F]*/PARTUUID='$PARTUUID'/g' fstab_tmp > /mnt/etc/fstab
-
 rm fstab_tmp
 cat /mnt/etc/fstab
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -82,6 +56,8 @@ mount -o bind /dev/pts /mnt/dev/pts/;
 chmod 777 /mnt/tmp;
 cp /etc/resolv.conf /mnt/etc/;
 
+
+
 # Lightdm configuration
 mkdir /mnt/etc/lightdm
 mkdir /mnt/etc/lightdm/lightdm.conf.d/
@@ -91,7 +67,17 @@ cp ./configs/lightdm/50-mp.conf /mnt/etc/lightdm/lightdm.conf.d/
 mkdir /mnt/home/mp/
 cp ./configs/i3_config /mnt/home/mp/
 
+# other configs
+cp ./configs/config.txt /mnt/boot     
+cp ./configs/wpa_supplicant.conf /mnt/etc/wpa_supplicant/
+mkdir /mnt/home/mp/.ssh/
+cp ./configs/ssh/* /mnt/home/mp/.ssh/
+cp ./configs/rootcrontab /mnt/root
 
+# maintenance scripts
+cp ../linux/cardashian_update.sh /mnt/usr/bin
+cp ../linux/cardashian_cold_start.sh /mnt/usr/bin
+cp ../linux/cardashian_check.sh /mnt/root
 
 sed -i 's/^/#/g' /mnt/etc/ld.so.preload
 cp /usr/bin/qemu-arm-static /mnt/usr/bin/
@@ -104,7 +90,7 @@ sed -i 's/^#//g' /mnt/etc/ld.so.preload
 umount /mnt/{dev/pts,dev,sys,proc,boot,}
 losetup -d /dev/loop0;
 
-echo -e '\e[32m[SMOS] - Finish creating the os image at: '; date; echo -e '\e[0m';
+echo -e "\e[32m[SMOS] - Finish creating the os image at: $(date)\e[0m";
 
 
 

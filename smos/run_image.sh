@@ -1,12 +1,14 @@
 #!/bin/bash
 
+./stop_image.sh
+
 IMAGE_NAME=$1
 echo 'Process image: '$IMAGE_NAME
 
 losetup -f -P $IMAGE_NAME
 
-mount -o rw /dev/loop0p2 /mnt
-mount -o rw /dev/loop0p1 /mnt/boot
+mount -o rw /dev/loop0p2 /mnt;
+mount -o rw /dev/loop0p1 /mnt/boot;
 
 mount -o bind /dev /mnt/dev/;
 mount -o bind /proc /mnt/proc/;

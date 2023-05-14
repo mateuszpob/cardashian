@@ -30,3 +30,6 @@ tar -czvf ../cardashian.tar.gz *
 
 # Send package to server
 scp ../cardashian.tar.gz tlusty://home/cardashian
+
+# Send start tasks to server
+scp ../linux/tasks.sh tlusty://home/cardashian

@@ -1,23 +1,23 @@
 #!/bin/bash
 
-# RPI device ci/cd script
+# Rpi device ci/cd script
 
 # Compile Emuserail
-cd /home/pi/cardashian/emuserialpc
+cd /home/mp/cardashian/emuserialpc
 mkdir -p build
 make
 
 # Create log directory
-mkdir /home/pi/cardashian/logs
+mkdir /home/mp/cardashian/logs
 
-cp /home/pi/cardashian/scripts/cardashian_start.sh /usr/bin
+cp /home/mp/cardashian/scripts/cardashian_start.sh /usr/bin
 chmod 777 /usr/bin/cardashian_start.sh
 
-cp /home/pi/cardashian/scripts/cardashian_stop.sh /usr/bin
+cp /home/mp/cardashian/scripts/cardashian_stop.sh /usr/bin
 chmod 777 /usr/bin/cardashian_stop.sh
 
-cp /home/pi/cardashian/scripts/cardashian_update.sh /usr/bin
+cp /home/mp/cardashian/scripts/cardashian_update.sh /usr/bin
 chmod 777 /usr/bin/cardashian_update.sh
 
-cp /home/pi/cardashian/scripts/run_emuserial.sh /usr/bin
-chmod 777 /usr/bin/run_emuserial.sh
+cp /home/mp/cardashian/scripts/cardashian_run_emuserial.sh /usr/bin
+chmod 777 /usr/bin/cardashian_run_emuserial.sh

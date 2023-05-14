@@ -3,13 +3,13 @@
 /usr/bin/cardashian_stop.sh
 
 #EMULOG_FILENAME="/var/log/emu/emulog_"$(date +"%d-%m-%y_%H:%M:%S")
-#/home/pi/cardashian/emuserialpc/emuserial -d /dev/emu -s $EMULOG_FILENAME > /home/pi/cardashian/logs/emuserial.log 2>&1 &
+#/home/mp/cardashian/emuserialpc/emuserial -d /dev/emu -s $EMULOG_FILENAME > /home/mp/cardashian/logs/emuserial.log 2>&1 &
 
-python3 /home/pi/cardashian/core/main.py /dev/idrive > /home/pi/cardashian/logs/core.log 2>&1 &
+python3 /home/mp/cardashian/core/main.py /dev/idrive > /home/mp/cardashian/logs/core.log 2>&1 &
  
 
-cd /home/pi/cardashian/dist
-python3 -m http.server > /home/pi/cardashian/logs/http.log 2>&1 &
+cd /home/mp/cardashian/dist
+python3 -m http.server > /home/mp/cardashian/logs/http.log 2>&1 &
 
 
 DISPLAY=:0 chromium-browser \

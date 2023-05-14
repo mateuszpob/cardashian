@@ -1,18 +1,25 @@
 #!/bin/bash
 
-#rsync -Pav -e "ssh -i /home/pi/.ssh/id_rsa" cardashian@188.68.231.142:/home/cardashian/synchronized/* /home/pi/cardashian/synchronized
-#ssh -i /home/pi/.ssh/id_rsa cardashian@188.68.231.142 "md5sum /home/cardashian/cardashian.tar.gz"
+#rsync -Pav -e "ssh -i /home/mp/.ssh/id_rsa" cardashian@188.68.231.142:/home/cardashian/synchronized/* /home/mp/cardashian/synchronized
+#ssh -i /home/mp/.ssh/id_rsa cardashian@188.68.231.142 "md5sum /home/cardashian/cardashian.tar.gz"
 
-cd /home/pi/
+# Wait for internet connection
+until ping -c1 www.google.com >/dev/null 2>&1;
+do
+sleep 1;
+done
 
-scp -i /home/pi/.ssh/id_rsa cardashian@188.68.231.142://home/cardashian/cardashian.tar.gz /home/pi
 
-# ok?
+cd /home/mp/
 
-rm -r -f ./cardashian/*
-mv cardashian.tar.gz ./cardashian
+rm -r -f ./cardashian
+mkdir ./cardashian
 cd ./cardashian
-tar -xzvf cardashian.tar.gz 
+
+scp -i /home/mp/.ssh/id_rsa cardashian@188.68.231.142://home/cardashian/cardashian.tar.gz .
+tar -xzvf cardashian.tar.gz
+
+
 
 chmod +x ./scripts/cardashian_install.sh
 ./scripts/cardashian_install.sh
