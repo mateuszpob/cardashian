@@ -35,7 +35,7 @@ def main():
         idrive = Idrive(conn, idrive_path)
         idrive.start()
 
-        os.system("/usr/bin/run_emuserial.sh " + emu_path)
+        os.system("/usr/bin/cardashian_run_emuserial.sh " + emu_path)
         time.sleep(3)
         
     emu = None
