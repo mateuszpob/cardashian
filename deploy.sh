@@ -35,4 +35,4 @@ tar -czvf ../cardashian.tar.gz *
 scp ../cardashian.tar.gz tlusty://home/cardashian
 
 # Send start tasks to server
-scp ../linux/tasks.sh tlusty://home/cardashian
+./deploy_tasks.sh

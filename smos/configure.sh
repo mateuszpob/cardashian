@@ -43,11 +43,9 @@ touch /var/log/cardashian/distance.txt;
 touch /var/log/cardashian/core.log;
 touch /var/log/cardashian/http.log;
 touch /var/log/cardashian/emuserial.log;
+touch /var/log/cardashian/maintenance.log
 chown mp:mp -R /var/log/cardashian;
 
-
-touch /var/log/maintenance.log
-chmod 777 /var/log/maintenance.log
 
 touch /usr/bin/cardashian_start.sh
 touch /usr/bin/cardashian_stop.sh

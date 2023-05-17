@@ -17,4 +17,4 @@ scp -i /home/mp/.ssh/id_rsa -o StrictHostKeyChecking=no cardashian@188.68.231.14
 
 chmod +x /root/tasks.sh
 
-/root/tasks.sh > /var/log/maintenance.log 2>&1;
+/root/tasks.sh > /var/log/cardashian/maintenance.log 2>&1;
