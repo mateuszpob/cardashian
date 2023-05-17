@@ -3,13 +3,14 @@
 # Rpi device ci/cd script
 
 # Compile Emuserail
-cd /home/mp/cardashian/emuserialpc
-mkdir -p build
-make
+# cd /home/mp/cardashian/emuserialpc
+# rm -r -f ./build
+# mkdir build
+# cd ./build
+# cmake ..
+# cmake --build .
 
 # Create log directory
-mkdir /home/mp/cardashian/logs
-
 cp /home/mp/cardashian/scripts/cardashian_start.sh /usr/bin
 chmod 777 /usr/bin/cardashian_start.sh
 

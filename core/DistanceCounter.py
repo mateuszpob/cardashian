@@ -20,13 +20,13 @@ class DistanceCounter(threading.Thread):
         threading.Thread.__init__(self)
 
     def readDistanceFromFile(self):
-        f = open("/var/log/emu/distance.txt", "r")
+        f = open("/var/log/cardashian/distance.txt", "r")
         distance = int(f.read())
         f.close()
         return distance
     
     def writeDistanceToFile(self, distance):
-        f = open("/var/log/emu/distance.txt", "w")
+        f = open("/var/log/cardashian/distance.txt", "w")
         f.write(str(distance))
         f.close()
         return distance

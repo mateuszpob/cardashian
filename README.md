@@ -27,11 +27,11 @@ pkill -9 chromium
 pkill -9 'python3 -m http.server'
 
 cd /home/pi/cardashian/synchronized/cardashian
-./emuserialpc/emuserial > /home/pi/cardashian/logs/emuserial.log 2>&1 &
-python3 ./core/main.py > /home/pi/cardashian/logs/core.log 2>&1 &
+./emuserialpc/emuserial > /var/log/cardashian/emuserial.log 2>&1 &
+python3 ./core/main.py > /var/log/cardashian/core.log 2>&1 &
  
 cd /home/pi/cardashian/synchronized/cardashian/dist
-python3 -m http.server > /home/pi/cardashian/logs/http.log 2>&1 &
+python3 -m http.server > /var/log/cardashian/http.log 2>&1 &
 
 sudo -u pi DISPLAY=:0 chromium-browser \
         --disable-session-crashed-bubble \

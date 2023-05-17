@@ -1,0 +1,14 @@
+[Unit]
+Description=Start Cardashian Service
+
+[Service]
+ExecStart=/usr/bin/cardashian_start.sh
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=cardashian
+User=mp
+Group=mp
+WorkingDirectory=/home/mp/cardashian/
+
+[Install]
+WantedBy=graphical.target
