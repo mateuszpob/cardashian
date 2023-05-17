@@ -6,6 +6,7 @@
 #include <sys/ioctl.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <pthread.h>
 #include <time.h>
 #include "serial.h"
 #include "format/emuStruct.h"

@@ -1,7 +1,8 @@
 # all:
 # 	gcc main.c serial.c serial.h -o huj
 
-CC=cc
+# CC=cc
+CC=arm-linux-gnueabihf-gcc
 
 all: build_dir main.o
 	$(CC) build/main.o build/front.o build/socket_server.o build/EMUSerial.o build/serial.o -o emuserial -lpthread
