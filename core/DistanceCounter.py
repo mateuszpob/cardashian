@@ -16,7 +16,7 @@ class DistanceCounter(threading.Thread):
         # self.distance_log = open('distance.log', 'w')
 
         self.total_distance = self.readDistanceFromFile()
-        self.temp_total_distance = self.total_distance;
+        self.temp_total_distance = self.total_distance
         threading.Thread.__init__(self)
 
     def readDistanceFromFile(self):
