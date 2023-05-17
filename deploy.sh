@@ -22,10 +22,10 @@ cd ..
 cp ./emuserialpc/emuserial ./build
 
 # Build frontend app
-cd ./lada_front
+cd ./displayapp
 npm run build
 cd ../
-cp -r ./lada_front/dist ./build
+cp -r ./displayapp/dist ./build
 
 # Build package 
 cd ./build

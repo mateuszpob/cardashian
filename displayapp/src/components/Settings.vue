@@ -55,27 +55,27 @@ export default {
             }
           ]
         },
-        {
-          'label': 'YouTube',
-          'options': [
-            {
-              'label': 'submenu',
-              'options': [
-                {'label': 'dupa1'},
-                {'label': 'dupa2'},
-                {'label': 'dupa3'},
-              ]
-            },
-            {
-              'label': 'Pierdoły',
-              'options': [
-                {'label': 'Konon'},
-                {'label': 'Major'},
-                {'label': 'Piston'}
-              ]
-            }
-          ]
-        },
+        // {
+        //   'label': 'YouTube',
+        //   'options': [
+        //     {
+        //       'label': 'submenu',
+        //       'options': [
+        //         {'label': 'dupa1'},
+        //         {'label': 'dupa2'},
+        //         {'label': 'dupa3'},
+        //       ]
+        //     },
+        //     {
+        //       'label': 'Pierdoły',
+        //       'options': [
+        //         {'label': 'Konon'},
+        //         {'label': 'Major'},
+        //         {'label': 'Piston'}
+        //       ]
+        //     }
+        //   ]
+        // },
       ]
     }
   },

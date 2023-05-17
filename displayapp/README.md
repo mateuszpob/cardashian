@@ -1,4 +1,4 @@
-# lada_front
+# displayapp
 
 ## Project setup
 ```
