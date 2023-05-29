@@ -8,6 +8,7 @@ useradd mp --home /home/mp
 chown -R mp:mp /home/mp
 chsh -s /bin/bash mp
 usermod -a -G sudo mp
+usermod -a -G dialout mp
 echo -e "123456\n123456" | passwd mp
 
 # update & install
