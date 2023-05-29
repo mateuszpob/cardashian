@@ -44,7 +44,8 @@ class DeviceManager():
         try:
             self.ser = serial.Serial(port=path, baudrate=19200, parity=serial.PARITY_NONE, stopbits=serial.STOPBITS_ONE, bytesize=serial.EIGHTBITS, timeout=0)
             print("checking device: " + self.ser.portstr)
-        except:
+        except Exception as e:
+            print(e)
             return False
 
         time.sleep(0.5)

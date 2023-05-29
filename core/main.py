@@ -29,11 +29,11 @@ def main():
     conn.start()
     if mock == False:
         dm = DeviceManager()
-        idrive_path = dm.find('idrive')
+        #idrive_path = dm.find('idrive')
         emu_path = dm.find('emu')
         
-        idrive = Idrive(conn, idrive_path)
-        idrive.start()
+        #idrive = Idrive(conn, idrive_path)
+        #idrive.start()
 
         os.system("/usr/bin/cardashian_run_emuserial.sh " + emu_path)
         time.sleep(3)

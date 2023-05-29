@@ -21,7 +21,11 @@ class DistanceCounter(threading.Thread):
 
     def readDistanceFromFile(self):
         f = open("/var/log/cardashian/distance.txt", "r")
-        distance = int(f.read())
+        value = f.read()
+        if(str.isnumeric(value)):
+            distance = int(value)
+        else:
+            distance = 0
         f.close()
         return distance
     
