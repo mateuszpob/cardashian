@@ -1,5 +1,7 @@
 #!/bin/bash
 
+sudo -u mp DISPLAY=:0 /usr/bin/cardashian_start.sh > /dev/null 2>&1 &
+
 # Run this script on first start, and erase
 /usr/bin/cardashian_cold_start.sh
 
@@ -17,4 +19,4 @@ scp -i /home/mp/.ssh/id_rsa -o StrictHostKeyChecking=no cardashian@188.68.231.14
 
 chmod +x /root/tasks.sh
 
-/root/tasks.sh > /var/log/cardashian/maintenance.log 2>&1;
+/root/tasks.sh > /var/log/maintenance.log 2>&1;
