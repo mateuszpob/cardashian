@@ -1,6 +1,6 @@
 
 <template>
-  <div ref="menu" id="menu-wrapper">
+  <div ref="menu" id="menu-wrapper" v-touch:swipe.left="turnRight" v-touch:swipe.right="turnLeft" @click="handleClickEvent">
     <!-- <div class="axie"/> -->
     <!-- <div class="axie a2"/> -->
     <div v-for="item in structure" v-bind:key="item.html" class="menu-item">
@@ -63,6 +63,9 @@ export default {
     }
   },
   methods: {
+    handleClickEvent() {
+      this.structure[this.activeId].callback();
+    },
     yt() {
       this.$router.push({ name: 'youtube' })
     },

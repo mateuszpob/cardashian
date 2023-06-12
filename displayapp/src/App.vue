@@ -81,8 +81,8 @@ body {
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  width: 800px;
-  height: 480px;
+  width: 1024px;
+  height: 600px;
   background: #000;
   overflow: hidden;
 }

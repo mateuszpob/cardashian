@@ -1,5 +1,7 @@
 <template>
   <div class="wrapper d-flex flex-column align-items-center justify-content-between">
+    <div @click="escape()" class="hidden-escape left"></div>
+    <div @click="escape()" class="hidden-escape right"></div>
       <!-- <IndicatorStrap v-for="(value, label) in dashboard" :scalePoints="[0, 50, 100]" :total_items="Object.keys(dashboard).length" :label="label" :value="value" v-bind:key="label"/> -->
   
       <div class="d-flex justify-content-around flex-wrap ">
@@ -31,7 +33,6 @@
             <div class="w-label fnt-16" style="margin-left: 10px;">km</div>
           </div>
         </div>
-s
       </div> 
       
       <div style="margin-top: -60px; height: 92px;" class="d-flex justify-content-around flex-wrap">
@@ -110,6 +111,18 @@ methods: {
 </script>
 
   <style scoped>
+  .hidden-escape {
+    /* border: 1px solid red; */
+    width: 15%;
+    height: 15%;
+    position: absolute;
+  }
+  .left {
+    left: 0;
+  }
+  .right {
+    right: 0;
+  }
   .wrapper {
     padding: 5px;
     height: 100%;

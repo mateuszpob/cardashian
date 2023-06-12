@@ -14,6 +14,8 @@
 
 <script>
 import OptionCheckBox from './settings/OptionCheckBox.vue';
+import { restartApplication, updateApplication } from '../core_actions';
+
 export default {
   name: 'Settings',
   data()  {
@@ -167,10 +169,10 @@ export default {
   },
   methods: {
     restartApp() {
-      alert('Smoli?');
+      restartApplication();
     },
     updateApp() {
-      alert('Ale smoli');
+      updateApplication();
     },
     setVisibility(id) {
       this.$store.dispatch('toggle', id)

@@ -22,10 +22,10 @@ export default {
   },
   computed: {
     fontSize() {
-      return 480 / Math.ceil(this.total_items / 2.9) + 'px'
+      return 600 / Math.ceil(this.total_items / 2.9) + 'px'
     },
     boxWidth() {
-      return (800 / Math.ceil(this.total_items / 3)) - 4 + 'px'
+      return (1024 / Math.ceil(this.total_items / 3)) - 4 + 'px'
     }
   },
   mounted() {
