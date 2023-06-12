@@ -13,7 +13,7 @@
       <div class="strap-box">
           <div class="strap-empty">
           <div :style="{'width': width}" class="strap-value">
-            <div class="value">{{ value + "&nbsp;" + unit }}</div>
+            <div class="value">{{ value ? (value + "&nbsp;" + unit) : '?' }}</div>
           </div>
         </div>
       </div>

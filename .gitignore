@@ -10,6 +10,7 @@ cardashian.tar.gz
 emuserialpc/emulogs
 emuserialpc/build/
 emuserialpc/emuserial
+emuserialpc/emuserial_x86
 
 smos/images
 smos/configs/ssh
