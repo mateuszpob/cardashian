@@ -58,6 +58,9 @@ export default {
             <div v-for="i in [...Array(pointsNumber).keys()]" v-bind:key="i" class="hand-box" :style="{'transform': 'rotate(' + (startAngle + (i * pointSize)) + 'deg)', 'display': pointIsVisible(i)}">
                 <div class="hand"><div class="tip" :class="{'tip-y': i > yellowTipsFrom && i < redTipsFrom, 'tip-r': i >= redTipsFrom}"></div></div>
             </div>
+            <div v-for="i in [...Array(pointsNumber).keys()]" v-bind:key="i" class="hand-box" :style="{'transform': 'rotate(' + (startAngle + (i * pointSize)) + 'deg)'}">
+                <div class="hand brdr"><div class="tip"></div></div>
+            </div>
         </div>
         <div class="speed-meter digital-font">{{ value2 }}</div>
         <div class="d-flex w-100 flex-row ">
@@ -100,13 +103,19 @@ export default {
     top: 50%;
     right: 50%;
 }
+.hand.brdr {
+    width: 130px;
+    height: 10px;
+}
+.hand.brdr .tip {
+    background: rgb(73, 240, 8);
+    height: 100%;
+    width: 2px;
+}
 .tip {
     background: rgb(73, 240, 8);
     height: 100%;
     width: 20px;
-}
-.tip-y {
-    background: rgb(240, 205, 8) !important;
 }
 .tip-r {
     background: rgb(240, 8, 8) !important;
