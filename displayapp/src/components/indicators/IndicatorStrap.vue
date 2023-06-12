@@ -1,5 +1,5 @@
 <template>
-    <div class="box">
+    <div class="box" @click="customize">
       <div class="scale-box d-flex justify-content-between w-100">
         <div v-for="point in scalePoints" v-bind:key="point" class="scale-point d-flex flex-column align-items-center">
           <div>{{ point }}</div>
@@ -54,12 +54,9 @@ export default {
 
   },
   methods: {
-    // escape() {
-    //   switch(true){
-    //     default:
-    //       this.$router.push({ name: 'menu' })
-    //   }
-    // }
+    customize() {
+      
+    }
   }
 }
 </script>

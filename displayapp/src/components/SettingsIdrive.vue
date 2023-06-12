@@ -81,46 +81,7 @@ export default {
         //     }
         //   ]
         // },
-      ],
-      emuframe: {
-        "RPM": "1222",
-        "MAP": "84",
-        "TPS": "5",
-        "IAT": "13",
-        "Batt": "13.84",
-        "IgnAngle": "17.0",
-        "pulseWidth": "2.71",
-        "scondarypulseWidth": "0.0",
-        "Egt1": "0",
-        "Egt2": "0",
-        "knockLevel": "0.0",
-        "dwellTime": "3.1",
-        "wboAFR": "14.7",
-        "gear": "1",
-        "Baro": "104",
-        "analogIn1": "0.0",
-        "analogIn2": "0.98",
-        "analogIn3": "0.06",
-        "analogIn4": "0.0",
-        "injDC": "2.5",
-        "emuTemp": "32",
-        "oilPressure": "0.19",
-        "oilTemperature": "23",
-        "fuelPressure": "0.0",
-        "CLT": "88",
-        "flexFuelEthanolContent": "0.0",
-        "ffTemp": "0",
-        "wboLambda": "1.0",
-        "vssSpeed": "4.5",
-        "deltaFPR": "0",
-        "fuelLevel": "0",
-        "tablesSet": "1",
-        "lambdaTarget": "0.0",
-        "afrTarget": "0.0",
-        "cel": "8",
-        "total_distance": "14",
-        "trip_distance": "14.6"
-    }
+      ]
     }
   },
   props: {
@@ -130,24 +91,60 @@ export default {
     this.emitter.on("escape", isOpen => {
       this.escape();
     });
-
-    if(!this.$store.getters.getMenu) {
+    this.emitter.on("dashframe", data => {
+      if(!this.$store.getters.getMenu) {
         let sideMenu = {};
-        Object.keys(this.emuframe).forEach((k) => { 
+        Object.keys(data).forEach((k) => { 
           sideMenu[k] = 1;
         });
         this.$store.dispatch('setMenu', sideMenu)
 
       }
+
+      // this.dashboardFrame = data;
+      this.emitter.off("dashframe");
+      
       let ob = [];
-      for(let k in this.emuframe) {
+      for(let k in data) {
         ob.push({'label': k, 'callback': this.setVisibility, 'arg': k})
       }
 
       this.settings[0].options[0].options = ob
-
-
+    });
     this.emitter.on("action", action => {
+      switch(action) {
+        case "turnLeft":
+          if(this.settings_option > 0)
+            this.settings_option--;
+          break;
+        case "turnRight":
+          if(this.settings_option < this.currentMenuLength - 1)
+          this.settings_option++;
+          break;
+        case "enter":
+          this.selected_items.push(this.settings_option);
+          
+
+          let ob = this.settings;
+          this.selected_items.forEach((i) => {
+            if(ob[i].callback instanceof Function) {
+              ob[i].callback(ob[i].arg);
+
+              this.selected_items.pop()
+            } else {
+              ob = ob[i].options;
+              this.currentMenuLength = ob.length;
+            }
+          });
+          break;
+        case "escape":
+          if(this.selected_items.length === 0) {
+            this.escape();
+          }
+          this.selected_items.pop();
+          this.settings_option = 0;
+          break;
+      }
 
     });
   },

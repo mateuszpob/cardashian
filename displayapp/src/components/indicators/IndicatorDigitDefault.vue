@@ -1,14 +1,14 @@
 <template>
-    <div class="box d-flex flex-column" :style="{'width': boxWidth}">
-        <h2 :style="{'font-size': fontSize, 'line-height': 'calc(0.8 * ' + fontSize + ')'}" class="digital-font d-flex justify-content-end align-items-end">
+    <div class="box d-flex flex-row justify-content-center align-items-center">
+          <div class="label hidden">
+          {{ $store.getters.labels[label] ? $store.getters.labels[label].label : label.replace(/([A-Z])/g, ' $1').trim() }}
+          </div>
+          <div class="digital-font default">
           {{ value }}
           <!--<span style="font-size: 30px; line-height: 30px" >
           {{ $store.getters.labels[label] ? $store.getters.labels[label].unit : '' }}
           </span>-->
-          </h2>
-          <h1 class="label d-flex justify-content-end hidden">
-          {{ $store.getters.labels[label] ? $store.getters.labels[label].label : label }}
-          </h1>
+          </div>
     </div>
 </template>
 
@@ -44,14 +44,26 @@ export default {
 
 <style scoped>
 .box{
-  width: 80px;
+  /* width: 120px;s */
+  height: 60px;
   overflow: hidden;
+
   /* border: solid red 1px; */
-  height: 140px;
+  /* height: 140px; */
 }
 .box .label {
-  font-size:16px;
-  color:rgb(0, 189, 0);
+  font-size:22px;
+  line-height: 20px;
+  color:rgb(255, 255, 255);
+  width: 110px;
+  text-transform: capitalize;
+  font-weight: 200;
+
+}
+.default {
+  font-size: 60px;
+  width: 100px;
+  /* line-height: 50px; */
 }
 .cntnt {
   text-shadow: 0 0 30px #49FF18, 0 0 20px #49FF18, 0 0 25px #49FF18, 0px 0px 10px rgba(206,89,55,0);

@@ -1,7 +1,7 @@
 <template>
     <GotToMenu :context="dashboard" :x="20" :y="20"></GotToMenu>
-    <div class="wrapper d-flex  flex-wrap mt-3">
-
+    <div class="wrapper d-flex  flex-wrap justify-content-around mt-3">
+      <div style="width:210px"></div>
         <IndicatorDigitDefault class="d-flex gx-4 gy-1" v-for="(value, label) in dashboard" :total_items="Object.keys(dashboard).length" :label="label" :value="value" v-bind:key="label"/>
     </div>
 </template>
