@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router';
 
 import Menu from './components/Menu.vue';
-import Dashboard from './components/Dashboard.vue';
+import SimpleParams from './components/SimpleParams.vue';
 import Settings from './components/Settings.vue';
 import Desktop from './components/Desktop.vue';
 
@@ -19,9 +19,9 @@ const router = createRouter({
             component: Desktop,
         },
         {
-            path: '/dashboard',
-            name: 'dashboard',
-            component: Dashboard,
+            path: '/simple-params',
+            name: 'simpleParams',
+            component: SimpleParams,
         },
         {
             path: '/settings',

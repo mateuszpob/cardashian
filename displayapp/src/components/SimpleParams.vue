@@ -7,7 +7,7 @@
 <script>
 import IndicatorDigitDefault from './indicators/IndicatorDigitDefault.vue' 
 export default {
-  name: 'Dashboard',
+  name: 'SimpleParams',
   data()  {
     return {
       dashboard: {}

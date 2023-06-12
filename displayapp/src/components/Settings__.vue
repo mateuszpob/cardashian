@@ -24,7 +24,7 @@ export default {
       selected_items: [],
       settings: [
         {
-          'label': 'Dashboard',
+          'label': 'SimpleParams',
           'active': '1',
           'options': [
             {

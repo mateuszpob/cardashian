@@ -26,12 +26,12 @@ export default {
       selected_items: [],
       settings: [
         {
-          'label': 'Dashboard',
+          'label': 'SimpleParams',
           'active': '1',
           'options': [
             {
               'label': 'widoczne elementy',
-              'options': this.getDashboardOptions(),
+              'options': this.getSimpleParamsOptions(),
             },
             {
               'label': 'Themes',
@@ -191,7 +191,7 @@ export default {
     moveMenuDown() {
       
     },
-    getDashboardOptions() {
+    getSimpleParamsOptions() {
       // return [
       //           {'label': 'RPM', 'callback': this.setVisibility, 'arg': 'RPM'},
       //           {'label': 'TPS', 'callback': this.setVisibility, 'arg': 'TPS'},
