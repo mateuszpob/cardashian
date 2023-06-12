@@ -10,7 +10,7 @@
       
       <div style="width:100%;margin-top: -100px" class="d-flex justify-content-around">
         <!-- <TableDetails></TableDetails> -->
-        <IndicatorDigiCircle :max-val="6000" :max-angle="270" :value="Math.round(dashboard['RPM'])" :value2="Math.round(dashboard['vssSpeed'])"></IndicatorDigiCircle>
+        <IndicatorDigiCircle :max-val="6000" :max-angle="270" :value="Math.round(dashboard['RPM'])" :value2="(Math.round(dashboard['vssSpeed']) === 0 ? 'N' : dashboard['gear'])"></IndicatorDigiCircle>
         <!-- <IndicatorSpeedDigital :unit="''" :total_items="1" :label="'SPEED'" :value="Math.round(dashboard['vssSpeed'])"></IndicatorSpeedDigital> -->
         <!-- <div class="d-flex flex-row justify-content-between">
           <div class="medium-label digital-font">GEAR: {{ dashboard['gear'] }}</div>
@@ -19,8 +19,9 @@
 
         <div style="" class="d-flex flex-column justify-content-center">
           <div class="d-flex flex-row align-items-end mt-5">
-            <div class="w-label fnt-20" style="width:70px;">GEAR</div>
-            <div class="digital-font fnt-100" style="width:80px;">{{ dashboard['gear'] }}</div>
+            <div class="w-label fnt-20" style="width:70px;">SPEED</div>
+            <div class="digital-font fnt-100" style="width:80px;">{{ Math.round(dashboard['vssSpeed']) }}</div>
+            <div class="w-label fnt-16" style="margin-left: 10px;">km/h</div>
           </div>
           <div class="d-flex flex-row align-items-end mt-4">
             <div class="w-label fnt-16" style="width:70px;">TOTAL</div>

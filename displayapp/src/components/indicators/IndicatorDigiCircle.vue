@@ -64,7 +64,7 @@ export default {
         </div>
         <div class="speed-meter digital-font">{{ value2 }}</div>
         <div class="d-flex w-100 flex-row ">
-            <div class="value2-label">km/h</div>
+            <div class="value2-label"></div>
             <div class="value-d-box d-flex flex-column align-items-start ">
                 <div class="digital-font rpm-val fnt-50">{{ value }}</div>
                 <div class=" rpm-lab fnt-20 mt-1">{{ 'RPM' }}</div>
@@ -108,7 +108,7 @@ export default {
     height: 10px;
 }
 .hand.brdr .tip {
-    background: rgb(73, 240, 8);
+    background: rgb(255, 255, 255);
     height: 100%;
     width: 2px;
 }
