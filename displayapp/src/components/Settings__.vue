@@ -46,7 +46,7 @@ export default {
           ]
         },
         {
-          'label': 'YouTube',
+          'label': 'Multimedia',
           'options': [
             {
               'label': 'Ulubione nuty',

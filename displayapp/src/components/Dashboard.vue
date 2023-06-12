@@ -1,6 +1,6 @@
 <template>
   <div class="wrapper d-flex flex-column align-items-center justify-content-between">
-  <GotToMenu :context="dashboard"></GotToMenu>
+  <GotToMenu :context="dashboard" :x="20" :y="20"></GotToMenu>
     
       <!-- <IndicatorStrap v-for="(value, label) in dashboard" :scalePoints="[0, 50, 100]" :total_items="Object.keys(dashboard).length" :label="label" :value="value" v-bind:key="label"/> -->
   
@@ -48,7 +48,7 @@ import IndicatorStrap from './indicators/IndicatorStrap.vue'
 import IndicatorSpeedDigital from './indicators/IndicatorSpeedDigital.vue' 
 import TableDetails from './indicators/TableDetails.vue' 
 import IndicatorDigiCircle from './indicators/IndicatorDigiCircle.vue' 
-import GotToMenu from './GotToMenu.vue'
+import GotToMenu from './buttons/GotToMenu.vue'
 export default {
 name: 'Dashboard',
 data()  {

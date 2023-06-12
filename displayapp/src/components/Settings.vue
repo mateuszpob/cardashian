@@ -1,6 +1,8 @@
 <template>
     <div class="container-xxl ">
-      <div class="row">
+      <GotToMenu :context="dashboard" :x="20" :y="10"></GotToMenu>
+      
+      <div class="row mt-5">
         <div class="menu-col col-4">
            <option-check-box v-for="(value, key) in currentMenuOption" :data-index="key" v-bind:key="key" :label="value.label" :class="settings_option == key ? 'active' : ''" />
         </div>
@@ -14,6 +16,7 @@
 
 <script>
 import OptionCheckBox from './settings/OptionCheckBox.vue';
+import GotToMenu from './buttons/GotToMenu.vue';
 import { restartApplication, updateApplication } from '../core_actions';
 
 export default {
@@ -201,8 +204,8 @@ export default {
     }
   },
   components: {
-    OptionCheckBox
-    
+    OptionCheckBox,
+    GotToMenu
   }
 }
 </script>

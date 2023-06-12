@@ -4,6 +4,8 @@ import Menu from './components/Menu.vue';
 import SimpleParams from './components/SimpleParams.vue';
 import Settings from './components/Settings.vue';
 import Dashboard from './components/Dashboard.vue';
+import Multimedia from './components/Multimedia.vue';
+import Maps from './components/Maps.vue';
 
 const router = createRouter({
     history: createWebHistory(),
@@ -15,8 +17,18 @@ const router = createRouter({
         // },
         {
             path: '/',
-            name: 'desktop',
+            name: 'dashboard',
             component: Dashboard,
+        },
+        {
+            path: '/multimedia',
+            name: 'multimedia',
+            component: Multimedia,
+        },
+        {
+            path: '/maps',
+            name: 'maps',
+            component: Maps,
         },
         {
             path: '/simple-params',

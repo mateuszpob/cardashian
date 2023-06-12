@@ -1,5 +1,5 @@
 <template>
-    <i @click="escape()" class="menu-button bi bi-grid-3x3-gap"></i>
+    <i @click="escape()" :style="{left: x + 'px', top: y + 'px'}" class="menu-button bi bi-grid-3x3-gap"></i>
 </template>
 
 <script>
@@ -11,6 +11,10 @@ export default {
     },
     mounted() {
 
+    },
+    props: {
+        x: Number,
+        y: Number
     },
     methods: {
         escape() {
@@ -25,10 +29,10 @@ export default {
 
 <style scoped>
 .menu-button {
-    color: #49FF18;
-    font-size: 60px;
+    text-shadow: 0 0 30px #49FF18, 0 0 20px #49FF18, 0 0 25px #49FF18, 0px 0px 10px rgba(206,89,55,0);
+    color: #fff;
+    font-size: 8vh;
+    line-height: 8vh;
     position: absolute;
-    left: 20px;
-    top: 10px;
 }
 </style>
