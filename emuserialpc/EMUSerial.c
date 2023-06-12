@@ -172,7 +172,7 @@ void * start_reading(void * args) {
             }
             memmove(read_buffer, ((uint8_t*)&read_buffer) + 1, read_bytes - 1);
         }
-        usleep(30000);
+        usleep(10000);
     }
 }
 
@@ -208,7 +208,7 @@ void * start_reading_log(void * args) {
             }
             memmove(read_buffer, (read_buffer) + 1, read_bytrs_tmp - 1);
         }
-		usleep(30000);
+		usleep(10000);
 	}
 	fclose(fptr); 
 	printf("Bytes read: %d\n\n", read_bytes);
