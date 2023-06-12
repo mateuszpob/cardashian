@@ -20,13 +20,18 @@ class DistanceCounter(threading.Thread):
         threading.Thread.__init__(self)
 
     def readDistanceFromFile(self):
-        f = open("/var/log/cardashian/distance.txt", "r")
-        value = f.read()
-        if(str.isnumeric(value)):
-            distance = int(value)
-        else:
+        try:
+            f = open("/var/log/cardashian/distance.txt", "r")
+            value = f.read()
+            f.close()
+            if(str.isnumeric(value)):
+                distance = int(value)
+            else:
+                distance = 0
+        except:
             distance = 0
-        f.close()
+
+        
         return distance
     
     def writeDistanceToFile(self, distance):
