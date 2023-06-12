@@ -34,7 +34,7 @@ class EmuSeialClient(threading.Thread):
                 
                 self.decode(data)
                 # print(struct.unpack("f", data))
-            time.sleep(0.2)
+            time.sleep(0.05)
             
     def decode(self, data):
         precision = [0,         0,          0,          0,          2,      2,          2,              2,                      2,          2,          2,              2,          2,          2,          2,          2,              2,          2,              2,              2,          2,          2,              2,                  2,              0,          2,                          2,          2,              2,          2,          2,              2,              2,              2,              2]

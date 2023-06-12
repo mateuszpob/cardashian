@@ -55,7 +55,7 @@ def main():
 
         if emu is not None:
             conn.send({"channel": "dashframe", "data": {"emu_frame": emu.frame, "total_distance": dc.get_total_distance(), "trip_distance": dc.get_trip_distance()}})
-        time.sleep(0.1)
+        time.sleep(0.02)
 
 if __name__ == '__main__':
     main()
