@@ -1,8 +1,5 @@
 <template>
-    <div class="hbw">
-        <div @click="escape()" class="hidden-escape left"></div>
-        <div @click="escape()" class="hidden-escape right"></div>
-    </div>
+    <i @click="escape()" class="menu-button bi bi-grid-3x3-gap"></i>
 </template>
 
 <script>
@@ -27,19 +24,11 @@ export default {
 </script>
 
 <style scoped>
-.hbw {
+.menu-button {
+    color: #49FF18;
+    font-size: 60px;
     position: absolute;
+    left: 20px;
+    top: 10px;
 }
-  .hidden-escape {
-    /* border: 1px solid red; */
-    width: 15%;
-    height: 15%;
-    position: absolute;
-  }
-  .left {
-    left: 0;
-  }
-  .right {
-    right: 0;
-  }
 </style>

@@ -20,7 +20,7 @@ export default {
     return {
       structure: [
         {html: "Menu1", callback: this.yt},
-        {html: "Desktop", callback: this.desktop},
+        {html: "Dashboard", callback: this.desktop},
         {html: "SimpleParams", callback: this.simpleParams},
         {html: "Smolnia4x4", callback: this.chrom},
         {html: "Settings", callback: this.settings}

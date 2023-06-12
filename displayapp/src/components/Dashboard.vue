@@ -50,7 +50,7 @@ import TableDetails from './indicators/TableDetails.vue'
 import IndicatorDigiCircle from './indicators/IndicatorDigiCircle.vue' 
 import GotToMenu from './GotToMenu.vue'
 export default {
-name: 'Desktop',
+name: 'Dashboard',
 data()  {
   return {
     dashboard: {},
