@@ -1,6 +1,10 @@
 <template>
     <div class="container-xxl ">
       <GotToMenu :context="dashboard" :x="20" :y="10"></GotToMenu>
+      <br><br><br><br>
+      <div class="menu-wrapper core-left" data-augmented-ui="tl-clip-x tr-clip-x l-clip-y br-clip">
+        <div class="menu-item" data-augmented-ui="" v-for="item in menu_items" v-bind:key="item.label">{{ item.label }}</div>
+      </div>
       
       <div class="row mt-5">
         <div class="menu-col col-4">
@@ -8,7 +12,6 @@
         </div>
         <div class="menu-col col-8 " v-if="currentMenuOption && currentMenuOption[settings_option]">
             <option-check-box  v-for="(subvalue, key) in currentMenuOption[settings_option].options" :label="subvalue.label" :data-index="key" v-bind:key="key" />
-          
         </div>
       </div>
    </div>
@@ -27,27 +30,7 @@ export default {
       settings_option: 0,
       currentMenuLength: 2,
       selected_items: [],
-      settings: [
-        {
-          'label': 'SimpleParams',
-          'active': '1',
-          'options': [
-            {
-              'label': 'widoczne elementy',
-              'options': this.getSimpleParamsOptions(),
-            },
-            {
-              'label': 'Themes',
-              'options': [
-                {'label': 'standard'},
-              ]
-            }
-          ]
-        },
-        {
-          'label': 'Settings',
-          'active': '1',
-          'options': [
+      menu_items: [
             {
               'label': 'Restart app',
               'callback': this.restartApp,
@@ -57,31 +40,18 @@ export default {
               'label': 'Update app',
               'callback': this.updateApp,
               'arg': null
+            },
+            {
+              'label': 'Visible params',
+              'options': this.getSimpleParamsOptions(),
+            },
+            {
+              'label': 'Themes',
+              'options': [
+                {'label': 'standard'},
+              ]
             }
-          ]
-        },
-        // {
-        //   'label': 'YouTube',
-        //   'options': [
-        //     {
-        //       'label': 'submenu',
-        //       'options': [
-        //         {'label': 'dupa1'},
-        //         {'label': 'dupa2'},
-        //         {'label': 'dupa3'},
-        //       ]
-        //     },
-        //     {
-        //       'label': 'Pierdoły',
-        //       'options': [
-        //         {'label': 'Konon'},
-        //         {'label': 'Major'},
-        //         {'label': 'Piston'}
-        //       ]
-        //     }
-        //   ]
-        // },
-      ],
+          ],
       emuframe: {
         "RPM": "1222",
         "MAP": "84",
@@ -144,7 +114,6 @@ export default {
         ob.push({'label': k, 'callback': this.setVisibility, 'arg': k})
       }
 
-      this.settings[0].options[0].options = ob
 
 
     this.emitter.on("action", action => {
@@ -214,22 +183,25 @@ export default {
 </script>
 
 <style scoped>
-.wrapper {
-  padding: 5px;
+.container-xxl {
+  background: url('/./public/bckg_1.jpg');
+  /* width: 100%; */
+  height: 100%;
 }
-.active {
-  border: 1px solid #00ee00;
+.menu-item {
+  color: #fff;
+  font-size: 3vw;
+  font-weight: 100;
+  padding-left: 20px;
 }
-.menu-option-sm {
-  color: #ffffff;
-}
-
-.container-xxl, .row, .menu-col {
-  height: 480px;
-}
-.menu-col {
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: column;
+.core-left, .core-right {
+    --aug-border: initial;
+    --aug-border-all: 0.25rem;
+    --aug-border-bg: rgba(0, 200, 0, 0.3);
+    padding: 1rem;
+    position: relative;
+    background: rgba(1, 22, 1, 0.3);
+    color: #fffffd;
+    transform-origin: 50% 50%;
 }
 </style>

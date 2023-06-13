@@ -1,5 +1,3 @@
-# all:
-# 	gcc main.c serial.c serial.h -o huj
 
 # CC=cc
 CC=arm-linux-gnueabihf-gcc
