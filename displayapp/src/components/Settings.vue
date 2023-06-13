@@ -4,7 +4,7 @@
       <br><br><br><br>
       <div class="menu-wrapper core-left">
         <div class="menu d-flex flex-column px-4 py-5" data-augmented-ui="tl-2-clip-x tr-2-clip-x border">
-          <div class="menu-item py-2" data-augmented-ui="" v-for="item in menu_items" v-bind:key="item.label">{{ item.label }}</div>
+          <div v-for="item in menu_items" @click="handleMenuItemClick(item)" v-bind:key="item.label" class="menu-item py-2">{{ item.label }}</div>
         </div>
       </div>
    </div>
@@ -27,16 +27,23 @@ export default {
             {
               'label': 'Restart app',
               'confirmation': this.restartApp,
+              'data': 'Do you want to restart the application?',
               'arg': null
             },
             {
               'label': 'Update app',
-              'callback': this.updateApp,
+              'confirmation': this.updateApp,
+              'data': 'Do you want to update and restart the application?',
               'arg': null
             },
+            // {
+            //   'label': 'Visible params',
+            //   'options': this.getSimpleParamsOptions(),
+            // },
             {
-              'label': 'Visible params',
-              'options': this.getSimpleParamsOptions(),
+              'label': 'About',
+              'info': this.about,
+              'data': 'Info page'
             },
           ],
       emuframe: {
@@ -130,11 +137,26 @@ export default {
     this.emitter.off("action");
   },
   methods: {
+    handleMenuItemClick(item) {
+      console.log(typeof item.callback)
+      if(typeof item.callback === 'function') {
+        item.callback();
+      } else if(typeof item.confirmation === 'function') {
+        if(this.displayConfirmation(item.data))
+          item.confirmation();
+      }
+    },
+    displayConfirmation(text) {
+      return window.confirm(text);
+    },
     restartApp() {
       restartApplication();
     },
     updateApp() {
       updateApplication();
+    },
+    about() {
+      alert("Smoli trochę?");
     },
     setVisibility(id) {
       this.$store.dispatch('toggle', id)
@@ -180,6 +202,10 @@ export default {
   font-size: 3vw;
   font-weight: 100;
   padding-left: 20px;
+}
+.menu-item:active{
+  color: #49FF18;
+  text-shadow: 0 0 10px #49FF18, 0 0 10px #49FF18, 0 0 10px #49FF18, 0px 0px 10px rgba(206,89,55,0);
 }
 .core-left, .core-right {
     --aug-border: initial;
