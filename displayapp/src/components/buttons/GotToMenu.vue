@@ -29,7 +29,7 @@ export default {
 
 <style scoped>
 .menu-button {
-    text-shadow: 0 0 30px #49FF18, 0 0 20px #49FF18, 0 0 25px #49FF18, 0px 0px 10px rgba(206,89,55,0);
+    text-shadow: 0 0 10px #49FF18, 0 0 10px #49FF18, 0 0 5px #49FF18, 0px 0px 10px rgba(206,89,55,0);
     color: #fff;
     font-size: 8vh;
     line-height: 8vh;

@@ -2,16 +2,9 @@
     <div class="container-xxl ">
       <GotToMenu :context="dashboard" :x="20" :y="10"></GotToMenu>
       <br><br><br><br>
-      <div class="menu-wrapper core-left" data-augmented-ui="tl-clip-x tr-clip-x l-clip-y br-clip">
-        <div class="menu-item" data-augmented-ui="" v-for="item in menu_items" v-bind:key="item.label">{{ item.label }}</div>
-      </div>
-      
-      <div class="row mt-5">
-        <div class="menu-col col-4">
-           <option-check-box v-for="(value, key) in currentMenuOption" :data-index="key" v-bind:key="key" :label="value.label" :class="settings_option == key ? 'active' : ''" />
-        </div>
-        <div class="menu-col col-8 " v-if="currentMenuOption && currentMenuOption[settings_option]">
-            <option-check-box  v-for="(subvalue, key) in currentMenuOption[settings_option].options" :label="subvalue.label" :data-index="key" v-bind:key="key" />
+      <div class="menu-wrapper core-left">
+        <div class="menu d-flex flex-column px-4 py-5" data-augmented-ui="tl-2-clip-x tr-2-clip-x border">
+          <div class="menu-item py-2" data-augmented-ui="" v-for="item in menu_items" v-bind:key="item.label">{{ item.label }}</div>
         </div>
       </div>
    </div>
@@ -33,7 +26,7 @@ export default {
       menu_items: [
             {
               'label': 'Restart app',
-              'callback': this.restartApp,
+              'confirmation': this.restartApp,
               'arg': null
             },
             {
@@ -45,12 +38,6 @@ export default {
               'label': 'Visible params',
               'options': this.getSimpleParamsOptions(),
             },
-            {
-              'label': 'Themes',
-              'options': [
-                {'label': 'standard'},
-              ]
-            }
           ],
       emuframe: {
         "RPM": "1222",
@@ -203,5 +190,37 @@ export default {
     background: rgba(1, 22, 1, 0.3);
     color: #fffffd;
     transform-origin: 50% 50%;
+}
+.menu {
+  --aug-border: initial;
+    --aug-border-all: 2px;
+    --aug-border-bg: var(--hot-blue);
+    background: rgb(33,36,0);
+background: linear-gradient(180deg, rgba(33,36,0,0.1) 0%, rgba(111,121,9,0.5) 100%, rgba(89,93,0.9) 10%);
+    /* background: rgb(33,36,0);
+background: linear-gradient(180deg, rgba(33,36,0,1) 10%, rgba(111,121,9,0.5438550420168067) 0%, rgba(89,93,0,1) 100%); */
+  /* background: linear-gradient(to bottom right, var(--c2), transparent), repeating-radial-gradient(var(--c0-a), var(--c0-a) 1px, transparent 2px, transparent 50px), repeating-linear-gradient(to right, transparent, transparent 24px, var(--c0-a) 25px, transparent 26px, transparent 100px), repeating-linear-gradient(to bottom, transparent, transparent 24px, var(--c0-a) 25px, transparent 26px, transparent 100px), linear-gradient(var(--c0-a), var(--c0-a)), var(--c1); */
+}
+div {
+  --c0-l: var(--media-prefers-light) #257ae4;
+    --c0-l-a: var(--media-prefers-light) rgba(37, 122, 228, 0.25);
+    --c0-l-i: var(--media-prefers-light) gold;
+    --c1-l: var(--media-prefers-light) #fffffd;
+    --c1-l-i: var(--media-prefers-light) #1e1e1c;
+    --c2-l: var(--media-prefers-light) #fdfdfa;
+    --c3-l: var(--media-prefers-light) #e4e4e4;
+    --c4-l: var(--media-prefers-light) #fcfcfa;
+    --c0: var(--c0-l, gold);
+    --c0-a: var(--c0-l-a, rgba(255, 215, 0, 0.25));
+    --c0-i: var(--c0-l-i, #257ae4);
+    --c1: var(--c1-l, #1e1e1c);
+    --c1-i: var(--c1-l-i, #fffffd);
+    --c2: var(--c2-l, #1d1d1b);
+    --c3: var(--c3-l, #2c2c2a);
+    --c4: var(--c4-l, #312d18);
+    --hbl: var(--media-prefers-light) #4039a5;
+    --hot-blue: var(--hbl, #b1ffff);
+    --hot-red: #ff604d;
+    --hot-green: #b9ffb1;
 }
 </style>
