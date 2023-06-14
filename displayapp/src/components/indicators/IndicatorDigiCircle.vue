@@ -118,7 +118,7 @@ export default {
     width: 20px;
 }
 .tip2 {
-    border: 1px solid red;
+    /* border: 1px solid red; */
 }
 .tip-r {
     background: rgb(240, 8, 8) !important;

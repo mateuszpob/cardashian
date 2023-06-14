@@ -142,8 +142,11 @@ export default {
       if(typeof item.callback === 'function') {
         item.callback();
       } else if(typeof item.confirmation === 'function') {
-        if(this.displayConfirmation(item.data))
+        setTimeout(() => {
+          if(this.displayConfirmation(item.data))
           item.confirmation();
+        }, 50);
+        
       }
     },
     displayConfirmation(text) {
