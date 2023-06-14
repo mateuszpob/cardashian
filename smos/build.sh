@@ -78,6 +78,7 @@ cp ./configs/rootcrontab /mnt/root
 cp ../linux/cardashian_update.sh /mnt/usr/bin
 cp ../linux/cardashian_cold_start.sh /mnt/usr/bin
 cp ../linux/cardashian_check.sh /mnt/root
+cp ../linux/rc.local /mnt/etc
 
 # cardashian start service
 cp ../linux/cardashian.service /mnt/etc/systemd/system/
