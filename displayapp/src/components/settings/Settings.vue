@@ -1,24 +1,23 @@
-<template>
-    <div class="container-xxl ">
-      <GotToMenu :context="dashboard" :x="20" :y="10"></GotToMenu>
-      <br><br><br><br>
-      <div class="menu-wrapper core-left">
-        <div class="menu d-flex flex-column px-4 py-5" data-augmented-ui="tl-2-clip-x tr-2-clip-x border">
-          <div v-for="item in menu_items" @click="handleMenuItemClick(item)" v-bind:key="item.label" class="menu-item py-2">{{ item.label }}</div>
-        </div>
-      </div>
-   </div>
-</template>
+
 
 <script>
-import OptionCheckBox from './settings/OptionCheckBox.vue';
-import GotToMenu from './buttons/GotToMenu.vue';
-import { restartApplication, updateApplication } from '../core_actions';
+import OptionCheckBox from './OptionCheckBox.vue';
+import GotToMenu from '../buttons/GotToMenu.vue';
+import PopupOne from './PopupOne.vue';
+import { restartApplication, updateApplication } from '../../core_actions';
 
 export default {
   name: 'Settings',
   data()  {
     return {
+      popupText: '',
+      nButton: 'Close',
+      yButton: 'OK',
+      yCallback: null,
+
+      faded: false,
+
+
       dashboardFrame: null,
       settings_option: 0,
       currentMenuLength: 2,
@@ -28,13 +27,17 @@ export default {
               'label': 'Restart app',
               'confirmation': this.restartApp,
               'data': 'Do you want to restart the application?',
-              'arg': null
+              'arg': null,
+              'yBtn': 'Yes',
+              'nBtn': 'No',
             },
             {
               'label': 'Update app',
               'confirmation': this.updateApp,
               'data': 'Do you want to update and restart the application?',
-              'arg': null
+              'arg': null,
+              'yBtn': 'Yes',
+              'nBtn': 'No',
             },
             // {
             //   'label': 'Visible params',
@@ -43,6 +46,17 @@ export default {
             {
               'label': 'About',
               'info': this.about,
+              'data': 'About'
+            },
+            {
+              'label': 'Info',
+              'info': this.about,
+              'data': 'Info page'
+            },
+
+            {
+              'label': 'Back to menu',
+              'callback': this.escape,
               'data': 'Info page'
             },
           ],
@@ -136,21 +150,41 @@ export default {
   beforeUnmount() {  
     this.emitter.off("action");
   },
+  created() {
+    this.emitter.on("ux", o => {
+      switch(o) {
+        case "openpopup":
+          this.faded = true;
+          break;
+        case "closepopup":
+          this.faded = false;
+          break;
+      }
+    });
+  },
   methods: {
     handleMenuItemClick(item) {
-      console.log(typeof item.callback)
       if(typeof item.callback === 'function') {
         item.callback();
       } else if(typeof item.confirmation === 'function') {
-        setTimeout(() => {
-          if(this.displayConfirmation(item.data))
-          item.confirmation();
-        }, 50);
-        
+        this.displayConfirmation(item);
+        // if(this.displayConfirmation(item.data))
+        //   item.confirmation();
+      } else if(typeof item.info === 'function') {
+        this.displayInfo(item);
       }
     },
-    displayConfirmation(text) {
-      return window.confirm(text);
+    displayInfo(item) {
+      this.popupText = item.data;
+      this.yButton = '';
+      this.emitter.emit("ux", "openpopup");
+    },
+    displayConfirmation(item) {
+      this.popupText = item.data;
+      this.yButton = item.yBtn;
+      this.nButton = item.nBtn;
+      this.yCallback = item.confirmation;
+      this.emitter.emit("ux", "openpopup");
     },
     restartApp() {
       restartApplication();
@@ -189,10 +223,23 @@ export default {
   },
   components: {
     OptionCheckBox,
-    GotToMenu
+    GotToMenu,
+    PopupOne
   }
 }
 </script>
+
+<template>
+  <div class="container-xxl h-100">
+    <PopupOne ref="popupone" :text="popupText" :yButton="yButton" :nButton="nButton" :yCallback="yCallback"></PopupOne>
+    <!-- <GotToMenu :context="dashboard" :x="20" :y="10"></GotToMenu> -->
+    <div ref="menucontainer" :class="{faded: faded}" class="menu-wrapper h-100 d-flex justify-content-center align-items-center">
+      <div class="menu border-blu ylo-cnt w-50 d-flex flex-column px-4 py-5" data-augmented-ui="tl-2-clip-x tr-2-clip-x border">
+        <div v-for="item in menu_items" @click="handleMenuItemClick(item)" v-bind:key="item.label" class="menu-item light-text-3 py-2">{{ item.label }}</div>
+      </div>
+    </div>
+ </div>
+</template>
 
 <style scoped>
 .container-xxl {
@@ -201,14 +248,11 @@ export default {
   height: 100%;
 }
 .menu-item {
-  color: #fff;
-  font-size: 3vw;
-  font-weight: 100;
   padding-left: 20px;
 }
 .menu-item:active{
-  color: #49FF18;
-  text-shadow: 0 0 10px #49FF18, 0 0 10px #49FF18, 0 0 10px #49FF18, 0px 0px 10px rgba(206,89,55,0);
+  color: var(--zi-def);
+  /* text-shadow: 0 0 10px var(--zi-def), 0 0 10px var(--zi-def), 0 0 10px var(--zi-def), 0px 0px 10px rgba(206,89,55,0); */
 }
 .core-left, .core-right {
     --aug-border: initial;
@@ -221,35 +265,10 @@ export default {
     transform-origin: 50% 50%;
 }
 .menu {
-  --aug-border: initial;
-    --aug-border-all: 2px;
-    --aug-border-bg: var(--hot-blue);
-    background: rgb(33,36,0);
-background: linear-gradient(180deg, rgba(33,36,0,0.1) 0%, rgba(111,121,9,0.5) 100%, rgba(89,93,0.9) 10%);
+
     /* background: rgb(33,36,0);
 background: linear-gradient(180deg, rgba(33,36,0,1) 10%, rgba(111,121,9,0.5438550420168067) 0%, rgba(89,93,0,1) 100%); */
   /* background: linear-gradient(to bottom right, var(--c2), transparent), repeating-radial-gradient(var(--c0-a), var(--c0-a) 1px, transparent 2px, transparent 50px), repeating-linear-gradient(to right, transparent, transparent 24px, var(--c0-a) 25px, transparent 26px, transparent 100px), repeating-linear-gradient(to bottom, transparent, transparent 24px, var(--c0-a) 25px, transparent 26px, transparent 100px), linear-gradient(var(--c0-a), var(--c0-a)), var(--c1); */
 }
-div {
-  --c0-l: var(--media-prefers-light) #257ae4;
-    --c0-l-a: var(--media-prefers-light) rgba(37, 122, 228, 0.25);
-    --c0-l-i: var(--media-prefers-light) gold;
-    --c1-l: var(--media-prefers-light) #fffffd;
-    --c1-l-i: var(--media-prefers-light) #1e1e1c;
-    --c2-l: var(--media-prefers-light) #fdfdfa;
-    --c3-l: var(--media-prefers-light) #e4e4e4;
-    --c4-l: var(--media-prefers-light) #fcfcfa;
-    --c0: var(--c0-l, gold);
-    --c0-a: var(--c0-l-a, rgba(255, 215, 0, 0.25));
-    --c0-i: var(--c0-l-i, #257ae4);
-    --c1: var(--c1-l, #1e1e1c);
-    --c1-i: var(--c1-l-i, #fffffd);
-    --c2: var(--c2-l, #1d1d1b);
-    --c3: var(--c3-l, #2c2c2a);
-    --c4: var(--c4-l, #312d18);
-    --hbl: var(--media-prefers-light) #4039a5;
-    --hot-blue: var(--hbl, #b1ffff);
-    --hot-red: #ff604d;
-    --hot-green: #b9ffb1;
-}
+
 </style>

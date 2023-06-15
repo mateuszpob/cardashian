@@ -2,7 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router';
 
 import Menu from './components/Menu.vue';
 import SimpleParams from './components/SimpleParams.vue';
-import Settings from './components/Settings.vue';
+import Settings from './components/settings/Settings.vue';
 import Dashboard from './components/Dashboard.vue';
 import Multimedia from './components/Multimedia.vue';
 import Maps from './components/Maps.vue';
