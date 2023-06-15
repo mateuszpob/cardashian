@@ -23,6 +23,10 @@ class HS(BaseHTTPRequestHandler):
 
 
 class Httpowy():
+    def get_ip(self):
+        # IPAddr=socket.gethostbyname(hostname) 
+        pass
+
     def run(self):
         logging.basicConfig(level=logging.INFO)
         server_address = ('', 9001)
