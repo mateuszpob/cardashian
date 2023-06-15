@@ -17,7 +17,7 @@ apt -y update
 apt -y install xorg xinit i3 i3status lightdm less vim gcc git nano build-essential chromium-browser udhcpc libqmi-utils lsof screen python3-pip
 
 # install python packages
-sudo -u mp pip3 install serial
+sudo -u mp pip3 install pyserial
 sudo -u mp pip3 install websocket_server
 # timedatectl set-timezone Europe/Warsaw
 
