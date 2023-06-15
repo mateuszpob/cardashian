@@ -2,11 +2,15 @@
 import Axios from 'axios'
 
 export function restartApplication() {
-    console.log('resatret app')
-    Axios.get('http://localhost:8080/action/restart_app').then((data) => {
+    Axios.get('http://localhost:9001/action/restart_app').then((data) => {
     });
 }
 
 export function updateApplication() {
-    console.log('update app')
+    Axios.get('http://localhost:9001/action/update_app').then((data) => {
+    });
+}
+
+export function getInfo() {
+    
 }

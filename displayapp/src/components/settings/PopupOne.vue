@@ -51,7 +51,9 @@ export default {
 </script>
 
 <template>
-        <div ref="popololek" v-if="visible" class="popup-one  border-blu ylo-d1-cnt d-flex flex-column px-4 py-5 justify-content-center align-items-center" data-augmented-ui="tl-2-clip-x tr-2-clip-x border" >
+    <div class="popup-one" v-if="visible">
+    <br><br>
+        <div ref="popololek" v-if="visible" class="  border-blu ylo-d1-cnt d-flex flex-column px-4 py-5 justify-content-center align-items-center" data-augmented-ui="tl-2-clip-x tr-2-clip-x border" >
             <p class="light-text-3">{{ text }}</p>
             
             <div class="d-flex justify-content-around w-100">
@@ -59,6 +61,7 @@ export default {
                 <button v-if="yButton.length > 0" @click="yAction" class="button-light border-blu ylo-d1-cnt mt-5" data-augmented-ui="tl-2-clip-x tr-2-clip-x border">{{ yButton }}</button>
             </div>
         </div>
+    </div>
 </template>
 
 <style scoped>
@@ -69,6 +72,7 @@ export default {
         left: 50%;
         top: 50%;
         transform: translateX(-50%) translateY(-50%);
+        /* opacity: 0.99; */
     }
     .popup-one p {
         font-size: 40px;

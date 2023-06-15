@@ -5,7 +5,7 @@ import OptionCheckBox from './OptionCheckBox.vue';
 import GotToMenu from '../buttons/GotToMenu.vue';
 import PopupOne from './PopupOne.vue';
 import { restartApplication, updateApplication } from '../../core_actions';
-
+import Axios from 'axios'
 export default {
   name: 'Settings',
   data()  {
@@ -50,7 +50,7 @@ export default {
             },
             {
               'label': 'Info',
-              'info': this.about,
+              'info': this.info,
               'data': 'Info page'
             },
 
@@ -175,7 +175,11 @@ export default {
       }
     },
     displayInfo(item) {
-      this.popupText = item.data;
+      Axios.get('http://localhost:9001/get/info').then((data) => {
+        this.popupText = 'asd111'; // data.data;
+      });
+
+      // this.popupText = getInfo();
       this.yButton = '';
       this.emitter.emit("ux", "openpopup");
     },
@@ -193,6 +197,9 @@ export default {
       updateApplication();
     },
     about() {
+      alert("Smoli trochę?");
+    },
+    info() {
       alert("Smoli trochę?");
     },
     setVisibility(id) {
@@ -230,29 +237,30 @@ export default {
 </script>
 
 <template>
-  <div class="container-xxl h-100">
+  <div class="container-sms w-100 h-100">
+    <br><br>
     <PopupOne ref="popupone" :text="popupText" :yButton="yButton" :nButton="nButton" :yCallback="yCallback"></PopupOne>
     <!-- <GotToMenu :context="dashboard" :x="20" :y="10"></GotToMenu> -->
     <div ref="menucontainer" :class="{faded: faded}" class="menu-wrapper h-100 d-flex justify-content-center align-items-center">
-      <div class="menu border-blu ylo-cnt w-50 d-flex flex-column px-4 py-5" data-augmented-ui="tl-2-clip-x tr-2-clip-x border">
-        <div v-for="item in menu_items" @click="handleMenuItemClick(item)" v-bind:key="item.label" class="menu-item light-text-3 py-2">{{ item.label }}</div>
+      <div class="menu border-blu ylo-cnt w-50 d-flex flex-row flex-wrap px-4 py-5" data-augmented-ui="tl-2-clip-x tr-2-clip-x border">
+        <div v-for="item in menu_items" @click="handleMenuItemClick(item)" v-bind:key="item.label" class="menu-item w-50 light-text-3 py-2">{{ item.label }}</div>
       </div>
     </div>
  </div>
 </template>
 
 <style scoped>
-.container-xxl {
+.menu-wrapper {
+  /* opacity: 0.99; */
+}
+.container-sms {
   background: url('/./public/bckg_1.jpg');
-  /* width: 100%; */
-  height: 100%;
 }
 .menu-item {
   padding-left: 20px;
 }
 .menu-item:active{
   color: var(--zi-def);
-  /* text-shadow: 0 0 10px var(--zi-def), 0 0 10px var(--zi-def), 0 0 10px var(--zi-def), 0px 0px 10px rgba(206,89,55,0); */
 }
 .core-left, .core-right {
     --aug-border: initial;
@@ -263,12 +271,6 @@ export default {
     background: rgba(1, 22, 1, 0.3);
     color: #fffffd;
     transform-origin: 50% 50%;
-}
-.menu {
-
-    /* background: rgb(33,36,0);
-background: linear-gradient(180deg, rgba(33,36,0,1) 10%, rgba(111,121,9,0.5438550420168067) 0%, rgba(89,93,0,1) 100%); */
-  /* background: linear-gradient(to bottom right, var(--c2), transparent), repeating-radial-gradient(var(--c0-a), var(--c0-a) 1px, transparent 2px, transparent 50px), repeating-linear-gradient(to right, transparent, transparent 24px, var(--c0-a) 25px, transparent 26px, transparent 100px), repeating-linear-gradient(to bottom, transparent, transparent 24px, var(--c0-a) 25px, transparent 26px, transparent 100px), linear-gradient(var(--c0-a), var(--c0-a)), var(--c1); */
 }
 
 </style>

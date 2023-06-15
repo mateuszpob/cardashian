@@ -54,11 +54,14 @@
   font-weight: 100;
 }
 .faded {
-  opacity: 0.15;
+  opacity: 0.2 !important;
 }
 .button-light {
   font-size: 3vw;
   font-weight: 100;
+}
+.not-brk {
+  height: 30px;
 }
 body {
   --c0-l: var(--media-prefers-light) #257ae4;
