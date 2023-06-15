@@ -17,8 +17,9 @@ if [ "$_IP" ]; then
   printf "My IP address is %s\n" "$_IP"
 fi
 
+# disable screen blanking
 sudo -u mp DISPLAY=:0 xset s noblank;
 sudo -u mp DISPLAY=:0 xset -dpms;
-sudo -u mp DISPLAY=:0 xset -s off;
+sudo -u mp DISPLAY=:0 xset s off;
 
 exit 0
