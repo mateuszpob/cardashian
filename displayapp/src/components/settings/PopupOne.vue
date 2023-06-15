@@ -76,8 +76,10 @@ export default {
     }
     .popup-one p {
         font-size: 40px;
+        font-family: 'RajdhaniLight';
     }
     button {
         width: 40%;
+        font-family: 'RajdhaniLight';
     }
 </style>

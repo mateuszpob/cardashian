@@ -258,6 +258,8 @@ export default {
 }
 .menu-item {
   padding-left: 20px;
+  font-family: 'RajdhaniLight';
+  /* font-family: 'RajdhaniRegular'; */
 }
 .menu-item:active{
   color: var(--zi-def);

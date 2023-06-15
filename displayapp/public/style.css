@@ -2,6 +2,16 @@
     font-family: digitalDisplay;
     src: url('/fonts/digital_display_tfb.ttf');
   }
+  @font-face {
+    font-family: RajdhaniLight;
+    src: url('/fonts/Rajdhani-Light.ttf');
+  }
+  @font-face {
+    font-family: RajdhaniRegular;
+    src: url('/fonts/Rajdhani-Regular.ttf');
+  }
+
+
 .digital-font {
   text-shadow: 0 0 1px #49FF18, 0 0 3px #49FF18, 0 0 5px #49FF18, 0px 0px 10px rgba(206,89,55,0);
   color: rgb(140, 255, 136);
