@@ -3,6 +3,7 @@ import threading
 import logging
 import socket
 import os
+import json 
 
 class Tools():
     def restartApp(self):
@@ -15,6 +16,7 @@ class Tools():
         return {"ip_address": self.get_ip_address() }
     
     def get_ip_address(self):
+        # return '127.0.0.1'
         s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
         s.connect(("8.8.8.8", 80))
         return s.getsockname()[0]
@@ -35,9 +37,13 @@ class HS(BaseHTTPRequestHandler):
             tools.updateApp()
         if self.path == "/get/info":
             data = tools.getInfo()
+        if self.path == "/get/about":
+            data = 'Smolnia Motorsport 4x4'
 
+        data = bytes(json.dumps(data), 'utf-8')
         self._set_response()
         self.wfile.write(data)
+        # self.wfile.write(data.format(self.path).encode('utf-8'))
 
         # logging.info("GET request,\nPath: %s\nHeaders:\n%s\n", str(self.path), str(self.headers))
         # self._set_response()

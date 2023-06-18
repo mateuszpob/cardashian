@@ -176,7 +176,7 @@ export default {
     },
     displayInfo(item) {
       Axios.get('http://localhost:9001/get/info').then((data) => {
-        this.popupText = 'asd111'; // data.data;
+        this.popupText = data.data;
       });
 
       // this.popupText = getInfo();
@@ -254,7 +254,7 @@ export default {
   /* opacity: 0.99; */
 }
 .container-sms {
-  background: url('/./public/bckg_1.jpg');
+  background: url('/./public/bckg_2.jpg');
 }
 .menu-item {
   padding-left: 20px;
