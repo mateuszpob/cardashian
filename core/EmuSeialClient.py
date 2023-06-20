@@ -12,7 +12,7 @@ class EmuSeialClient(threading.Thread):
         
         self.mock = mock
         if self.mock:
-            print("EmuSerial MOCK !!!!!!!!!!!!!!!!!!!!!\n")
+            print("EmuSerial MOCK \n")
         else:
             # Connect the socket to the port where the server is listening
             server_address = ('localhost', 9990)
