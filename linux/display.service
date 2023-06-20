@@ -1,0 +1,14 @@
+[Unit]
+Description=Configure display
+
+[Service]
+ExecStart=/usr/bin/configure_display.sh
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=displayconf
+User=mp
+Group=mp
+WorkingDirectory=/home/mp/
+
+[Install]
+WantedBy=graphical.target
