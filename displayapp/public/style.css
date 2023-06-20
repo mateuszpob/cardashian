@@ -58,9 +58,8 @@
   color: white;
   background: linear-gradient(180deg, rgba(33,36,0,0.4) 20%, rgba(19, 73, 5, 0.8) 100%, rgb(12, 93, 1) 50%);
 }
-.light-text-3 {
+.light-text {
   color: #fff;
-  font-size: 3vw;
   font-weight: 100;
 }
 .faded {

@@ -4,7 +4,7 @@
 import OptionCheckBox from './OptionCheckBox.vue';
 import GotToMenu from '../buttons/GotToMenu.vue';
 import PopupOne from './PopupOne.vue';
-import { restartApplication, updateApplication } from '../../core_actions';
+import { restartApplication, updateApplication, setWifiCredentials, restartDevice } from '../../core_actions';
 import Axios from 'axios'
 export default {
   name: 'Settings',
@@ -24,20 +24,36 @@ export default {
       selected_items: [],
       menu_items: [
             {
-              'label': 'Restart app',
-              'confirmation': this.restartApp,
-              'data': 'Do you want to restart the application?',
+              'label': 'Update app',
+              'callback': updateApplication,
+              'text': 'Do you want to update and restart the application?',
               'arg': null,
               'yBtn': 'Yes',
               'nBtn': 'No',
             },
             {
-              'label': 'Update app',
-              'confirmation': this.updateApp,
-              'data': 'Do you want to update and restart the application?',
+              'label': 'Restart app',
+              'callback': restartApplication,
+              'text': 'Do you want to restart the application?',
               'arg': null,
               'yBtn': 'Yes',
               'nBtn': 'No',
+            },
+            {
+              'label': 'Restart device',
+              'callback': restartDevice,
+              'text': 'Do you want to restart the device?',
+              'arg': null,
+              'yBtn': 'Yes',
+              'nBtn': 'No',
+            },
+            {
+              'label': 'Wifi settings',
+              'text': 'Type wifi credentails',
+              'callback': setWifiCredentials,
+              'fields': [{label: 'SSID', val: null}, {label: 'PASS', val: null}],
+              'yBtn': 'Save',
+              'nBtn': 'Close',
             },
             // {
             //   'label': 'Visible params',
@@ -46,18 +62,13 @@ export default {
             {
               'label': 'About',
               'info': this.about,
-              'data': 'About'
+              'text': 'About'
             },
             {
               'label': 'Info',
               'info': this.info,
-              'data': 'Info page'
-            },
-
-            {
-              'label': 'Back to menu',
-              'callback': this.escape,
-              'data': 'Info page'
+              'data': 'Info page',
+              'nBtn': 'Close',
             },
           ],
       emuframe: {
@@ -164,15 +175,20 @@ export default {
   },
   methods: {
     handleMenuItemClick(item) {
-      if(typeof item.callback === 'function') {
-        item.callback();
-      } else if(typeof item.confirmation === 'function') {
-        this.displayConfirmation(item);
-        // if(this.displayConfirmation(item.data))
-        //   item.confirmation();
-      } else if(typeof item.info === 'function') {
-        this.displayInfo(item);
-      }
+      this.menuItem = item; 
+      this.emitter.emit("ux", "openpopup");
+
+      // if(typeof item.callback === 'function') {
+      //   item.callback();
+      // } else if(typeof item.confirmation === 'function') {
+      //   this.displayConfirmation(item);
+      //   // if(this.displayConfirmation(item.data))
+      //   //   item.confirmation();
+      // } else if(typeof item.info === 'function') {
+      //   this.displayInfo(item);
+      // } else if(typeof item.fields === 'function') {
+      //   this.displayFieldsBox(item);
+      // }
     },
     displayInfo(item) {
       Axios.get('http://localhost:9001/get/info').then((data) => {
@@ -183,25 +199,8 @@ export default {
       this.yButton = '';
       this.emitter.emit("ux", "openpopup");
     },
-    displayConfirmation(item) {
-      this.popupText = item.data;
-      this.yButton = item.yBtn;
-      this.nButton = item.nBtn;
-      this.yCallback = item.confirmation;
-      this.emitter.emit("ux", "openpopup");
-    },
-    restartApp() {
-      restartApplication();
-    },
-    updateApp() {
-      updateApplication();
-    },
-    about() {
-      alert("Smoli trochę?");
-    },
-    info() {
-      alert("Smoli trochę?");
-    },
+
+
     setVisibility(id) {
       this.$store.dispatch('toggle', id)
     },
@@ -220,12 +219,7 @@ export default {
       
     },
     getSimpleParamsOptions() {
-      // return [
-      //           {'label': 'RPM', 'callback': this.setVisibility, 'arg': 'RPM'},
-      //           {'label': 'TPS', 'callback': this.setVisibility, 'arg': 'TPS'},
-      //           {'label': 'IAT', 'callback': this.setVisibility, 'arg': 'IAT'},
-      //         ]
-      
+
     }
   },
   components: {
@@ -238,12 +232,14 @@ export default {
 
 <template>
   <div class="container-sms w-100 h-100">
-    <br><br>
-    <PopupOne ref="popupone" :text="popupText" :yButton="yButton" :nButton="nButton" :yCallback="yCallback"></PopupOne>
+    <!-- <br><br> -->
+    <PopupOne ref="popupone" :item="menuItem"></PopupOne>
+    <!-- <PopupOne ref="popupone" :text="popupText" :yButton="yButton" :nButton="nButton" :yCallback="yCallback"></PopupOne> -->
     <!-- <GotToMenu :context="dashboard" :x="20" :y="10"></GotToMenu> -->
     <div ref="menucontainer" :class="{faded: faded}" class="menu-wrapper h-100 d-flex justify-content-center align-items-center">
-      <div class="menu border-blu ylo-cnt w-50 d-flex flex-row flex-wrap px-4 py-5" data-augmented-ui="tl-2-clip-x tr-2-clip-x border">
-        <div v-for="item in menu_items" @click="handleMenuItemClick(item)" v-bind:key="item.label" class="menu-item w-50 light-text-3 py-2">{{ item.label }}</div>
+      <div class="menu border-blu ylo-cnt w-75 d-flex flex-row flex-wrap px-4 py-5" data-augmented-ui="tl-2-clip-x tr-2-clip-x border">
+        <div v-for="item in menu_items" @click="handleMenuItemClick(item)" v-bind:key="item.label" class="menu-item w-50 light-text h1 py-2">{{ item.label }}</div>
+        <div @click="escape()" class="menu-item w-50 light-text h1 py-2">Back to menu</div>
       </div>
     </div>
  </div>

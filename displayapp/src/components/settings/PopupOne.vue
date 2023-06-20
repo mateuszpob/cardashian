@@ -19,8 +19,6 @@ export default {
     });
   },
     mounted() {
-        // this.$refs.menucontainer.classList.add('faded')
-        console.log(this.$refs.popololek)
     },
     beforeUnmount() {
         this.$refs.popo
@@ -34,18 +32,24 @@ export default {
             this.emitter.emit("ux", "closepopup");
         },
         yAction() {
-            this.yCallback();
+            if(this.item.fields) {
+                this.item.callback(this.item.fields);
+            } else {
+                this.item.callback();
+            }
+            
             this.hide();
         }
     },
     props: {
-        text: String,
-        yButton: String,
-        yCallback: Function,
-        nButton: {
-            type: String,
-            default: "Close"
-        }
+        item: Object
+        // text: String,
+        // yButton: String,
+        // yCallback: Function,
+        // nButton: {
+        //     type: String,
+        //     default: "Close"
+        // }
     }
 }
 </script>
@@ -53,12 +57,17 @@ export default {
 <template>
     <div class="popup-one" v-if="visible">
     <br><br>
-        <div ref="popololek" v-if="visible" class="  border-blu ylo-d1-cnt d-flex flex-column px-4 py-5 justify-content-center align-items-center" data-augmented-ui="tl-2-clip-x tr-2-clip-x border" >
-            <p class="light-text-3">{{ text }}</p>
-            
+        <div v-if="visible" class="border-blu ylo-d1-cnt d-flex flex-column px-4 py-5 justify-content-center align-items-center" data-augmented-ui="tl-2-clip-x tr-2-clip-x border" >
+            <p v-if="item.text" class="light-text h3">{{ item.text }}</p>
+            <div v-if="item.fields" class="d-flex flex-column">
+                <div v-for="field in item.fields" v-bind:key="field.label" class="d-flex flex-row mt-3">
+                    <label class="w-25 light-text h3 px-3">{{ field.label }}</label>
+                    <input class="w-75 settings-field" v-model="field.val" />
+                </div>
+            </div>
             <div class="d-flex justify-content-around w-100">
-                <button @click="hide" class="button-light border-blu ylo-d1-cnt mt-5 px-3 py-2" data-augmented-ui="tl-2-clip-x tr-2-clip-x border">{{ nButton }}</button>
-                <button v-if="yButton.length > 0" @click="yAction" class="button-light border-blu ylo-d1-cnt mt-5" data-augmented-ui="tl-2-clip-x tr-2-clip-x border">{{ yButton }}</button>
+                <button @click="hide" class="button-light border-blu ylo-d1-cnt mt-5 px-3 py-2" data-augmented-ui="tl-2-clip-x tr-2-clip-x border">{{ item.nBtn }}</button>
+                <button v-if="item.yBtn" @click="yAction" class="button-light border-blu ylo-d1-cnt mt-5" data-augmented-ui="tl-2-clip-x tr-2-clip-x border">{{ item.yBtn }}</button>
             </div>
         </div>
     </div>
@@ -78,8 +87,14 @@ export default {
         font-size: 40px;
         font-family: 'RajdhaniLight';
     }
+    .popup-one input {
+        background: #003300;
+        color: #fff;
+        font-size: 4vh;
+    }
     button {
         width: 40%;
         font-family: 'RajdhaniLight';
     }
+    
 </style>
