@@ -53,8 +53,8 @@ touch /usr/bin/cardashian_stop.sh
 touch /usr/bin/cardashian_run_emuserial.sh
 
 chown -R mp:mp /usr/bin/cardashian_*
-chmod 777 /usr/bin/cardashian_*
-chmod 777 /root/cardashian_check.sh
+chmod 775 /usr/bin/cardashian_*
+chmod 775 /root/cardashian_check.sh
 
 
 echo -e '\e[32m[SMOS] - Configure mp user i3\e[0m'

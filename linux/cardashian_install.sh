@@ -12,13 +12,16 @@
 
 # Create log directory
 cp /home/mp/cardashian/scripts/cardashian_start.sh /usr/bin
-chmod 777 /usr/bin/cardashian_start.sh
+chmod 775 /usr/bin/cardashian_start.sh
 
 cp /home/mp/cardashian/scripts/cardashian_stop.sh /usr/bin
-chmod 777 /usr/bin/cardashian_stop.sh
+chmod 775 /usr/bin/cardashian_stop.sh
 
 cp /home/mp/cardashian/scripts/cardashian_update.sh /usr/bin
-chmod 777 /usr/bin/cardashian_update.sh
+chmod 775 /usr/bin/cardashian_update.sh
 
 cp /home/mp/cardashian/scripts/cardashian_run_emuserial.sh /usr/bin
-chmod 777 /usr/bin/cardashian_run_emuserial.sh
+chmod 775 /usr/bin/cardashian_run_emuserial.sh
+
+cp /home/mp/cardashian/scripts/configure_display.sh /usr/bin
+chmod 775 /usr/bin/configure_display.sh

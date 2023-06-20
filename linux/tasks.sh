@@ -1,3 +1,4 @@
 #!/bin/bash
 
-# /usr/bin/cardashian_update.sh
+/usr/bin/cardashian_update.sh
+
