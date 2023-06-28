@@ -18,9 +18,3 @@ sleep 1;
 sleep 1;
 systemctl enable cardashian.service
 systemctl start cardashian.service
-
-sleep 1;
-systemctl enable display.service
-systemctl start display.service
-
-export DISPLAY=:0;xset s noblank; xset s off; xset -dpms

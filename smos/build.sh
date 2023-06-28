@@ -56,7 +56,8 @@ mount -o bind /dev/pts /mnt/dev/pts/;
 chmod 777 /mnt/tmp;
 cp /etc/resolv.conf /mnt/etc/;
 
-
+# Create home directory
+mkdir /mnt/home/mp/
 
 # Lightdm configuration
 mkdir /mnt/etc/lightdm
@@ -64,8 +65,7 @@ mkdir /mnt/etc/lightdm/lightdm.conf.d/
 cp ./configs/lightdm/50-mp.conf /mnt/etc/lightdm/lightdm.conf.d/
 
 # i3 config
-mkdir /mnt/home/mp/
-cp ./configs/i3_config /mnt/home/mp/
+# cp ./configs/i3_config /mnt/home/mp/
 
 # other configs
 cp ./configs/config.txt /mnt/boot     
@@ -81,7 +81,6 @@ cp ../linux/cardashian_check.sh /mnt/root
 
 # cardashian start service
 cp ../linux/cardashian.service /mnt/etc/systemd/system/
-cp ../linux/display.service /mnt/etc/systemd/system/
 
 sed -i 's/^/#/g' /mnt/etc/ld.so.preload
 cp /usr/bin/qemu-arm-static /mnt/usr/bin/
