@@ -4,7 +4,7 @@
 import OptionCheckBox from './OptionCheckBox.vue';
 import GotToMenu from '../buttons/GotToMenu.vue';
 import PopupOne from './PopupOne.vue';
-import { restartApplication, updateApplication, setWifiCredentials, restartDevice } from '../../core_actions';
+import { restartApplication, updateApplication, setWifiCredentials, restartDevice, openKeyboard } from '../../core_actions';
 import Axios from 'axios'
 export default {
   name: 'Settings',
@@ -43,6 +43,14 @@ export default {
               'label': 'Restart device',
               'callback': restartDevice,
               'text': 'Do you want to restart the device?',
+              'arg': null,
+              'yBtn': 'Yes',
+              'nBtn': 'No',
+            },
+            {
+              'label': 'Open keyboard',
+              'callback': openKeyboard,
+              'text': 'Do you want to open screen keyboard?',
               'arg': null,
               'yBtn': 'Yes',
               'nBtn': 'No',
@@ -239,7 +247,7 @@ export default {
     <div ref="menucontainer" :class="{faded: faded}" class="menu-wrapper h-100 d-flex justify-content-center align-items-center">
       <div class="menu border-blu ylo-cnt w-75 d-flex flex-row flex-wrap px-4 py-5" data-augmented-ui="tl-2-clip-x tr-2-clip-x border">
         <div v-for="item in menu_items" @click="handleMenuItemClick(item)" v-bind:key="item.label" class="menu-item w-50 light-text h1 py-2">{{ item.label }}</div>
-        <div @click="escape()" class="menu-item w-50 light-text h1 py-2">Back to menu</div>
+        <div @click="escape()" class="menu-item w-50 light-text h1 py-2 ">Back to menu</div>
       </div>
     </div>
  </div>

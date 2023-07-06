@@ -36,6 +36,12 @@ export function setWifiCredentials(data) {
     });
 }
 
+export function openKeyboard() {
+    console.log("openKeyboard");
+    Axios.get('http://localhost:9001/action/open_keyboard').then((data) => {
+    });
+}
+
 export function getInfo() {
 
 }
