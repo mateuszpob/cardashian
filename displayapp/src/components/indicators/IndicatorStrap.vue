@@ -66,7 +66,7 @@ export default {
 .box{
   position: relative;
   width: 20vw;
-  height: 60px;
+  height: 90px;
   /* border: 1px solid #fff; */
 }
 .label-box {

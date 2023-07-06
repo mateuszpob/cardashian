@@ -80,7 +80,7 @@ export default {
     /* position: relative; */
     padding: 30px;
     width: 200px;
-    height: 200px;
+    height: 255px;
 }
 .face-box {
     width: 200px;

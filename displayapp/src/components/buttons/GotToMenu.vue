@@ -1,5 +1,5 @@
 <template>
-    <i @click="escape()" :style="{left: x + 'px', top: y + 'px'}" class="menu-button bi bi-grid-3x3-gap"></i>
+    <i @click="escape()" :style="{left: x + 'px', top: y + 'px'}" class="menu-button bi bi-box-arrow-in-left"></i>
 </template>
 
 <script>
