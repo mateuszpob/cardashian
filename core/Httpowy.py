@@ -13,6 +13,9 @@ class Tools():
     def updateApp(self):
         os.system("/usr/bin/cardashian_update.sh; /usr/bin/cardashian_start.sh")
 
+    def openKeyboard(self):
+        os.system("DISPLAY=:0 /usr/bin/onboard > /dev/null 2>&1 &")
+
     def getInfo(self):
         return {"ip_address": self.get_ip_address() }
     
@@ -36,6 +39,8 @@ class HS(BaseHTTPRequestHandler):
             tools.restartApp()
         if self.path == "/action/update_app":
             tools.updateApp()
+        if self.path == "/action/open_keyboard":
+            tools.openKeyboard()
         if self.path == "/get/info":
             data = tools.getInfo()
         if self.path == "/get/about":
