@@ -66,7 +66,7 @@ export default {
                 </div>
             </div>
             <div class="d-flex justify-content-around w-100">
-                <button @click="hide" class="button-light border-blu ylo-d1-cnt mt-5 px-3 py-2" data-augmented-ui="tl-2-clip-x tr-2-clip-x border">{{ item.nBtn }}</button>
+                <button @click="hide" class="button-light border-blu ylo-d1-cnt mt-5 px-3 py-2" data-augmented-ui="tl-2-clip-x tr-2-clip-x border">{{ item.nBtn ?? 'Close' }}</button>
                 <button v-if="item.yBtn" @click="yAction" class="button-light border-blu ylo-d1-cnt mt-5" data-augmented-ui="tl-2-clip-x tr-2-clip-x border">{{ item.yBtn }}</button>
             </div>
         </div>

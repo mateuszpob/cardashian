@@ -60,8 +60,7 @@ export default {
               'text': 'Type wifi credentails',
               'callback': setWifiCredentials,
               'fields': [{label: 'SSID', val: null}, {label: 'PASS', val: null}],
-              'yBtn': 'Save',
-              'nBtn': 'Close',
+              'yBtn': 'Save'
             },
             // {
             //   'label': 'Visible params',
@@ -75,8 +74,7 @@ export default {
             {
               'label': 'Info',
               'info': this.info,
-              'data': 'Info page',
-              'nBtn': 'Close',
+              'data': 'Info page'
             },
           ],
       emuframe: {

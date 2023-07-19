@@ -1,6 +1,7 @@
 <template>
     <GotToMenu :context="dashboard" :x="20" :y="20"></GotToMenu>
-    <iframe width="1024" height="600" src="https://www.youtube.com/embed/ThVPOdaVvlA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+    <iframe width="1024" height="600" src="//www.youtube.com/" ></iframe>
+    <!-- <iframe width="1024" height="600" src="https://www.youtube.com/embed/ThVPOdaVvlA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe> -->
 </template>
 
 <script>

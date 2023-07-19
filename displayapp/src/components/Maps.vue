@@ -1,6 +1,8 @@
 <template>
-    <GotToMenu :context="dashboard" :x="20" :y="20"></GotToMenu>
-    <iframe src="https://www.google.com/" />
+    <div>
+      <GotToMenu :context="dashboard" :x="20" :y="20"></GotToMenu>
+      <iframe width="1024" height="600" src="//www.google.com/maps" ></iframe>
+    </div>
 </template>
 
 <script>

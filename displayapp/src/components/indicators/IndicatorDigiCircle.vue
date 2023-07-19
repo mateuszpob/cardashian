@@ -77,7 +77,7 @@ export default {
 
 <style scoped>
 .box {
-    /* position: relative; */
+    position: static;
     padding: 30px;
     width: 200px;
     height: 255px;
