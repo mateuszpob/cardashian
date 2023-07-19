@@ -14,7 +14,7 @@ echo -e "123456\n123456" | passwd mp;
 # update & install
 echo -e '\e[32m[SMOS] - update & install\e[0m'
 apt -y update
-apt -y install xorg xinit fluxbox lightdm less vim gcc git nano build-essential chromium-browser udhcpc libqmi-utils lsof screen python3-pip
+apt -y install xorg xinit fluxbox lightdm less vim gcc git nano build-essential chromium-browser udhcpc libqmi-utils lsof screen python3-pip onboard
 
 # install python packages
 sudo -u mp pip3 install pyserial
@@ -37,7 +37,7 @@ echo -e '\e[32m[SMOS] - cardashian files\e[0m'
 # cardashian files
 touch /boot/ssh
 
-
+# chromium-browser --load-extension
 
 mkdir /var/log/cardashian;
 touch /var/log/cardashian/distance.txt;
