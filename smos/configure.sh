@@ -67,5 +67,11 @@ mkdir /home/mp/.config/
 chown mp:mp -R /home/mp/.config/
 
 
+chmod +x /usr/bin/configure_display.sh
+chmod +x /usr/bin/screen_rotate_*
+chmod +x /usr/bin/set_screen_*
+
+# Add to the script the possibility to be executed by standard user with root privileges 
+chmod 440 /etc/sudoers.d/010_mp-rotate
 
 touch /home/mp/configured

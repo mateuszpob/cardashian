@@ -26,3 +26,4 @@ DISPLAY=:0 chromium-browser \
 	    --check-for-update-interval=2147483647 \
         --aggressive-cache-discard \
 	    --kiosk http://127.0.0.1:8000 > /dev/null 2>&1 &
+            
