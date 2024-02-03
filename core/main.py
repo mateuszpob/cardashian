@@ -5,7 +5,8 @@ from DistanceCounter import DistanceCounter
 from DeviceManager import DeviceManager
 from websocket_server import WebsocketServer
 from Idrive import Idrive
-from Httpowy import Httpowy
+from Httpowy.Httpowy import Httpowy
+from MapManager import MapManager 
 import time
 from pprint import pprint
 import sys
@@ -25,8 +26,11 @@ def main():
         if sys.argv[1] == '-m':
             mock = True
 
+    # start mam manager
+    mapManager = MapManager()
+
     # start http server for displayapp
-    httpowy = Httpowy()
+    httpowy = Httpowy(mapManager)
     httpowy.start()
     
     conn = Connector()
@@ -53,6 +57,9 @@ def main():
     dc = DistanceCounter(emu)
     dc.start()
 
+    # print('hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhuj 1')
+    # # MapManagerServer.run(debug=True, port=5009)
+    # print('hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhuj 2')
     while True:
         # print(mierzej.get_values())
         # conn.send({"channels": mierzej.get_values()})
