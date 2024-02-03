@@ -1,5 +1,5 @@
 <template>
-  
+    <GotToMenu :context="dashboard" :x="20" :y="20"></GotToMenu>
     <div id="map"></div>
 
 </template>
@@ -7,6 +7,7 @@
 <script>
 import 'ol/ol.css';
 import Map from 'ol/Map';
+import GotToMenu from './buttons/GotToMenu.vue'
 import View from 'ol/View';
 import TileLayer from 'ol/layer/Tile';
 import XYZ from 'ol/source/XYZ';
@@ -40,6 +41,9 @@ export default {
       this.$data.map = null;
     }
   },
+  components: {
+    GotToMenu
+  }
 };
 </script>
 

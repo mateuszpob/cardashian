@@ -1,5 +1,5 @@
 <template>
-    <i @click="escape()" :style="{left: x + 'px', top: y + 'px'}" class="menu-button bi bi-grid-3x3-gap"></i>
+    <i @click="escape()" :style="{right: x + 'px', top: y + 'px'}" class="menu-button bi bi-grid-3x3-gap"></i>
 </template>
 
 <script>
@@ -34,5 +34,6 @@ export default {
     font-size: 8vh;
     line-height: 8vh;
     position: absolute;
+    z-index: 9999;
 }
 </style>

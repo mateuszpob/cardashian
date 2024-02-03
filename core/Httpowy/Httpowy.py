@@ -59,7 +59,8 @@ class HS(BaseHTTPRequestHandler):
             zoom = int(path_components[2])
             column = int(path_components[3])
             row = int(path_components[4])
-            data = self.map_manager.getTile(zoom, column, row)
+            with self.map_manager as manager:
+                data = manager.getTile(zoom, column, row)
 
             if data == None:
                 print('---------------------------------------> empty tile')
