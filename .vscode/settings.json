@@ -8,5 +8,8 @@
         "getopt.h": "c",
         "time.h": "c",
         "serial.h": "c"
-    }
+    },
+    "python.analysis.extraPaths": [
+        "./core/Maps/Gps"
+    ]
 }

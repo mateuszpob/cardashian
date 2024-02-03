@@ -1,6 +1,7 @@
 logs
 build
-core/__pycache__
+__pycache__
+.pyc
 cardashian.tar.gz
 *.bin
 .vscode

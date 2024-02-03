@@ -1,12 +1,13 @@
 from MierzejClient import MierzejClient
 from EmuSeialClient import EmuSeialClient
-from Connector import Connector
+from WSConnector import WSConnector
 from DistanceCounter import DistanceCounter
 from DeviceManager import DeviceManager
 from websocket_server import WebsocketServer
 from Idrive import Idrive
 from Httpowy.Httpowy import Httpowy
 from MapManager import MapManager 
+from maps.gps.GPSController import GPSController
 import time
 from pprint import pprint
 import sys
@@ -26,14 +27,18 @@ def main():
         if sys.argv[1] == '-m':
             mock = True
 
-    # start mam manager
+    # Start GPS Controller
+    gc = GPSController() 
+    gc.start()
+
+    # Start Map Manager
     mapManager = MapManager()
 
-    # start http server for displayapp
+    # Start http server for displayapp
     httpowy = Httpowy(mapManager)
     httpowy.start()
     
-    conn = Connector()
+    conn = WSConnector()
     conn.start()
     if mock == False:
         dm = DeviceManager()

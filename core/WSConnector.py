@@ -4,7 +4,7 @@ from websocket_server import WebsocketServer
 from pprint import pprint
 import json
 
-class Connector(threading.Thread):
+class WSConnector(threading.Thread):
     def __init__(self):
         self.clients = []
         self.server = WebsocketServer(host='127.0.0.1', port=30101)
