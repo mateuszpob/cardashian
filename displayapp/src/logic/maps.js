@@ -5,15 +5,20 @@ import TileLayer from 'ol/layer/Tile';
 import XYZ from 'ol/source/XYZ';
 import Feature from 'ol/Feature';
 import Point from 'ol/geom/Point';
-import { Style, Icon } from 'ol/style';
+import LineString from 'ol/geom/LineString';
+import { Style, Icon, Stroke } from 'ol/style';
 import VectorLayer from 'ol/layer/Vector';
 import VectorSource from 'ol/source/Vector';
 import { fromLonLat } from 'ol/proj';
+import { OSM, Vector } from 'ol/source';
+import { Draw, Modify, Snap } from 'ol/interaction';
 
 export function initializeMap(targetElement) {
 
     let autoPositionUpdate = true;
     let coordinates = fromLonLat([21.0122, 52.2297]);
+    let routeCoordinates = [coordinates]; // Array to store route coordinates
+
 
     const tools = {
         centerMap: function() {
@@ -33,7 +38,7 @@ export function initializeMap(targetElement) {
         ],
         view: new View({
             center: fromLonLat([21.0122, 52.2297]),
-            zoom: 12,
+            zoom: 16,
         }),
     });
 
@@ -49,11 +54,28 @@ export function initializeMap(targetElement) {
       }),
     });
 
+    const routeStyle = new Style({
+        stroke: new Stroke({
+            color: 'purple',
+            width: 3,
+        }),
+    });
+
+    const routeFeature = new Feature(new LineString(routeCoordinates));
+    routeFeature.setStyle(routeStyle);
+
     const markerLayer = new VectorLayer({
         source: new VectorSource(),
     });
 
+    const routeLayer = new VectorLayer({
+        source: new VectorSource({
+            features: [routeFeature],
+        }),
+    });
+
     map.addLayer(markerLayer);
+    map.addLayer(routeLayer);
 
     // Utwórz WebSocket
     const socket = new WebSocket('ws://localhost:50250');
@@ -72,6 +94,10 @@ export function initializeMap(targetElement) {
         // Dodaj nową warstwę z aktualnym markerem
         if (marker)
         markerLayer.getSource().addFeature(marker);
+
+        // Dodaj aktualną pozycję do trasy
+        routeCoordinates.push(coordinates);
+        routeFeature.getGeometry().setCoordinates(routeCoordinates);
 
         if(autoPositionUpdate) {
             // Ustaw nowy środek widoku mapy na aktualną lokalizację

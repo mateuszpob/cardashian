@@ -12,8 +12,8 @@ class FakeZapierdalacz:
     def simulate_random_movement(self, max_deviation=0.0005, max_speed=5.0, fix_status='1'):
         time.sleep(1)
         # Symulacja losowego ruchu w okolicy podanej lokalizacji
-        self.base_latitude = float(self.base_latitude) + random.uniform(max_deviation / 2, max_deviation)
-        self.base_longitude = float(self.base_longitude) + random.uniform(max_deviation/ 4, max_deviation)
+        self.base_latitude = float(self.base_latitude) + random.uniform(-0.0005, max_deviation)
+        self.base_longitude = float(self.base_longitude) + random.uniform(0, max_deviation)
         speed = round(random.uniform(0, max_speed), 2)
 
         # Pobierz aktualny czas w formacie NMEA
