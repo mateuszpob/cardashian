@@ -8,7 +8,7 @@ const iconPath = 'target.png';
 
 const markerStyle = new Style({
     image: new Icon({
-        anchor: [0.5, 1],
+        anchor: [0.5, 0.60],
         anchorXUnits: 'fraction',
         anchorYUnits: 'fraction',
         src: iconPath,

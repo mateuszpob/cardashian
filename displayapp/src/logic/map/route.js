@@ -7,7 +7,7 @@ import VectorSource from 'ol/source/Vector';
 const routeStyle = new Style({
     stroke: new Stroke({
         color: 'purple',
-        width: 3,
+        width: 5,
     }),
 });
 
