@@ -7,7 +7,8 @@
 </template>
 
 <script>
-import { initializeMap } from '../logic/maps.js';
+import { samuraje } from '../logic/map/main.js';
+// import { initializeMap } from  '../logic/maps.js';
 
 import GotToMenu from './buttons/GotToMenu.vue';
 
@@ -22,7 +23,7 @@ export default {
   mounted() {
     // Inicjalizacja mapy OpenLayers
     // const map = initializeMap('map');
-    const { map, tools } = initializeMap('map');
+    const { map, tools } = samuraje('map');
     this.map = map;
     this.tools = tools
   },
