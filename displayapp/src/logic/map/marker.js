@@ -24,7 +24,6 @@ export function createMarkerLayer() {
 }
 
 export function updateMarkerLayer(markerLayer, coordinates) {
-    console.log("UPDATE", markerLayer, coordinates);
 
     if (!marker) {
         // Jeśli marker nie istnieje, utwórz go
