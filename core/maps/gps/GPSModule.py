@@ -5,7 +5,7 @@ from maps.gps.GPSInfoParser import GPSInfoParser
 from maps.gps.FakeZapierdalacz import FakeZapierdalacz
 
 class GPSModule:
-    def __init__(self, serial_port='/dev/ttyUSB0', baud_rate=9600, timeout=1, mock=True):
+    def __init__(self, serial_port='/dev/ttyUSB0', baud_rate=9600, timeout=1, mock=True, debug=True):
         self.mock = mock
         self.ser = None
 
@@ -71,8 +71,9 @@ class GPSModule:
         response = self.send_at_command('AT+CGNSINF')
         # response = '1,1,20240118201756.000,52.209354,20.967317,126.600,0.00,249.2,1,,0.8,1.2,0.8,,35,8,5,,,51,,'
         if 'ERROR' not in response:
-            print(response)
             return self.gps_info_parser.parse_cgnsinf_string(response)
+        if self.debug:
+            print(response)
 
 if __name__ == "__main__":
     gps_module = GPSModule()

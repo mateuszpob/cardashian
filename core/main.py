@@ -28,7 +28,7 @@ def main():
             mock = True
 
     # Start GPS Controller
-    gc = GPSController() 
+    gc = GPSController(mock=True) 
     gc.start()
 
     # Start Map Manager
