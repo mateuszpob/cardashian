@@ -56,7 +56,8 @@ mount -o bind /dev/pts /mnt/dev/pts/;
 chmod 777 /mnt/tmp;
 cp /etc/resolv.conf /mnt/etc/;
 
-
+# Create home directory
+mkdir /mnt/home/mp/
 
 # Lightdm configuration
 mkdir /mnt/etc/lightdm
@@ -64,8 +65,7 @@ mkdir /mnt/etc/lightdm/lightdm.conf.d/
 cp ./configs/lightdm/50-mp.conf /mnt/etc/lightdm/lightdm.conf.d/
 
 # i3 config
-mkdir /mnt/home/mp/
-cp ./configs/i3_config /mnt/home/mp/
+# cp ./configs/i3_config /mnt/home/mp/
 
 # other configs
 cp ./configs/config.txt /mnt/boot     
@@ -73,6 +73,17 @@ cp ./configs/wpa_supplicant.conf /mnt/etc/wpa_supplicant/
 mkdir /mnt/home/mp/.ssh/
 cp ./configs/ssh/* /mnt/home/mp/.ssh/
 cp ./configs/rootcrontab /mnt/root
+cp ./configs/fluxbox/startup /mnt/home/mp/.fluxbox/
+
+# script with the root privileges for standard user
+cp ./configs/010_mp-rotate /mnt/etc/sudoers.d/010_mp-rotate
+
+# scripts
+cp ../linux/screen_rotate_180.sh /mnt/usr/bin
+cp ../linux/screen_rotate_360.sh /mnt/usr/bin
+cp ../linux/set_screen_180.sh /mnt/usr/bin
+cp ../linux/set_screen_360.sh /mnt/usr/bin
+
 
 # maintenance scripts
 cp ../linux/cardashian_update.sh /mnt/usr/bin
@@ -81,7 +92,6 @@ cp ../linux/cardashian_check.sh /mnt/root
 
 # cardashian start service
 cp ../linux/cardashian.service /mnt/etc/systemd/system/
-cp ../linux/display.service /mnt/etc/systemd/system/
 
 sed -i 's/^/#/g' /mnt/etc/ld.so.preload
 cp /usr/bin/qemu-arm-static /mnt/usr/bin/

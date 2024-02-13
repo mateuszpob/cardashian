@@ -69,9 +69,11 @@ def main():
         # print(mierzej.get_values())
         # conn.send({"channels": mierzej.get_values()})
 
+        emu.frame['boost'] = str(int(emu.frame['MAP']) - int(emu.frame['Baro']))
+
         if emu is not None:
             conn.send({"channel": "dashframe", "data": {"emu_frame": emu.frame, "total_distance": dc.get_total_distance(), "trip_distance": dc.get_trip_distance()}})
-        time.sleep(0.02)
+        time.sleep(0.1)
 
 if __name__ == '__main__':
     main()

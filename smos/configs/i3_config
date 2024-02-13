@@ -180,4 +180,4 @@ bar {
 #exec i3-config-wizard
 
 #exec --no-startup-id feh --bg-scale /opt/splash.png
-exec /usr/bin/cardashian_start.sh > /var/log/cardashian/start.log 2>&1 &
+#exec /usr/bin/cardashian_start.sh > /var/log/cardashian/start.log 2>&1 &

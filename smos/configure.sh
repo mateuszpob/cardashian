@@ -3,18 +3,18 @@
 
 
 echo -e '\e[32m[SMOS] - create user\e[0m'
-userdel -r pi
-useradd mp --home /home/mp
-chown -R mp:mp /home/mp
-chsh -s /bin/bash mp
-usermod -a -G sudo mp
-usermod -a -G dialout mp
-echo -e "123456\n123456" | passwd mp
+userdel -r pi;
+useradd mp --home /home/mp;
+chown -R mp:mp /home/mp;
+chsh -s /bin/bash mp;
+usermod -a -G sudo mp;
+usermod -a -G dialout mp;
+echo -e "123456\n123456" | passwd mp;
 
 # update & install
 echo -e '\e[32m[SMOS] - update & install\e[0m'
 apt -y update
-apt -y install xorg xinit i3 i3status lightdm less vim gcc git nano build-essential chromium-browser udhcpc libqmi-utils lsof screen python3-pip
+apt -y install xorg xinit fluxbox lightdm less vim gcc git nano build-essential chromium-browser udhcpc libqmi-utils lsof screen python3-pip onboard
 
 # install python packages
 sudo -u mp pip3 install pyserial
@@ -37,7 +37,7 @@ echo -e '\e[32m[SMOS] - cardashian files\e[0m'
 # cardashian files
 touch /boot/ssh
 
-
+# chromium-browser --load-extension
 
 mkdir /var/log/cardashian;
 touch /var/log/cardashian/distance.txt;
@@ -57,15 +57,21 @@ chmod 775 /usr/bin/cardashian_*
 chmod 775 /root/cardashian_check.sh
 
 
-echo -e '\e[32m[SMOS] - Configure mp user i3\e[0m'
+# echo -e '\e[32m[SMOS] - Configure mp user i3\e[0m'
 # i3 configuration for mp user
 mkdir /home/mp/.config/
-mkdir /home/mp/.config/i3/
-cp /home/mp/i3_config /home/mp/.config/i3/
-mv /home/mp/.config/i3/i3_config /home/mp/.config/i3/config
-chmod 755 /home/mp/.config/i3/config
+# mkdir /home/mp/.config/i3/
+# cp /home/mp/i3_config /home/mp/.config/i3/
+# mv /home/mp/.config/i3/i3_config /home/mp/.config/i3/config
+# chmod 755 /home/mp/.config/i3/config
 chown mp:mp -R /home/mp/.config/
 
 
+chmod +x /usr/bin/configure_display.sh
+chmod +x /usr/bin/screen_rotate_*
+chmod +x /usr/bin/set_screen_*
+
+# Add to the script the possibility to be executed by standard user with root privileges 
+chmod 440 /etc/sudoers.d/010_mp-rotate
 
 touch /home/mp/configured

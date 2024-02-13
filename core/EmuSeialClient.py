@@ -34,7 +34,7 @@ class EmuSeialClient(threading.Thread):
                 
                 self.decode(data)
                 # print(struct.unpack("f", data))
-            time.sleep(0.05)
+            time.sleep(0.2)
             
     def decode(self, data):
         precision = [0,         0,          0,          0,          2,      2,          2,              2,                      2,          2,          2,              2,          2,          2,          2,          2,              2,          2,              2,              2,          2,          2,              2,                  2,              0,          2,                          2,          2,              2,          2,          2,              2,              2,              2,              2]
@@ -81,6 +81,7 @@ class EmuSeialClient(threading.Thread):
             offset=offset+sizes[types[i]]
             i=i+1
         self.frame = dataObject
+        print("TPS: " + self.frame.TPS + ", Volty: " + self.frame.Batt)
         # pprint(dataObject)
 
 

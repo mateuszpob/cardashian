@@ -22,6 +22,3 @@ chmod 775 /usr/bin/cardashian_update.sh
 
 cp /home/mp/cardashian/scripts/cardashian_run_emuserial.sh /usr/bin
 chmod 775 /usr/bin/cardashian_run_emuserial.sh
-
-cp /home/mp/cardashian/scripts/configure_display.sh /usr/bin
-chmod 775 /usr/bin/configure_display.sh

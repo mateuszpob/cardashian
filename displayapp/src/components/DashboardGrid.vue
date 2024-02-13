@@ -1,8 +1,31 @@
 <template>
-  <div style="width:100%; height: 100%">
-    <IndicatorStrap @mousedown="startDrag" v-for="(settings, key) in indicators" v-bind:key="key" :style="{top: '0px', left: '0px'}" :scalePoints="settings.scalePoints" :unit="settings.unit" :total_items="1" :label="settings.label" :value="dashboard[key]"></IndicatorStrap> -->
+  <GridLayout style="height: 600px" :layout.sync="layout"
+               :col-num="8"
+               :max-rows="6"
+               :is-bounded="false"
+               :row-height="90"
+               :is-draggable="draggable"
+               :is-resizable="resizable"
+               :vertical-compact="false"
+               :use-css-transforms="true"
+               :restore-on-drag="true"
+  >
+      <GridItem v-for="item in layout" v-bind:key="item.i" class="d-flex justify-content-center align-items-center p-0"
+                 :static="item.static"
+                 :x="item.x"
+                 :y="item.y"
+                 :w="item.w"
+                 :h="item.h"
+                 :i="item.i"
+      >
+        <IndicatorStrap v-if="item.indicator.type === 'strap'" v-bind:key="key" :scalePoints="item.indicator.scalePoints" :unit="item.indicator.unit" :total_items="1" :label="item.indicator.label" :value="dashboard[item.indicator.key]"></IndicatorStrap>
+        
+        <IndicatorDigiCircle v-if="item.indicator.type === 'digicircle'" :max-val="6000" :max-angle="270" :value="Math.round(dashboard['RPM'])" :value2="(Math.round(dashboard['vssSpeed']) === 0 ? 'N' : dashboard['gear'])"></IndicatorDigiCircle>
+      
+      </GridItem>
+      <!-- <IndicatorStrap v-for="(settings, key) in indicators" v-bind:key="key" :scalePoints="settings.scalePoints" :unit="settings.unit" :total_items="1" :label="settings.label" :value="dashboard[key]"></IndicatorStrap> -->
     
-  </div>
+  </GridLayout>
 </template>
 
 <script>
@@ -39,9 +62,9 @@ data()  {
     dashboard: {},
     indicators: {
       "TPS": {label: "TPS", unit: "%", scalePoints: [0, 50, 100]},
-      // "IAT": {label: "INTAKE AIR TEMP", unit: "°C", scalePoints: [0, 30, 60]},
-      // "Batt": {label: "VOLTAGE", unit: "V", scalePoints: [0, 5, 10, 15]},
-      // "wboAFR": {label: "AFR", unit: "", scalePoints: [0,  10, 20]},
+      "IAT": {label: "INTAKE AIR TEMP", unit: "°C", scalePoints: [0, 30, 60]},
+      "Batt": {label: "VOLTAGE", unit: "V", scalePoints: [0, 5, 10, 15]},
+      "wboAFR": {label: "AFR", unit: "", scalePoints: [0,  10, 20]},
     },
     indicators2: {
       "CLT": {label: "WATER TEMP", unit: "°C", scalePoints: [0, 50, 100, 150]},
@@ -77,9 +100,6 @@ beforeUnmount() {
   this.emitter.off("dashframe");
 },
 methods: {
-  startDrag(e) {
-    console.log(e)
-  },
   escape() {
     switch(true){
       default:
@@ -112,7 +132,61 @@ methods: {
   <style>
 
 
-.box {
-  position: absolute;
+
+
+
+
+
+
+
+  .vue-grid-layout {
+    /* background: #eee; */
+    width:100%;
+}
+.vue-grid-item:not(.vue-grid-placeholder) {
+    /* background: #ccc; */
+    /* border: 1px solid var(--zi-def); */
+}
+.vue-grid-item .resizing {
+    opacity: 0.9;
+}
+.vue-grid-item .static {
+    /* background: #cce; */
+}
+.vue-grid-item .text {
+    font-size: 24px;
+    text-align: center;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    height: 100%;
+    width: 100%;
+}
+.vue-grid-item .no-drag {
+    height: 100%;
+    width: 100%;
+}
+.vue-grid-item .minMax {
+    font-size: 12px;
+}
+.vue-grid-item .add {
+    cursor: pointer;
+}
+.vue-draggable-handle {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    top: 0;
+    left: 0;
+    background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='10'><circle cx='5' cy='5' r='5' fill='#999999'/></svg>") no-repeat;
+    background-position: bottom right;
+    padding: 0 8px 8px 0;
+    background-repeat: no-repeat;
+    background-origin: content-box;
+    box-sizing: border-box;
+    cursor: pointer;
 }
 </style>

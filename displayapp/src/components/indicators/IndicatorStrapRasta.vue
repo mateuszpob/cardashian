@@ -11,9 +11,9 @@
       </div>
 
       <div class="strap-box">
-          <div class="strap-empty">
+          <div class="strap-empty" :class="{['strap-' + strap]: true}">
+          <div class="value">{{ value ? (value + "&nbsp;" + unit) : '?' }}</div>
           <div :style="{'width': width}" class="strap-value">
-            <div class="value">{{ value ? (value + "&nbsp;" + unit) : '?' }}</div>
           </div>
         </div>
       </div>
@@ -37,11 +37,15 @@ export default {
     value: String,
     total_items: Number,
     scalePoints: Array,
-    unit: String
+    unit: String,
+    strap: {
+      type: String,
+      default: 'green'
+    }
   },
   computed: {
     width() {
-      return (this.value / this.scalePoints[this.scalePoints.length - 1] * 100) + '%';
+      return 100 - (this.value / this.scalePoints[this.scalePoints.length - 1] * 100) + '%';
     },
     fontSize() {
       return 480 / Math.ceil(this.total_items / 3) + 'px'
@@ -81,27 +85,38 @@ export default {
   color: #fff;
 }
 .value {
+  position: absolute;
   font-size: 20px;
     color: #000;
     line-height: 22px;
     font-weight: bold;
+    padding-left: 4px;
 }
 .strap-box {
   height: 20px;
   padding: 0 14px;
 }
+.strap-green {
+  background-color: #49FF18; 
+}
+.strap-rasta {
+  background: rgb(26,249,0);
+  background: linear-gradient(90deg, rgba(26,249,0,1) 0%, rgba(245,255,8,1) 67%, rgba(255,0,0,1) 100%);
+}
+.strap-rasta-r {
+  background: rgb(255,0,0);
+  background: linear-gradient(90deg, rgba(255,0,0,1) 25%, rgba(245,255,8,1) 67%, rgba(26,249,0,1) 100%);
+}
 .strap-empty {
+  position: relative;
   width: 100%;
   height: 100%;
-  background-color: rgb(45, 51, 77);
-  /* position: absolute;
-  bottom: 0; */
 }
 .strap-value {
+  background-color: rgb(45, 51, 77);
   height: 100%;
-  background-color: #49FF18;
+  float: right;
   padding-left: 5px;
-  /* position: absolute; */
 }
 
 .scale-point{

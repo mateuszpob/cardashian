@@ -1,0 +1,2 @@
+mp ALL=NOPASSWD:/usr/bin/set_screen_180.sh
+mp ALL=NOPASSWD:/usr/bin/set_screen_360.sh

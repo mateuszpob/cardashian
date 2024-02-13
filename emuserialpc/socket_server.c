@@ -44,7 +44,7 @@ void send_data(int connfd, struct emu_data_t *emu_data_struct) {
     
     do {
         write(connfd, emu_data_struct, datalen);
-        usleep(10000);
+        usleep(FRAME_WAIT_UTIME);
     } while(read(connfd, read_buffer, 2) > 0);
     
     printf("Client escaped.\n");

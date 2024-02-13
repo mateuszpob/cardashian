@@ -11,7 +11,8 @@ python3 /home/mp/cardashian/core/main.py /dev/idrive > /var/log/cardashian/core.
 cd /home/mp/cardashian/dist
 python3 -m http.server > /var/log/cardashian/http.log 2>&1 &
 
-
+# DISPLAY=:0 midori -e Fullscreen -a http://127.0.0.1:8000
+# DISPLAY=:0 firefox -kiosk -private-window http://127.0.0.1:8000
 DISPLAY=:0 chromium-browser \
         --disable-session-crashed-bubble \
         --disable-notifications \
@@ -25,3 +26,4 @@ DISPLAY=:0 chromium-browser \
 	    --check-for-update-interval=2147483647 \
         --aggressive-cache-discard \
 	    --kiosk http://127.0.0.1:8000 > /dev/null 2>&1 &
+            

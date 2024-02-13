@@ -17,6 +17,8 @@
 #define EMU_TYPE_WORD 2
 #define EMU_TYPE_SWORD 3
 
+#define FRAME_WAIT_UTIME 10000
+
 struct emu_frame {
 	union {
 		struct {

@@ -13,6 +13,7 @@
 #include "format/emuStruct.h"
 
 #define MAX_CLIENTS 1
+#define FRAME_WAIT_UTIME 10000
 
 int socket_file_descriptor;
 struct sockaddr_in serv_addr, cli_addr;

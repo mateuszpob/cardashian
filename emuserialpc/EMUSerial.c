@@ -65,32 +65,34 @@ uint8_t prepareEmuFrame(uint8_t * buffer) {
 
 void display_data_object() {
 	
-	gotoxy(0,0);
-	system("clear");
-	// printf("dwellTime: %f \n", emu_data.dwellTime);
-	printf("RPM:		%d \n", emu_data.RPM);
-	printf("gear:      	%d \n", emu_data.gear);
-	printf("vssSpeed:  	%f \n", emu_data.vssSpeed);
-	printf("CLT: 		%d \n", emu_data.CLT);
-	printf("MAP:       	%d \n", emu_data.MAP);
-	printf("TPS: 		%d \n", emu_data.TPS);
-	printf("IAT: 		%d \n", emu_data.IAT);
-	printf("IgnAngle:  	%lf \n", emu_data.IgnAngle);
+	printf("TPS: %d, Batt: %f, RPM: %d \n", emu_data.TPS, emu_data.Batt, emu_data.RPM);
 	
-	printf("Batt:      	%f \n", emu_data.Batt);
-	printf("emuTemp: 	%d \n", emu_data.emuTemp);
+	// gotoxy(0,0);
+	// system("clear");
+	// printf("dwellTime: %f \n", emu_data.dwellTime);
+	// printf("RPM:		%d \n", emu_data.RPM);
+	// printf("gear:      	%d \n", emu_data.gear);
+	// printf("vssSpeed:  	%f \n", emu_data.vssSpeed);
+	// printf("CLT: 		%d \n", emu_data.CLT);
+	// printf("MAP:       	%d \n", emu_data.MAP);
+	// printf("TPS: 		%d \n", emu_data.TPS);
+	// printf("IAT: 		%d \n", emu_data.IAT);
+	// printf("IgnAngle:  	%lf \n", emu_data.IgnAngle);
+	
+	// printf("Batt:      	%f \n", emu_data.Batt);
+	// printf("emuTemp: 	%d \n", emu_data.emuTemp);
 
-	printf("1 Pulse: 	%f \n", emu_data.pulseWidth);
-	printf("2 Pulse:	%f \n", emu_data.scondarypulseWidth);
-	printf("injDC:     	%f \n", emu_data.injDC);
+	// printf("1 Pulse: 	%f \n", emu_data.pulseWidth);
+	// printf("2 Pulse:	%f \n", emu_data.scondarypulseWidth);
+	// printf("injDC:     	%f \n", emu_data.injDC);
 
-	printf("afrTarget: 	%f \n", emu_data.afrTarget);
-	printf("wboAFR: 	%f \n", emu_data.wboAFR);
+	// printf("afrTarget: 	%f \n", emu_data.afrTarget);
+	// printf("wboAFR: 	%f \n", emu_data.wboAFR);
 
 // gotoxy(20,20); pulseWidth","scondarypulseWidth emuTemp
 
-	fflush(stdout);
-	fflush(stderr);
+	// fflush(stdout);
+	// fflush(stderr);
 }
 
 // char * get_filename(void) {
@@ -119,7 +121,7 @@ void store_frame(uint8_t *frame, int frame_length) {
 
 	if(fptr == NULL) {
 		printf("Error open data logger file\n");
-		usleep(300000);
+		usleep(FRAME_WAIT_UTIME);
 	}
 
 	fwrite(frame, frame_length, 1, fptr);
@@ -172,7 +174,7 @@ void * start_reading(void * args) {
             }
             memmove(read_buffer, ((uint8_t*)&read_buffer) + 1, read_bytes - 1);
         }
-        usleep(10000);
+        usleep(FRAME_WAIT_UTIME);
     }
 }
 
@@ -208,7 +210,7 @@ void * start_reading_log(void * args) {
             }
             memmove(read_buffer, (read_buffer) + 1, read_bytrs_tmp - 1);
         }
-		usleep(10000);
+		usleep(FRAME_WAIT_UTIME);
 	}
 	fclose(fptr); 
 	printf("Bytes read: %d\n\n", read_bytes);
