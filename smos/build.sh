@@ -89,6 +89,9 @@ cp ../linux/set_screen_360.sh /mnt/usr/bin
 cp ../linux/cardashian_update.sh /mnt/usr/bin
 cp ../linux/cardashian_cold_start.sh /mnt/usr/bin
 cp ../linux/cardashian_check.sh /mnt/root
+cp ../linux/cardashian_start.sh
+cp ../linux/cardashian_stop.sh
+cp ../linux/cardashian_run_emuserial.sh
 
 # cardashian start service
 cp ../linux/cardashian.service /mnt/etc/systemd/system/

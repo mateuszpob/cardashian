@@ -48,9 +48,7 @@ touch /var/log/cardashian/maintenance.log
 chown mp:mp -R /var/log/cardashian;
 
 
-touch /usr/bin/cardashian_start.sh
-touch /usr/bin/cardashian_stop.sh
-touch /usr/bin/cardashian_run_emuserial.sh
+
 
 chown -R mp:mp /usr/bin/cardashian_*
 chmod 775 /usr/bin/cardashian_*

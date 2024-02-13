@@ -14,7 +14,7 @@ cp ./linux/* ./build/scripts
 # Copy Core
 cp -r ./core ./build
 
-# Copy Emuserial - will be build on the device
+# Copy Emuserial
 cd ./emuserialpc
 rm -r -f ./build
 make
@@ -32,7 +32,9 @@ cd ./build
 tar -czvf ../cardashian.tar.gz *
 
 # Send package to server
-scp ../cardashian.tar.gz tlusty://home/cardashian
+scp ../cardashian.tar.gz smolnia:/home/ubuntu
+ssh smolnia sudo mv /home/ubuntu/cardashian.tar.gz /home/cardashian
+
 cd ../
 
 # Send start tasks to server

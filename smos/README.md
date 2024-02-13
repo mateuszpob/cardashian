@@ -7,3 +7,7 @@ Cron roota uruchamia "/root/cardashian_check.sh"
 "cardashian_check.sh" odpala "/root/tasks.sh"
 
 w "/root/tasks.sh" moze byc np odpalanie "cardashian_update.sh"
+
+
+user: mp
+klucz

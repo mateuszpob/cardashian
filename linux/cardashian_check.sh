@@ -20,7 +20,7 @@ echo '# initialised' > /usr/bin/cardashian_cold_start.sh
 
 cd /root
 
-scp -i /home/mp/.ssh/id_rsa -o StrictHostKeyChecking=no cardashian@188.68.231.142://home/cardashian/tasks.sh /root
+scp -i /home/mp/.ssh/id_rsa -o StrictHostKeyChecking=no cardashian@146.59.87.67://home/cardashian/tasks.sh /root
 
 chmod +x /root/tasks.sh
 
