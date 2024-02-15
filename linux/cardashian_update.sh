@@ -16,7 +16,7 @@ rm -r -f ./cardashian
 mkdir ./cardashian
 cd ./cardashian
 
-scp -i /home/mp/.ssh/id_rsa -o StrictHostKeyChecking=no cardashian@146.59.87.67://home/cardashian/cardashian.tar.gz .
+scp -i /home/mp/.ssh/id_rsa -o StrictHostKeyChecking=no cardashian@146.59.87.67:/home/cardashian/cardashian.tar.gz .
 tar -xzvf cardashian.tar.gz
 
 
