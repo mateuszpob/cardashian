@@ -69,7 +69,7 @@ class HS(BaseHTTPRequestHandler):
 
             if data == None:
                 print('---------------------------------------> empty tile')
-                empty_tile = '/home/mp/workspace/home/navi/nocny/mapserver/empty.png'
+                empty_tile = '/home/mp/maps/empty.png'
                 with open(empty_tile, 'rb') as file:
                     data = file.read()
         

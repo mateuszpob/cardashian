@@ -7,6 +7,7 @@ from PIL import Image, UnidentifiedImageError
 class MapManager():
     def __init__(self, mock=False):
         self.mbtilesDBFile = '/home/mp/workspace/home/navi/nocny/mapserver/wawabi.mbtiles'
+        self.mbtilesDBFile = '/home/mp/maps/wawabi.mbtiles'
 
     def __enter__(self):
         self.connection = sqlite3.connect(self.mbtilesDBFile, check_same_thread=False)
