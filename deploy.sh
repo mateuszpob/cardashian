@@ -23,6 +23,7 @@ cp ./emuserialpc/emuserial ./build
 
 # Build frontend app
 cd ./displayapp
+rm -r dist
 npm run build
 cd ../
 cp -r ./displayapp/dist ./build

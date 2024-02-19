@@ -1,0 +1,12 @@
+[Unit]
+Description=Start Chromium Browser
+PartOf=default.target
+
+[Service]
+ExecStart=/usr/bin/chromium-browser --disable-session-crashed-bubble --disable-notifications --disable-translate --disable-infobars --disable-suggestions-service --disable-touch-drag-drop --disable-save-password-bubble --disable-component-update --overscroll-history-navigation=0 --check-for-update-interval=2147483647 --aggressive-cache-discard --kiosk http://127.0.0.1:9001
+Restart=on-failure
+StandardOutput=append:/var/log/cardashian/browser.log
+StandardError=append:/var/log/cardashian/browser.log
+
+[Install]
+WantedBy=default.target

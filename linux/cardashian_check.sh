@@ -5,8 +5,7 @@ sudo -u mp DISPLAY=:0 xset -dpms;
 sudo -u mp DISPLAY=:0 xset s off;
 sudo -u mp DISPLAY=:0 xrandr --output HDMI-1 --rotate inverted;
 sudo -u mp DISPLAY=:0 xrandr -s 1024x600 -r 60
-sudo -u mp DISPLAY=:0 xset dpms force on
-sudo -u mp DISPLAY=:0 /usr/bin/cardashian_start.sh > /dev/null 2>&1 &
+#sudo -u mp /usr/bin/cardashian_start.sh > /dev/null 2>&1 &
 
 # Run this script on first start, and erase
 /usr/bin/cardashian_cold_start.sh

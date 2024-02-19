@@ -32,7 +32,7 @@ export function initializeMap(targetElement) {
         layers: [
             new TileLayer({
                 source: new XYZ({
-                url: 'http://localhost:9001/get-map/{z}/{x}/{y}',
+                url: '/get/map/{z}/{x}/{y}',
                 }),
             }),
         ],

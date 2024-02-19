@@ -1,0 +1,12 @@
+[Unit]
+Description=Start visio core
+PartOf=default.target
+
+[Service]
+ExecStart=python3 /home/mp/cardashian/core/main.py /dev/idrive
+Restart=on-failure
+StandardOutput=append:/var/log/cardashian/core.log
+StandardError=append:/var/log/cardashian/core.log
+
+[Install]
+WantedBy=default.target

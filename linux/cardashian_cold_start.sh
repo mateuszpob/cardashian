@@ -15,6 +15,11 @@ sleep 1;
 sleep 1;
 /usr/sbin/ifconfig wlan0 up;
 
+rm /root/configure.sh;
+
 sleep 1;
-systemctl enable cardashian.service
-systemctl start cardashian.service
+sudo -u mp systemctl --user enable core.service;
+sudo -u mp systemctl --user start core.service;
+
+sudo -u mp systemctl --user enable chrome.service;
+sudo -u mp systemctl --user start chrome.service;

@@ -93,8 +93,10 @@ cp ../linux/cardashian_start.sh
 cp ../linux/cardashian_stop.sh
 cp ../linux/cardashian_run_emuserial.sh
 
-# cardashian start service
-cp ../linux/cardashian.service /mnt/etc/systemd/system/
+# application services
+mkdir -p /mnt/home/mp/.config/systemd/user
+cp ../linux/core.service /mnt/home/mp/.config/systemd/user
+cp ../linux/chrome.service /mnt/home/mp/.config/systemd/user
 
 sed -i 's/^/#/g' /mnt/etc/ld.so.preload
 cp /usr/bin/qemu-arm-static /mnt/usr/bin/
