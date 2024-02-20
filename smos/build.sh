@@ -80,18 +80,18 @@ cp ./configs/010_mp-rotate /mnt/etc/sudoers.d/010_mp-rotate
 
 # scripts
 cp ../linux/screen_rotate_180.sh /mnt/usr/bin
+cp ../linux/screen_rotate_90.sh /mnt/usr/bin
 cp ../linux/screen_rotate_360.sh /mnt/usr/bin
-cp ../linux/set_screen_180.sh /mnt/usr/bin
-cp ../linux/set_screen_360.sh /mnt/usr/bin
+cp ../linux/screen_rotate_270.sh /mnt/usr/bin
 
 
 # maintenance scripts
 cp ../linux/cardashian_update.sh /mnt/usr/bin
 cp ../linux/cardashian_cold_start.sh /mnt/usr/bin
 cp ../linux/cardashian_check.sh /mnt/root
-cp ../linux/cardashian_start.sh
-cp ../linux/cardashian_stop.sh
-cp ../linux/cardashian_run_emuserial.sh
+cp ../linux/cardashian_start.sh /mnt/usr/bin
+cp ../linux/cardashian_stop.sh /mnt/usr/bin
+cp ../linux/cardashian_run_emuserial.sh /mnt/usr/bin
 
 # application services
 mkdir -p /mnt/home/mp/.config/systemd/user

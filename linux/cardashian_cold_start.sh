@@ -18,8 +18,10 @@ sleep 1;
 rm /root/configure.sh;
 
 sleep 1;
-sudo -u mp systemctl --user enable core.service;
-sudo -u mp systemctl --user start core.service;
+mkdir -p /home/mp/.config/systemd/user/default.target.wants/
+ln -s /home/mp/.config/systemd/user/core.service /home/mp/.config/systemd/user/default.target.wants/core.service
+ln -s /home/mp/.config/systemd/user/chrome.service /home/mp/.config/systemd/user/default.target.wants/chrome.service
 
-sudo -u mp systemctl --user enable chrome.service;
-sudo -u mp systemctl --user start chrome.service;
+chown mp:mp /home/mp/.config/systemd/user/default.target.wants/core.service
+chown mp:mp /home/mp/.config/systemd/user/default.target.wants/chrome.service
+
