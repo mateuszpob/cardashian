@@ -1,11 +1,11 @@
 logs
 build
 __pycache__
-.pyc
+*.pyc
 cardashian.tar.gz
 *.bin
 .vscode
-
+*.gpx
 
 
 emuserialpc/emulogs
