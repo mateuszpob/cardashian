@@ -69,7 +69,7 @@ def main():
         # print(mierzej.get_values())
         # conn.send({"channels": mierzej.get_values()})
 
-        if emu and emu.frame['MAP']:
+        if emu and 'MAP' in emu.frame:
 
             emu.frame['boost'] = str(int(emu.frame['MAP']) - int(emu.frame['Baro']))
 

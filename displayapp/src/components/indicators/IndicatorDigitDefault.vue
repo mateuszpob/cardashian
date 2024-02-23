@@ -1,5 +1,5 @@
 <template>
-    <div class="box d-flex flex-row justify-content-center align-items-center">
+    <div class=" d-flex flex-row justify-content-center align-items-center">
           <div class="label hidden">
           {{ $store.getters.labels[label] ? $store.getters.labels[label].label : label.replace(/([A-Z])/g, ' $1').trim() }}
           </div>
@@ -51,7 +51,7 @@ export default {
   /* border: solid red 1px; */
   /* height: 140px; */
 }
-.box .label {
+.label {
   font-size:22px;
   line-height: 20px;
   color:rgb(255, 255, 255);
@@ -61,9 +61,9 @@ export default {
 
 }
 .default {
-  font-size: 60px;
+  font-size: 50px;
   width: 100px;
-  /* line-height: 50px; */
+  line-height: 50px;
 }
 .cntnt {
   text-shadow: 0 0 30px #49FF18, 0 0 20px #49FF18, 0 0 25px #49FF18, 0px 0px 10px rgba(206,89,55,0);

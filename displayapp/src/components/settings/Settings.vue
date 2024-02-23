@@ -69,11 +69,12 @@ export default {
             {
               'label': 'About',
               'info': this.about,
-              'text': 'About'
+              'text': 'Smolnia Motorsport'
             },
             {
               'label': 'Info',
               'info': this.info,
+              'text': 'mateuszpob@gmail.com',
               'data': 'Info page'
             },
           ],

@@ -5,22 +5,23 @@ import SimpleParams from './components/SimpleParams.vue';
 import Settings from './components/settings/Settings.vue';
 import Dashboard from './components/Dashboard.vue';
 import DashboardStatic from './components/DashboardStatic.vue';
+import DashboardFiat from './components/DashboardFiat.vue';
 import Multimedia from './components/Multimedia.vue';
 import Maps from './components/Maps.vue';
 
 const router = createRouter({
     history: createWebHistory(),
     routes: [
-        // {
-        //     path: '/',
-        //     name: 'home',
-        //     component: HelloWorld,
-        // },
         {
             path: '/',
             name: 'dashboard',
             // component: Dashboard,
             component: DashboardStatic,
+        },
+        {
+            path: '/fiat',
+            name: 'dashboard-fiat',
+            component: DashboardFiat,
         },
         {
             path: '/multimedia',

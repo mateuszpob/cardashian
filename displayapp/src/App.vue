@@ -30,6 +30,7 @@ export default {
           let frame = data.data.emu_frame;
           frame.total_distance = data.data.total_distance;
           frame.trip_distance = data.data.trip_distance;
+          // console.log(frame)
           this.emitter.emit("dashframe", frame);
           break;
         case "action":

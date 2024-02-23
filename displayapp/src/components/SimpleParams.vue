@@ -1,8 +1,9 @@
 <template>
-    <GotToMenu :context="dashboard" :x="20" :y="20"></GotToMenu>
+    <GotToMenu :context="dashboard" :x="20" :y="20" :s="'left'"></GotToMenu>
     <div class="wrapper d-flex  flex-wrap justify-content-around mt-3">
       <div style="width:210px"></div>
-        <IndicatorDigitDefault class="d-flex gx-4 gy-1" v-for="(value, label) in dashboard" :total_items="Object.keys(dashboard).length" :label="label" :value="value" v-bind:key="label"/>
+        <IndicatorDigitDefault class="d-flex gx-4 gy-1" v-for="(value, label) in dashboard"  :total_items="Object.keys(dashboard).length" :label="label" :value="value" v-bind:key="label"/>
+        <div class="d-flex" style="width:210px"></div>
     </div>
 </template>
 
@@ -26,12 +27,11 @@ export default {
         this.escape();
     });
     this.emitter.on("dashframe", frame => {
-
-      Object.keys(this.$store.getters.getMenu).forEach((o) => {
-        if(this.$store.getters.getMenu[o])
+      console.log(DocumentFragment)
+      Object.keys(frame).forEach((o) => {
           this.dashboard[o] = frame[o]
       });
-      // this.dashboard = frame;
+      this.dashboard = frame;
     });
   },
   mounted() {
@@ -60,5 +60,6 @@ export default {
 .wrapper {
   padding: 5px;
   height: 100%;
+  width: 100%;
 }
 </style>

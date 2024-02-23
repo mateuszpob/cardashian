@@ -81,7 +81,6 @@ class EmuSeialClient(threading.Thread):
             offset=offset+sizes[types[i]]
             i=i+1
         self.frame = dataObject
-        print("TPS: " + self.frame.TPS + ", Volty: " + self.frame.Batt)
         # pprint(dataObject)
 
 
