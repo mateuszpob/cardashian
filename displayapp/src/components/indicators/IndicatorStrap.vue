@@ -1,5 +1,6 @@
 <template>
-    <div class="box" @click="customize">
+    <div class="box" @click="customize" ref="componentA">
+      <IndicatorMenu :isVisible="isMenuVisible" />
       <div class="scale-box d-flex justify-content-between w-100">
         <div v-for="point in scalePoints" v-bind:key="point" class="scale-point d-flex flex-column align-items-center">
           <div>{{ point }}</div>
@@ -30,7 +31,15 @@
 </template>
 
 <script>
-export default {
+import IndicatorMenu from './IndicatorMenu.vue' 
+
+export default{
+  data() {
+    return {
+      isMenuVisible: false,
+        componentA: null
+    }
+  },
   name: 'IndicatorStrap',
   props: {
     label: String,
@@ -51,12 +60,20 @@ export default {
     }
   },
   mounted() {
-
-  },
+        document.addEventListener('click', this.handleClickOutside);
+    },
   methods: {
+    handleClickOutside(event) { console.log('asdadsdsd', this.componentA, event)
+        if (this.componentA && !this.componentA.contains(event.target)) {
+            this.isMenuVisible = false;
+        }
+    },
     customize() {
-      
+      this.isMenuVisible = !this.isMenuVisible;
     }
+  },
+  components: {
+    IndicatorMenu
   }
 }
 </script>

@@ -87,7 +87,8 @@ export default {
   /* padding: 1vw 12vw 5vw 10vw;s */
   width: 100%;
   background-color: rgba(0,0,0,0.5);
-  box-shadow: rgb(15, 0, 0) 0px 7px 18px 14px;
+  /* box-shadow: rgb(15, 0, 0) 0px 7px 18px 14px; */
+  box-shadow: rgb(15, 0, 0) 0px 6px 12px 6px;
 }
 .box{
   position: relative;

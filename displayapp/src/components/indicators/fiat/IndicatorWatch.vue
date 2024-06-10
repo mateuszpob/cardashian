@@ -79,7 +79,7 @@ export default {
   width: 20vw;
   height: 13vw;
   overflow: hidden;
-  box-shadow: rgb(15, 0, 0) 0px 7px 18px 14px;
+  box-shadow: rgb(15, 0, 0) 0px 6px 12px 6px;
 }
 .tip {
   background: linear-gradient(to bottom, #ff0000 5%, transparent 30%);
