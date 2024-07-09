@@ -58,7 +58,7 @@ export default {
     <div class="popup-one" v-if="visible">
     <br><br>
         <div v-if="visible" class="border-blu ylo-d1-cnt d-flex flex-column px-4 py-5 justify-content-center align-items-center" data-augmented-ui="tl-2-clip-x tr-2-clip-x border" >
-            <p v-if="item.text" class="light-text h3">{{ item.text }}</p>
+            <p v-if="item.text" class="light-text h3" v-html="item.text"></p>
             <div v-if="item.fields" class="d-flex flex-column">
                 <div v-for="field in item.fields" v-bind:key="field.label" class="d-flex flex-row mt-3">
                     <label class="w-25 light-text h3 px-3">{{ field.label }}</label>

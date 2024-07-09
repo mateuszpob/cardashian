@@ -8,6 +8,7 @@
     <div class="menu-item" @click="dashboard"><i class="bi bi-browser-chrome"></i></div>
     <div class="menu-item" @click="multimedia"><i class="bi bi-cassette"></i></div>
   </div>
+  <div id="version">v1.0.0</div>
 </template>
 
 <script>
@@ -75,5 +76,12 @@ export default {
   color: #fff;
   font-size: 12vh;
   padding: 3vw;
+}
+#version {
+  position: absolute;
+  left: 4px;
+  bottom: 2px;
+  color: #c7c7c7;
+  font-size: medium;
 }
 </style>

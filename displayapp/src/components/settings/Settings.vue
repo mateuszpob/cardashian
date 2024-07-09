@@ -69,7 +69,7 @@ export default {
             {
               'label': 'About',
               'info': this.about,
-              'text': 'Smolnia Motorsport'
+              'text': 'EMU Display<br>v1.0.0'
             },
             {
               'label': 'Info',
