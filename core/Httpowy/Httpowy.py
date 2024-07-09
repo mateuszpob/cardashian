@@ -13,10 +13,10 @@ TODO Tu trzeba refactor zrobić bo tu jest jakaś tragedia
 '''
 class Tools():
     def restartApp(self):
-        os.system("/usr/bin/cardashian_start.sh")
+        os.system("/usr/bin/cardashian_start.sh > /var/log/cardashian/maintenance.log 2>&1")
     
     def updateApp(self):
-        os.system("/usr/bin/cardashian_update.sh; /usr/bin/cardashian_start.sh")
+        os.system("/usr/bin/cardashian_update.sh > /var/log/cardashian/maintenance.log 2>&1; /usr/bin/cardashian_start.sh > /var/log/cardashian/maintenance.log 2>&1")
 
     def openKeyboard(self):
         os.system("DISPLAY=:0 /usr/bin/onboard > /var/log/cardashian/maintenance.log 2>&1 &")
