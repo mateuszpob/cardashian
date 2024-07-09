@@ -19,7 +19,7 @@ class Tools():
         os.system("/usr/bin/cardashian_update.sh; /usr/bin/cardashian_start.sh")
 
     def openKeyboard(self):
-        os.system("DISPLAY=:0 /usr/bin/onboard > /dev/null 2>&1 &")
+        os.system("DISPLAY=:0 /usr/bin/onboard > /var/log/cardashian/maintenance.log 2>&1 &")
 
     def getInfo(self):
         return {"ip_address": self.get_ip_address() }
