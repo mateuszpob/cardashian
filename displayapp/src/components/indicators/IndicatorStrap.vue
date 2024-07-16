@@ -63,7 +63,7 @@ export default{
         document.addEventListener('click', this.handleClickOutside);
     },
   methods: {
-    handleClickOutside(event) { console.log('asdadsdsd', this.componentA, event)
+    handleClickOutside(event) {
         if (this.componentA && !this.componentA.contains(event.target)) {
             this.isMenuVisible = false;
         }

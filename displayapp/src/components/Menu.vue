@@ -8,10 +8,11 @@
     <div class="menu-item" @click="dashboard"><i class="bi bi-browser-chrome"></i></div>
     <div class="menu-item" @click="multimedia"><i class="bi bi-cassette"></i></div>
   </div>
-  <div id="version">v1.0.0</div>
+  <div id="version">v1.0.1</div>
 </template>
 
 <script>
+// 
 
 export default {
   props: {
@@ -55,6 +56,9 @@ export default {
     },
 
     
+  },
+  components: {
+    // VirtualKeyboard
   }
 }
 

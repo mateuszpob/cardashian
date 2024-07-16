@@ -1,5 +1,5 @@
 //import { createStore } from 'vuex';
-import Axios from 'axios'
+import Axios from 'axios';
 
 export function restartApplication() {
     console.log("restartApplication");
@@ -21,25 +21,16 @@ export function updateApplication() {
 
 export function setWifiCredentials(data) {
     console.log("setWifiCredentials ca", data);
-    let req = {};
-    data.forEach(o => {
-        console.log(o)
-        
-        if(o.label === 'SSID') {
-            req.ssid = o.val;
-        }
-        if(o.label === 'PASS') {
-            req.pass = o.val;
-        }
-    });
-    Axios.post('http://localhost:9001/action/set_wifi', req).then((data) => {
-    });
-}
 
-export function openKeyboard() {
-    console.log("openKeyboard");
-    Axios.get('http://localhost:9001/action/open_keyboard').then((data) => {
+    let values = [];
+    document.querySelectorAll('.settings-field').forEach(field => {
+        values.push(field.value);
     });
+    
+    Axios.get('http://localhost:9001/action/set_wifi/' + values[0] + '/' + values[1]).then((data) => {
+    });
+
+    window.sendEventToVue("ux", "closepopup");
 }
 
 export function getInfo() {

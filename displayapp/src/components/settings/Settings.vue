@@ -47,18 +47,19 @@ export default {
               'yBtn': 'Yes',
               'nBtn': 'No',
             },
-            {
-              'label': 'Open keyboard',
-              'callback': openKeyboard,
-              'text': 'Do you want to open screen keyboard?',
-              'arg': null,
-              'yBtn': 'Yes',
-              'nBtn': 'No',
-            },
+            // {
+            //   'label': 'Open keyboard',
+            //   'callback': openKeyboard,
+            //   'text': 'Do you want to open screen keyboard?',
+            //   'arg': null,
+            //   'yBtn': 'Yes',
+            //   'nBtn': 'No',
+            // },
             {
               'label': 'Wifi settings',
               'text': 'Type wifi credentails',
               'callback': setWifiCredentials,
+              'keyboard': true,
               'fields': [{label: 'SSID', val: null}, {label: 'PASS', val: null}],
               'yBtn': 'Save'
             },
@@ -69,14 +70,14 @@ export default {
             {
               'label': 'About',
               'info': this.about,
-              'text': 'EMU Display<br>v1.0.0'
+              'text': 'EMU Display<br>v1.0.1'
             },
-            {
-              'label': 'Info',
-              'info': this.info,
-              'text': 'mateuszpob@gmail.com',
-              'data': 'Info page'
-            },
+            // {
+            //   'label': 'Info',
+            //   'info': this.info,
+            //   'text': 'mateuszpob@gmail.com',
+            //   'data': 'Info page'
+            // },
           ],
       emuframe: {
         "RPM": "1222",
@@ -122,30 +123,31 @@ export default {
   props: {
     msg: String
   },
-  created() {
-    this.emitter.on("escape", isOpen => {
-      this.escape();
-    });
+  // created() {
+  //   console.log("created1")
+  //   this.emitter.on("escape", isOpen => {
+  //     this.escape();
+  //   });
 
-    if(!this.$store.getters.getMenu) {
-        let sideMenu = {};
-        Object.keys(this.emuframe).forEach((k) => { 
-          sideMenu[k] = 1;
-        });
-        this.$store.dispatch('setMenu', sideMenu)
+  //   if(!this.$store.getters.getMenu) {
+  //       let sideMenu = {};
+  //       Object.keys(this.emuframe).forEach((k) => { 
+  //         sideMenu[k] = 1;
+  //       });
+  //       this.$store.dispatch('setMenu', sideMenu)
 
-      }
-      let ob = [];
-      for(let k in this.emuframe) {
-        ob.push({'label': k, 'callback': this.setVisibility, 'arg': k})
-      }
+  //     }
+  //     let ob = [];
+  //     for(let k in this.emuframe) {
+  //       ob.push({'label': k, 'callback': this.setVisibility, 'arg': k})
+  //     }
 
 
 
-    this.emitter.on("action", action => {
+  //   this.emitter.on("action", action => {
 
-    });
-  },
+  //   });
+  // },
   mounted() {
 
   },
@@ -184,6 +186,11 @@ export default {
     handleMenuItemClick(item) {
       this.menuItem = item; 
       this.emitter.emit("ux", "openpopup");
+
+      if (item.keyboard) {
+        // this.emitter.emit("ux", "openkeyboard");
+        this.keyboardVisible = true
+      }
 
       // if(typeof item.callback === 'function') {
       //   item.callback();

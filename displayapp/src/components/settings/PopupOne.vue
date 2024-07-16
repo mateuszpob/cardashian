@@ -1,4 +1,5 @@
 <script>
+import VirtualKeyboard from "../ui/VirtualKeyboard.vue";
 
 export default {
     data()  {
@@ -11,10 +12,10 @@ export default {
       switch(o) {
         case "openpopup":
             this.visible = true;
-          break;
-        // case "closepopup":
-        //   this.$refs.menucontainer.classList.remove('faded')
-        //   break;
+            break;
+        case "closepopup":
+            this.visible = false;
+            break;
       }
     });
   },
@@ -38,7 +39,7 @@ export default {
                 this.item.callback();
             }
             
-            this.hide();
+            // this.hide();
         }
     },
     props: {
@@ -50,25 +51,45 @@ export default {
         //     type: String,
         //     default: "Close"
         // }
+    },
+    components: {
+        VirtualKeyboard
     }
 }
 </script>
 
 <template>
-    <div class="popup-one" v-if="visible">
-    <br><br>
-        <div v-if="visible" class="border-blu ylo-d1-cnt d-flex flex-column px-4 py-5 justify-content-center align-items-center" data-augmented-ui="tl-2-clip-x tr-2-clip-x border" >
+    <div class="popup-one" v-if="visible && item.keyboard !== true">
+        <br><br>
+        <div class="border-blu ylo-d1-cnt d-flex flex-column px-4 py-5 justify-content-center align-items-center" data-augmented-ui="tl-2-clip-x tr-2-clip-x border" >
             <p v-if="item.text" class="light-text h3" v-html="item.text"></p>
             <div v-if="item.fields" class="d-flex flex-column">
                 <div v-for="field in item.fields" v-bind:key="field.label" class="d-flex flex-row mt-3">
                     <label class="w-25 light-text h3 px-3">{{ field.label }}</label>
-                    <input class="w-75 settings-field" v-model="field.val" />
+                    <input class="input w-75 settings-field" v-model="field.val" />
                 </div>
             </div>
             <div class="d-flex justify-content-around w-100">
                 <button @click="hide" class="button-light border-blu ylo-d1-cnt mt-5 px-3 py-2" data-augmented-ui="tl-2-clip-x tr-2-clip-x border">{{ item.nBtn ?? 'Close' }}</button>
                 <button v-if="item.yBtn" @click="yAction" class="button-light border-blu ylo-d1-cnt mt-5" data-augmented-ui="tl-2-clip-x tr-2-clip-x border">{{ item.yBtn }}</button>
             </div>
+        </div>
+    </div>
+
+    <div class="popup-one keyboard" v-if="visible && item.keyboard === true">
+   
+        <div class="border-blu ylo-d1-cnt d-flex flex-column px-4 py-5 justify-content-center align-items-center" data-augmented-ui="tl-2-clip-x tr-2-clip-x border">
+
+            <p v-if="item.text" class="light-text h3" v-html="item.text"></p>
+            <div v-if="item.fields" class="d-flex flex-column">
+                <div v-for="field in item.fields" v-bind:key="field.label" class="d-flex flex-row mt-3">
+                    <label class="w-25 light-text h3 px-3">{{ field.label }}</label>
+                    <input class="input w-75 settings-field" v-model="field.val" />
+                </div>
+            </div>
+            <br>
+            <VirtualKeyboard :enterAction="yAction" ></VirtualKeyboard>
+
         </div>
     </div>
 </template>
@@ -82,6 +103,9 @@ export default {
         top: 50%;
         transform: translateX(-50%) translateY(-50%);
         /* opacity: 0.99; */
+    }
+    .popup-one.keyboard {
+        width: 80%;
     }
     .popup-one p {
         font-size: 40px;

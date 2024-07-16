@@ -13,10 +13,8 @@ const app = createApp({
     render: () => h(App),
 });
 
-const store = setupStore();
-
 app.config.globalProperties.emitter = emitter;
-
+const store = setupStore();
 const axiospro = Axios;
 
 const customMixin = {
@@ -30,4 +28,11 @@ app.mixin(customMixin);
 app.use(Router);
 app.use(store);
 app.use(Vue3TouchEvents);
+
+window.vueAppInstance = app;
+window.sendEventToVue = function(eventName, data) {
+    app.config.globalProperties.emitter.emit(eventName, data);
+};
+
+
 app.mount('#app');

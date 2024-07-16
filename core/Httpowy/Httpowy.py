@@ -17,10 +17,8 @@ class Tools():
     
     def updateApp(self):
         os.system("/usr/bin/cardashian_update.sh > /var/log/cardashian/maintenance.log 2>&1; /usr/bin/cardashian_start.sh > /var/log/cardashian/maintenance.log 2>&1")
-
-    def openKeyboard(self):
-        os.system("DISPLAY=:0 /usr/bin/onboard > /var/log/cardashian/maintenance.log 2>&1 &")
-
+    def setWifi(self, ssid, passw):
+        os.system("/home/mp/cardashian/scripts/set_wifi.sh \"" + ssid + "\" \"" + passw + "\"> /var/log/cardashian/maintenance.log 2>&1 &")
     def getInfo(self):
         return {"ip_address": self.get_ip_address() }
     
@@ -47,49 +45,59 @@ class HS(SimpleHTTPRequestHandler):
         path_components = parsed_path.path.split('/')
 
         # miałem poprawić a zrobiłem jeszcze gorzej, ale jutro trzeba topić fure ;)
-        okeje = [
-            "/action/restart_app",
-            "/action/update_app",
-            "/action/open_keyboard",
-            "/get/info",
-            "/get/about",
-            "/get/map"
-        ]
-        if self.path in okeje or "get/map" in self.path: 
-            if self.path == "/action/restart_app":
-                self.tools.restartApp()
-            if self.path == "/action/update_app":
-                self.tools.updateApp()
-            if self.path == "/action/open_keyboard":
-                self.tools.openKeyboard()
-            if self.path == "/get/info":
-                data = self.tools.getInfo()
-            if self.path == "/get/about":
-                data = 'Smolnia Motorsport 4x4'
+        # dziś tez nie poprawie bo jutro trzeba robić furę
+        # okeje = [
+        #     "/action/restart_app",
+        #     "/action/update_app",
+        #     "/action/set_wifi",
+        #     "/get/info",
+        #     "/get/about",
+        #     "/get/map"
+        # ]
 
-            data = bytes(json.dumps(data), 'utf-8')
+        # if self.path in okeje or "get/map" in self.path:
+
+        print(self.path)
+
+        if self.path == "/action/restart_app":
+            self.tools.restartApp()
+        if self.path == "/action/update_app":
+            self.tools.updateApp()
+        if path_components[1] == "action" and path_components[2] == "set_wifi":
+            self.tools.setWifi(path_components[3], path_components[4])
+            # self.tools.setWifi(data.ssid, data.passw)
             
-            if path_components[1] == "get" and path_components[2] == "map":
-                zoom = int(path_components[3])
-                column = int(path_components[4])
-                row = int(path_components[5])
-                # print("Zoom: " + zoom)
-                # print("column: " + column)
-                # print("row: " + row)
-                with self.map_manager as manager:
-                    data = manager.getTile(zoom, column, row)
-
-                if data == None:
-                    print('---------------------------------------> empty tile')
-                    empty_tile = '/home/mp/maps/empty.png'
-                    with open(empty_tile, 'rb') as file:
-                        data = file.read()
+        if self.path == "/get/info":
 
             
-            self._set_response()
-            self.wfile.write(data)
-        else:
-            super().do_GET()
+            data = self.tools.getInfo()
+        if self.path == "/get/about":
+            data = 'Smolnia Motorsport 4x4'
+
+        
+        data = bytes(json.dumps(data), 'utf-8')
+        
+        if path_components[1] == "get" and path_components[2] == "map":
+            zoom = int(path_components[3])
+            column = int(path_components[4])
+            row = int(path_components[5])
+            # print("Zoom: " + zoom)
+            # print("column: " + column)
+            # print("row: " + row)
+            with self.map_manager as manager:
+                data = manager.getTile(zoom, column, row)
+
+            if data == None:
+                print('---------------------------------------> empty tile')
+                empty_tile = '/home/mp/maps/empty.png'
+                with open(empty_tile, 'rb') as file:
+                    data = file.read()
+
+        
+        self._set_response()
+        self.wfile.write(data)
+        # else:
+        #     super().do_GET()
 
     def _set_response(self):
         self.send_response(200)
