@@ -1,5 +1,5 @@
 #include "front.h"
-
+#include "globals.h"
 
 
 int display_hint(char option) {

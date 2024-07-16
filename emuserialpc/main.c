@@ -7,6 +7,7 @@
 #include "EMUSerial.h"
 #include "socket_server.h"
 #include "front.h"
+#include "globals.h"
 
 
 
@@ -23,7 +24,7 @@ float:      4
 struct emu_data_t 116
 */
 
-void sig_handler(int signum){
+void sig_handler(){
 
   //Return type of the handler function should be void
   fclose(fptr);

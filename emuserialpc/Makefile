@@ -1,27 +1,32 @@
 
-# CC=cc
-CC=arm-linux-gnueabihf-gcc
+CC = gcc
+CC = arm-linux-gnueabihf-gcc
 
-all: build_dir main.o
-	$(CC) build/main.o build/front.o build/socket_server.o build/EMUSerial.o build/serial.o -o emuserial -lpthread
+CFLAGS = -Wall -Wextra -pthread -Wunused-variable
+DEPS = socket_server.h serial.h format/emuFormat.h EMUSerial.h front.h globals.h format/emuStruct.h
+OBJ = $(BUILD_DIR)/main.o $(BUILD_DIR)/socket_server.o $(BUILD_DIR)/serial.o $(BUILD_DIR)/EMUSerial.o $(BUILD_DIR)/globals.o $(BUILD_DIR)/front.o
+BUILD_DIR = build
 
-main.o: 	socket_server.o front.o
-	$(CC) main.c -c -o build/main.o
+# Build target
+all: $(BUILD_DIR)/emuserial
 
-front.o:	EMUSerial.o
-	$(CC) front.c -c -o build/front.o
+# Create build directory if it doesn't exist
+$(BUILD_DIR):
+	mkdir -p $(BUILD_DIR)
 
-socket_server.o:	EMUSerial.o
-	$(CC) socket_server.c -c -o build/socket_server.o -lpthread
+# Compile source files into object files in build directory
+$(BUILD_DIR)/%.o: %.c $(DEPS) | $(BUILD_DIR)
+	@echo "Compiling $< into $@"
+	$(CC) $(CFLAGS) -I. -c $< -o $@
 
-EMUSerial.o:	serial.o 
-	$(CC) EMUSerial.c -c -o build/EMUSerial.o
+# Link object files into the final executable
+$(BUILD_DIR)/emuserial: $(OBJ)
+	@echo "Linking $@"
+	$(CC) $(CFLAGS) $^ -o $@
 
-serial.o: 
-	$(CC) serial.c -c -o build/serial.o
-
-build_dir:
-	$(shell mkdir -p build)
-
+# Clean build directory
 clean:
-	rm build/*
+	@echo "Cleaning build directory"
+	rm -rf $(BUILD_DIR)
+
+.PHONY: all clean

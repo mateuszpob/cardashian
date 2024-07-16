@@ -1,4 +1,5 @@
 #include "serial.h"
+#include "globals.h"
 
 int run_serial_client(char * device_path, int speed) {
     serial_descriptor = open(device_path, O_RDWR | O_NOCTTY | O_SYNC); // O_NOCTTY, O_NONBLOCK

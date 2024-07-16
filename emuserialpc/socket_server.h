@@ -11,16 +11,9 @@
 #include <errno.h>
 #include <unistd.h>
 #include "format/emuStruct.h"
-
+#include "globals.h"
 #define MAX_CLIENTS 1
 #define FRAME_WAIT_UTIME 10000
-
-int socket_file_descriptor;
-struct sockaddr_in serv_addr, cli_addr;
-int clilen;
-int total_client_couter;
-int connfd;
-uint8_t read_buffer[256];
 
 int run_socket_server(int port, struct emu_data_t *emu_data_struct);
 void send_data(int connfd, struct emu_data_t *emu_data_struct);

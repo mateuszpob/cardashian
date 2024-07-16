@@ -18,12 +18,11 @@
 #include <string.h>
 #include <unistd.h>
 #include <sys/ioctl.h>
+#include "globals.h"
 
 #define DEFAULT_BAUD B9600
 
-int serial_descriptor;
-char * serial_device_patch;
-char * data_patch;
+extern char * serial_device_patch;
 
 int run_serial_client(char * device_path, int speed);
 int set_interface_attribs(int fd, int speed, int parity);

@@ -30,7 +30,7 @@ extern "C" {
     int verbose_mode;
     int socket_file_descriptor;
     uint8_t *serial_path;
-    int serial_descriptor;
+    // int serial_descriptor;
     sem_t queue_mutex;
     uint8_t device_address[4];
     

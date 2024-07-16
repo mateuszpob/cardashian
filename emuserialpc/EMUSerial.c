@@ -1,4 +1,5 @@
 #include "EMUSerial.h"
+#include "globals.h"
 
 void gotoxy(int x,int y)
 {
@@ -149,7 +150,6 @@ void * start_reading(void * args) {
     int bytes_avaiable = 0;
 
     uint8_t read_bytes_total = 0;
-    uint8_t response_found = 0;
 
     while(1) {
         ioctl(serial_descriptor, FIONREAD, &bytes_avaiable);

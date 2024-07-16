@@ -1,4 +1,5 @@
 #include "socket_server.h"
+#include "globals.h"
 
 int run_socket_server(int port, struct emu_data_t *emu_data_struct) {
 

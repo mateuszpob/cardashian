@@ -27,7 +27,7 @@ extern "C" {
     extern uint8_t *response_frame;
     int verbose_mode;
     uint8_t *serial_path;
-    int serial_descriptor;
+    // int serial_descriptor; 
     int serial_mode;
     sem_t queue_mutex;
     uint8_t device_address[4];

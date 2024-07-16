@@ -9,8 +9,10 @@
 #include <pthread.h>
 #include <time.h>
 #include "serial.h"
+#include "globals.h"
 #include "format/emuStruct.h"
 #include "format/emuFormat.h"
+
 
 #define EMU_TYPE_UBYTE 0
 #define EMU_TYPE_SBYTE 1
@@ -32,14 +34,14 @@ struct emu_frame {
 	};
 };
 
-struct emu_frame decoded_frame;
-FILE *fptr;
-pthread_t serial_reader_thread;
-pthread_t data_reader_thread;
-uint8_t store_frame_option;
-uint8_t show_raw_frames_option;
-uint8_t show_live_params_option;
-char *data_logger_filename;
+extern struct emu_frame decoded_frame;
+extern FILE *fptr;
+extern pthread_t serial_reader_thread;
+extern pthread_t data_reader_thread;
+extern uint8_t store_frame_option;
+extern uint8_t show_raw_frames_option;
+extern uint8_t show_live_params_option;
+extern char *data_logger_filename;
 
 uint8_t decodeEmuFrame(struct emu_frame *frame);
 uint8_t checksum_is_ok(uint8_t * buffer);

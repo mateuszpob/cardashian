@@ -10,8 +10,8 @@
 #include <stdarg.h>
 #include <time.h>
 #include "EMUSerial.h"
+#include "globals.h"
 
-int quiet_mode;
 extern char * command_arguments[3];
 
 int display_hint(char option);
