@@ -11,7 +11,7 @@ done
 
 
 cd /home/mp/
-
+rm -r -f .cache/chromium/Default/
 rm -r -f ./cardashian
 mkdir ./cardashian
 cd ./cardashian

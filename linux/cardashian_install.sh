@@ -22,3 +22,5 @@ chmod 775 /usr/bin/cardashian_update.sh
 
 cp /home/mp/cardashian/scripts/cardashian_run_emuserial.sh /usr/bin
 chmod 775 /usr/bin/cardashian_run_emuserial.sh
+
+chmod 775 /home/mp/cardashian/scripts/set_wifi.sh

@@ -19,7 +19,7 @@ cd ./emuserialpc
 rm -r -f ./build
 make
 cd ..
-cp ./emuserialpc/emuserial ./build
+cp ./emuserialpc/build/emuserial ./build
 
 # Build frontend app
 cd ./displayapp
